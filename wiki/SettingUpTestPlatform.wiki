@@ -43,7 +43,12 @@ define('DB_PASSWORD', 'root'); // ...and password
 
 === Change WordPress URL to localhost ===
 
+Follow these instructions and set the host URL to http://localhost:8888
+
 http://codex.wordpress.org/Changing_The_Site_URL
+
+Note that changing the siteurl is not enough.
+
 
 === Check that it all works ===
 
