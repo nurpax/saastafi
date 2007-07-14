@@ -12,7 +12,7 @@ Mount disk image and drag MAMP to Applications.
 - Start Applications/MAMP/MAMP.app -- this will start MySQL and Apache automatically
 
 === Import DB ===
-- Download the latest mysql dump from saasta: ~/saasta/backup/<n>/saastafidb.dump.  It's better to use the latest backup, since this will test that backups are working
+- Download the latest mysql dump from saasta: ~/saasta/backup/<n>/saastafidb.dump.  It's better to use a backup rather than copying from the site, as this will test that backups are working
 
 - Import the DB from the command line (phpMyAdmin doesn't support big DBs):
 
@@ -30,6 +30,8 @@ Access DB:
 sudo /Applications/MAMP/Library/bin/mysql -u root -p saastafi
 
 === Install saasta.fi wordpress from backups ===
+
+*Note* If you want to update the live saasta.fi server from your SVN repository, see UpdatingLiveServerFromSvn.
 
 Go to the root of your www.saasta.fi backup, and run:
 
