@@ -1,4 +1,4 @@
-#summary How to edit and update live production saasta.fi server to the latest code from Subversion
+#summary How to edit and update test/production servers to the latest code from Subversion
 
 = Edit/update cycle =
 
