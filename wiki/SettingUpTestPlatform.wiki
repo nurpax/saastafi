@@ -1,0 +1,11 @@
+#summary How to setup saasta.fi test server on Mac OS X
+#labels Phase-Implementation
+
+= Setting up saasta.fi test server =
+
+== SW ==
+
+Download and install (in your home):
+
+http://www.mamp.info/en/download.html
+
