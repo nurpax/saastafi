@@ -41,6 +41,10 @@ define('DB_USER', 'root');     // Your MySQL username
 
 define('DB_PASSWORD', 'root'); // ...and password
 
+=== Change WordPress URL to localhost ===
+
+http://codex.wordpress.org/Changing_The_Site_URL
+
 === Check that it all works ===
 
 Browse to url http://localhost:8888/saasta/ and it all just work!
