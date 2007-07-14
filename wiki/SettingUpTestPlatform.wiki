@@ -14,3 +14,22 @@ Mount disk image and drag MAMP to Applications.
 === Configure MAMP ===
 
 - Start Applications/MAMP/MAMP.app
+
+=== Import DB ===
+- Download the latest mysql dump from saasta: ~/saasta/backup/<n>/saastafidb.dump.  It's better to use the latest backup, since this will test that backups are working
+
+- Import the DB from the command line (phpMyAdmin doesn't support big DBs):
+
+Create DB:
+sudo /Applications/MAMP/Library/bin/mysqladmin -p create saastafi
+
+(passwd=root)
+
+Import DB:
+
+sudo /Applications/MAMP/Library/bin/mysql -u root -p saastafi < saastafidb.dump 
+
+Access DB:
+
+sudo /Applications/MAMP/Library/bin/mysql -u root -p saastafi
+
