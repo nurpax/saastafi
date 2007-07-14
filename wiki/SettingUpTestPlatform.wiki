@@ -52,4 +52,4 @@ Note that changing the siteurl is not enough.
 
 === Check that it all works ===
 
-Browse to url http://localhost:8888/saasta/ and it all just work!
+Browse to url http://localhost:8888/saasta/ and it all just works!
