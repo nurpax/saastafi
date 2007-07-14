@@ -1,0 +1,4 @@
+#summary How to update live production saasta.fi server to the latest code from Subversion
+
+= Updating test/production server to the latest SVN version =
+
