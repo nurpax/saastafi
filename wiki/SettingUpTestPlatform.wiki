@@ -5,7 +5,12 @@
 
 == SW ==
 
-Download and install (in your home):
+=== Download and install ===
 
 http://www.mamp.info/en/download.html
 
+Mount disk image and drag MAMP to Applications.
+
+=== Configure MAMP ===
+
+* Start Applications/MAMP/MAMP.app
