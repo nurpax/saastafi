@@ -31,7 +31,7 @@ sudo /Applications/MAMP/Library/bin/mysql -u root -p saastafi
 
 === Install saasta.fi wordpress from backups ===
 
-*Note* If you want to update the live saasta.fi server from your SVN repository, see UpdatingLiveServerFromSvn.
+*Note:* If you want to update the live saasta.fi server from your SVN repository, see UpdatingLiveServerFromSvn.  You should do this only after you have a working test installation.
 
 Go to the root of your www.saasta.fi backup, and run:
 
