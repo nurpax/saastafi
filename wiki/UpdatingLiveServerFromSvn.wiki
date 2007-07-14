@@ -12,8 +12,8 @@ As the SVN copy of the site's source code doesn't contain any of the content dir
 
 === Setting it up ===
 
-  # Check out a working copy of saastafi from SVN (see project page for instructions).  The trunk root contains a directory called 'saasta'.  This location is denoted by $SITE/saasta.
-  # Go to your Apache's htdocs directory and create a symlink 'saasta' that points to $SITE/saasta.  E.g., `cd /Applications/MAMP/htdocs/` followed by `ln -s /Users/janne/dev/saastafi/trunk/saasta saasta`.
-  # Go to $SITE/saasta and run `../update_content.sh $CONTENT_DIR`. Update wp-config.php as instructed by the update script.
+  # Check out a working copy of saastafi from SVN (see project page for instructions).  The trunk root contains a directory called 'saasta'.  This location is denoted by `$SITE/saasta`.
+  # Go to your Apache's htdocs directory and create a symlink `saasta` that points to `$SITE/saasta`.  E.g., `cd /Applications/MAMP/htdocs/` followed by `ln -s /Users/janne/dev/saastafi/trunk/saasta saasta`.
+  # Go to `$SITE/saasta` and run `../update_content.sh $CONTENT_DIR`. Update wp-config.php as instructed by the update script.
 
 You should be good to go.
