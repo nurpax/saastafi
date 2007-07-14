@@ -13,4 +13,4 @@ Mount disk image and drag MAMP to Applications.
 
 === Configure MAMP ===
 
-* Start Applications/MAMP/MAMP.app
+- Start Applications/MAMP/MAMP.app
