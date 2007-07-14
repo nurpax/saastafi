@@ -6,7 +6,7 @@ There are a few separate edit/update scenarios.  The most common one is when you
 
 == Editing and testing the SVN working copy ==
 
-This is the method you'd be using most of the time.  The idea is to have a checked out copy of the site's source code and use that working copy directly with Apache running on your test server.
+This is the method you'll be using most of the time.  The idea is to have a checked out copy of the site's source code and use that working copy directly with Apache running on your test server.
 
 As the SVN copy of the site's source code doesn't contain any of the content directories, we need to first check out the source code and then copy the content directories over to the SVN copy.
 
@@ -33,3 +33,14 @@ The release package contains only files that are in SVN.  Any local files in you
   # Update wp-config.php the same way as above
   # Test the release on test server (running whatever sanity checks you might have)
   # If it worked, restore your `saasta` symlink by running `rm -rf saasta && mv bak.saasta saasta` in `htdocs`
+
+== Update production server to use your new release ==
+
+*TODO* *TODO* NOT TESTED YET ON PRODUCTION
+
+  # *BACKUP* `/saasta` directory on the production server.  Don't skip this step.
+  # *BACKUP* the database as well.
+  # Didn't backup yet?  Go to (1)
+  # Copy your `saasta.tar.gz` to the production server.  Go to the site's root directory and run `tar zxf saasta.tar.gz`
+  # Run sanity checks
+  # If it failed, restore the old site from backups
