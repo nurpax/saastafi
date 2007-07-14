@@ -17,7 +17,7 @@ if [ -z $1 ]; then
     echo "Need to specify source content directory."
     echo "The source content directory needs to contain"
     echo "the full wp-content, wp-photoz etc. directories, as copied"
-    echo "from the live server."
+    echo "from the production server."
     exit 1
 fi
 
@@ -50,3 +50,13 @@ echo Copy wp-filez
 cp -fR $SRC_DIR/wp-filez/* wp-filez
 echo Copy wp-photos
 cp -fR $SRC_DIR/wp-photos/* wp-photos
+
+echo Copy wp-config.php
+cp -fR $SRC_DIR/wp-config.php .
+
+echo
+echo "IMPORTANT:"
+echo "You now need to update wp-config.php to use the correct"
+echo "user/passwd.  The settings for these are not same on the production"
+echo "and test servers"
+echo
