@@ -10,6 +10,8 @@ This is the method you'd be using most of the time.  The idea is to have a check
 
 As the SVN copy of the site's source code doesn't contain any of the content directories, we need to first check out the source code and then copy the content directories over to the SVN copy.
 
+Content dir (`$CONTENT_DIR`) means a directory containing a backed up copy of the production server's WordPress installation.
+
 === Setting it up ===
 
   # Check out a working copy of saastafi from SVN (see project page for instructions).  The trunk root contains a directory called 'saasta'.  This location is denoted by `$SITE/saasta`.
@@ -17,3 +19,17 @@ As the SVN copy of the site's source code doesn't contain any of the content dir
   # Go to `$SITE/saasta` and run `../update_content.sh $CONTENT_DIR`. Update wp-config.php as instructed by the update script.
 
 You should be good to go.
+
+== Testing your release package on test server ==
+This is only an intermediate step in order to do a production server update.  This will test whether or not a release package works on the test server.
+
+The release package contains only files that are in SVN.  Any local files in your working copy will not be included in the release package.
+
+  # Make sure that you've committed all your changes to SVN by ruing `svn st`.  This command shouldn't print anything.
+  # Create a release tarball by cd'ing to your trunk root, and running `./dist_package.sh`.  This will create a directory `tmp` that contains the release package `saasta.tar.gz`.
+  # Go to /Applications/MAMP/htdocs and backup your `saasta` symlink with `mv saasta bak.saasta`
+  # Untar your release tarball by running `tar zxf $PATH_TO_TRUNK/tmp/saasta.tar.gz`.  This will create a directory called `saasta` which contains the source code of your site.
+  # Go to the newly created saasta directory and copy the content files over by running: `cd saasta && $PATH_TO_TRUNK/update_content.sh $CONTENT_DIR`
+  # Update wp-config.php the same way as above
+  # Test the release on test server (running whatever sanity checks you might have)
+  # If it worked, restore your `saasta` symlink by running `rm -rf saasta && mv bak.saasta saasta` in `htdocs`
