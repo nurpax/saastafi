@@ -13,7 +13,7 @@ Mount disk image and drag MAMP to Applications.
 
 === Configure MAMP ===
 
-- Start Applications/MAMP/MAMP.app
+- Start Applications/MAMP/MAMP.app -- this will start MySQL and Apache automatically
 
 === Import DB ===
 - Download the latest mysql dump from saasta: ~/saasta/backup/<n>/saastafidb.dump.  It's better to use the latest backup, since this will test that backups are working
@@ -45,3 +45,6 @@ define('DB_USER', 'root');     // Your MySQL username
 
 define('DB_PASSWORD', 'root'); // ...and password
 
+=== Check that it all works ===
+
+Browse to url http://localhost:8888/saasta/ and it all just work!
