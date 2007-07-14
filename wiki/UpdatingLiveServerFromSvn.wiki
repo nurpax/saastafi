@@ -1,4 +1,19 @@
-#summary How to update live production saasta.fi server to the latest code from Subversion
+#summary How to edit and update live production saasta.fi server to the latest code from Subversion
 
-= Updating test/production server to the latest SVN version =
+= Edit/update cycle =
 
+There are a few separate edit/update scenarios.  The most common one is when you edit source code in the SVN working copy and you want Apache to automatically pick up your changes.  The second scenario is testing your release on your test server.  The last scenario is when you want to upload your latest release to the production server.
+
+== Editing and testing the SVN working copy ==
+
+This is the method you'd be using most of the time.  The idea is to have a checked out copy of the site's source code and use that working copy directly with Apache running on your test server.
+
+As the SVN copy of the site's source code doesn't contain any of the content directories, we need to first check out the source code and then copy the content directories over to the SVN copy.
+
+=== Setting it up ===
+
+  # Check out a working copy of saastafi from SVN (see project page for instructions).  The trunk root contains a directory called 'saasta'.  This location is denoted by $SITE/saasta.
+  # Go to your Apache's htdocs directory and create a symlink 'saasta' that points to $SITE/saasta.  E.g., `cd /Applications/MAMP/htdocs/` followed by `ln -s /Users/janne/dev/saastafi/trunk/saasta saasta`.
+  # Go to $SITE/saasta and run `../update_content.sh $CONTENT_DIR`. Update wp-config.php as instructed by the update script.
+
+You should be good to go.
