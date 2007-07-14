@@ -58,4 +58,4 @@ Browse to url http://localhost:8888/saasta/ and it all just works!
 
 === Working ===
 
-If it worked, read UpdatingLiveServerFromSvn next to familiarize yourself with edit/update workflow.
+If it worked, you should now read UpdatingLiveServerFromSvn to familiarize yourself with edit/update workflow.
