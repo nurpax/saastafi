@@ -3,15 +3,11 @@
 
 = Setting up saasta.fi test server =
 
-== SW ==
-
-=== Download and install ===
+=== Download and install MAMP ===
 
 http://www.mamp.info/en/download.html
 
 Mount disk image and drag MAMP to Applications.
-
-=== Configure MAMP ===
 
 - Start Applications/MAMP/MAMP.app -- this will start MySQL and Apache automatically
 
