@@ -33,3 +33,15 @@ Access DB:
 
 sudo /Applications/MAMP/Library/bin/mysql -u root -p saastafi
 
+=== Install saasta.fi wordpress from backups ===
+
+Go to the root of your www.saasta.fi backup, and run:
+
+cp -R saasta /Applications/MAMP/htdocs
+
+Edit /Applications/MAMP/htdocs/saasta/wp-config.php and change DB_USER and DB_PASSWORD to the following:
+
+define('DB_USER', 'root');     // Your MySQL username
+
+define('DB_PASSWORD', 'root'); // ...and password
+
