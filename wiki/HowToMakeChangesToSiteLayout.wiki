@@ -1,5 +1,9 @@
 #summary Misc. tips on how to change site layout
 
+Questions to Muumi:
+  * Janne: What's the process of creating a new theme?  Do we create a new theme directory and start developing there?  It would be nice to leave old themes around, just in case we want to recycle them
+
+
 = Change theme =
   * All images stored in saasta/wp-content/themes/default/images/
   * Header image is saasta_header.gif
