@@ -41,7 +41,7 @@
 			<?php wp_list_pages('title_li=<h2>Pages</h2>' ); ?>
 
 			<li>
-			<a href="http://www.saasta.fi/saasta/?p=916"><img src="champagne.png"/><br/><span style="font-size:2em;">Best Saasta of Q2/2007!</span></a>
+			<a href="<?php print get_permalink(916); ?>"><img src="champagne.png"/><br/><span style="font-size:2em;">Best Saasta of Q2/2007!</span></a>
 			</li>
 			
 			<li><h2>Random saasta</h2>

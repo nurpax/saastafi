@@ -33,7 +33,7 @@ if ( !$withcomments && !is_single() ) {
 
 <div id="header">
 	<div id="headerimg">
-	<a href="http://www.saasta.fi/saasta"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/transp.gif" style="width:100%;height:100%;" border="0"></a>
+	<a href="<?php echo get_option('home'); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/transp.gif" style="width:100%;height:100%;" border="0"></a>
 <!--
 		<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1>
 		<div class="description"><?php bloginfo('description'); ?></div>
