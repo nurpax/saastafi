@@ -6,7 +6,6 @@
   * Page "container" background is saasta_bg.gif
   * Footer is saasta_footer.gif
   * Page background color is saasta_bgcolor.gif
-  * Remember to make a backup of the old images, e.g. saasta_header_q2_2007.gif etc
 
 = Add user avatars =
   * Avatar images stored in saasta/people
