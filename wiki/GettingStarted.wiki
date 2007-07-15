@@ -1,0 +1,4 @@
+#summary How to start development on saasta.fi
+
+= Getting started =
+  * 
