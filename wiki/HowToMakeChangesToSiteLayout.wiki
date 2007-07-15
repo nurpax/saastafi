@@ -1,0 +1,15 @@
+#summary Misc. tips on how to change site layout
+
+= Change theme =
+  * All images stored in saasta/wp-content/themes/default/images/
+  * Header image is saasta_header.gif
+  * Page "container" background is saasta_bg.gif
+  * Footer is saasta_footer.gif
+  * Page background color is saasta_bgcolor.gif
+  * Remember to make a backup of the old images, e.g. saasta_header_q2_2007.gif etc
+
+= Add user avatars =
+  * Avatar images stored in saasta/people
+  * Images must be 32x32 pixels in size
+  * Filename must correspond to user login
+  * Accepted formats (note the case-sensitive extension): gif, png and jpg
