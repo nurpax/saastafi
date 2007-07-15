@@ -2,7 +2,8 @@
 
 Questions to Muumi:
   * Janne: What's the process of creating a new theme?  Do we create a new theme directory and start developing there?  It would be nice to leave old themes around, just in case we want to recycle them
-
+  * Muumi: Well, most of the functionality is in wp-content/themes/default/functions.php. I guess we ought to separate our stuff in there into themes/saasta-functions.php or something, and include that. Then we could just clone the default theme and retain the old functionality.
+    * Some functionality is in the root directory, e.g. saasta-handlefaves.php so those won't be affected by theme changes.
 
 = Change theme =
   * All images stored in saasta/wp-content/themes/default/images/
