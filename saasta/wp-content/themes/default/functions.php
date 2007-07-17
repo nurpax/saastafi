@@ -1,5 +1,23 @@
 <?php
 
+function saasta_print_add_fave_form() 
+{
+    print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
+    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
+    print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
+    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="add fave"/>';
+    print '</form>';
+}
+
+function saasta_print_del_fave_form($post_id)
+{
+    print '<form style="" action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return confirm(\"You sure?\");">';
+    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
+    print '<input type="hidden" name="del_post_id" value="'. $post_id .'"/>';
+    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="unfave"/>';
+    print '</form>';
+}
+
 function saasta_print_post_header() {
     global $user_ID;
     global $wpdb;
@@ -39,11 +57,7 @@ function saasta_print_post_header() {
 
         // user hasn't marked this as fave
         if (count($foo) == 0) {
-            print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
-            print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
-            print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
-            print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="add fave"/>';
-            print '</form>';
+            saasta_print_add_fave_form ();
         }
         // user has marked post as fave, show how many other shave too
         else {
