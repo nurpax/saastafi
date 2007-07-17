@@ -1,135 +1,135 @@
 <?php
 
 function saasta_print_post_header() {
-	global $user_ID;
-	global $wpdb;
+    global $user_ID;
+    global $wpdb;
 
-	// TODO: use css classes
-	print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1.0em;">';
-	print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" bgcolor="#DDD391" style="padding:0.2em;border:1px solid black;">';
-	$icon = "people/unknown.png";
+    // TODO: use css classes
+    print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1.0em;">';
+    print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" bgcolor="#DDD391" style="padding:0.2em;border:1px solid black;">';
+    $icon = "people/unknown.png";
 
-	$pic_name = "people/" . get_the_author_login();
+    $pic_name = "people/" . get_the_author_login();
 
-	if (file_exists($pic_name . ".png"))
-		$icon = $pic_name . ".png";
-	else if (file_exists($pic_name . ".gif"))
-		$icon = $pic_name . ".gif";
+    if (file_exists($pic_name . ".png"))
+        $icon = $pic_name . ".png";
+    else if (file_exists($pic_name . ".gif"))
+        $icon = $pic_name . ".gif";
 
-	print '<img src="' . $icon . '" width="32" height="32" border="0"></td>';
-	print '<td width="100%" bgcolor="#DDD391" style="padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
-	print '<a href="';
-	the_permalink();
-	print '" rel="bookmark" title="Permanent Link to ';
-	the_title();
-	print '">';
-	the_title();
-	print '</a></span><br><small>';
-	the_time('F jS, Y');
-	print ' by ';
-	the_author();
-	print '</small></td></tr>';
+    print '<img src="' . $icon . '" width="32" height="32" border="0"></td>';
+    print '<td width="100%" bgcolor="#DDD391" style="padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
+    print '<a href="';
+    the_permalink();
+    print '" rel="bookmark" title="Permanent Link to ';
+    the_title();
+    print '">';
+    the_title();
+    print '</a></span><br><small>';
+    the_time('F jS, Y');
+    print ' by ';
+    the_author();
+    print '</small></td></tr>';
 
-	get_currentuserinfo();
-	if ($user_ID != '') {
-		$foo = $wpdb->get_results("select post_id from saasta_faves where user_id=".$user_ID." and post_id=".get_the_ID());
+    get_currentuserinfo();
+    if ($user_ID != '') {
+        $foo = $wpdb->get_results("select post_id from saasta_faves where user_id=".$user_ID." and post_id=".get_the_ID());
 
-		print '<tr>'; //<td bgcolor="#DDD391" width="32" style="padding:0.2em;border-left:1px solid black;border-bottom:1px solid black;"></td>';
-		print '<td bgcolor="#DDD391" valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;">';
+        print '<tr>'; //<td bgcolor="#DDD391" width="32" style="padding:0.2em;border-left:1px solid black;border-bottom:1px solid black;"></td>';
+        print '<td bgcolor="#DDD391" valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;">';
 
-		// user hasn't marked this as fave
-		if (count($foo) == 0) {
-			print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
-			print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
-			print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
-			print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="add fave"/>';
-			print '</form>';
-		}
-		// user has marked post as fave, show how many other shave too
-		else {
-			$foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
-			if ($foo->numfaves > 1) print $foo->numfaves.' faves';
-			else if ($foo->numfaves == 1) print '1 fave';
-		}
-		print '</td></tr>';
-	}
-	print '</table>';
+        // user hasn't marked this as fave
+        if (count($foo) == 0) {
+            print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
+            print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
+            print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
+            print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="add fave"/>';
+            print '</form>';
+        }
+        // user has marked post as fave, show how many other shave too
+        else {
+            $foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
+            if ($foo->numfaves > 1) print $foo->numfaves.' faves';
+            else if ($foo->numfaves == 1) print '1 fave';
+        }
+        print '</td></tr>';
+    }
+    print '</table>';
 }
 
 // under construction, do not touch -muumi
 function saasta_print_votebar() {
-	global $wpdb;
-	global $user_ID;
+    global $wpdb;
+    global $user_ID;
 
-	get_currentuserinfo();
-	// no user
-	if ('' == $user_ID)
-		return;
+    get_currentuserinfo();
+    // no user
+    if ('' == $user_ID)
+        return;
 
-	
-	
-	$query = "select count(*) as numvotes from saasta_votes where post_id=".get_the_ID()." and user_id=".$user_ID;
+    
+    
+    $query = "select count(*) as numvotes from saasta_votes where post_id=".get_the_ID()." and user_id=".$user_ID;
     $foo = $wpdb->get_results($query);
-	// has not voted yet?
-	if ($foo[0]->numvotes == 0) {
-		print '<p>';
-		print '<a href="'.$_SERVER['REQUEST_URI'].'&vote=res&pid='.get_the_ID().'">res</a>';
-		print ' or ';
-		print '<a href="'.$_SERVER['REQUEST_URI'].'&vote=dis&pid='.get_the_ID().'">dis</a>';
-		print '</p>';
-	}
-	else {
-		// vote cast now?
-		if (isset($_REQUEST['vote']) && isset($_REQUEST['pid'])) {
-			$vote = $_REQUEST['vote'];
-			$pid = $_REQUEST['pid'];
-			$v = 0;
-			if ('res' == $vote) { $v = 1; }
-			if ('dis' == $vote) { $v = -1; }
-			if ($v != 0) {
-				$wpdb->query("delete from saasta_votes where post_id=".$pid." and user_id=".$user_ID);
-				$wpdb->query("insert into saasta_votes (post_id,user_id,vote) values (".$pid.",".$user_ID.",".$v.")");
-			}
-		}
+    // has not voted yet?
+    if ($foo[0]->numvotes == 0) {
+        print '<p>';
+        print '<a href="'.$_SERVER['REQUEST_URI'].'&vote=res&pid='.get_the_ID().'">res</a>';
+        print ' or ';
+        print '<a href="'.$_SERVER['REQUEST_URI'].'&vote=dis&pid='.get_the_ID().'">dis</a>';
+        print '</p>';
+    }
+    else {
+        // vote cast now?
+        if (isset($_REQUEST['vote']) && isset($_REQUEST['pid'])) {
+            $vote = $_REQUEST['vote'];
+            $pid = $_REQUEST['pid'];
+            $v = 0;
+            if ('res' == $vote) { $v = 1; }
+            if ('dis' == $vote) { $v = -1; }
+            if ($v != 0) {
+                $wpdb->query("delete from saasta_votes where post_id=".$pid." and user_id=".$user_ID);
+                $wpdb->query("insert into saasta_votes (post_id,user_id,vote) values (".$pid.",".$user_ID.",".$v.")");
+            }
+        }
 
-		$query = "select count(vote) as num_votes,SUM(vote) as tally from saasta_votes where post_id=".get_the_ID();
-		$foo = $wpdb->get_results($query);
-		print '<p>';
-		print $foo[0]->num_votes." votes cast, tally = ".$foo[0]->tally;
-		print '</p>';
-	}
+        $query = "select count(vote) as num_votes,SUM(vote) as tally from saasta_votes where post_id=".get_the_ID();
+        $foo = $wpdb->get_results($query);
+        print '<p>';
+        print $foo[0]->num_votes." votes cast, tally = ".$foo[0]->tally;
+        print '</p>';
+    }
 }
 
 // under construction, do not touch -muumi
 function saasta_print_tags() {
-	global $wpdb;
-	global $user_ID;
-	
-	get_currentuserinfo();
-	if ('' == $user_ID)
-		return;
+    global $wpdb;
+    global $user_ID;
+    
+    get_currentuserinfo();
+    if ('' == $user_ID)
+        return;
 
-	$postId = get_the_ID();
+    $postId = get_the_ID();
 
-	if (isset($_REQUEST['pid']) && isset($_REQUEST['newtags'])) {
-		$tags = explode(" ",$_REQUEST['newtags']);
-		$values = "";
-		foreach ($tags as $t) {
-			if ($values != "") $values .= ",";
-			$values .= "(".$postId.",'".$t."')";
-		}
-		// the ignore should treat duplicate entries as warnings
-		$wpdb->query("insert ignore into saasta_post_tags (post_id,tag) values ".$values);
-	}
+    if (isset($_REQUEST['pid']) && isset($_REQUEST['newtags'])) {
+        $tags = explode(" ",$_REQUEST['newtags']);
+        $values = "";
+        foreach ($tags as $t) {
+            if ($values != "") $values .= ",";
+            $values .= "(".$postId.",'".$t."')";
+        }
+        // the ignore should treat duplicate entries as warnings
+        $wpdb->query("insert ignore into saasta_post_tags (post_id,tag) values ".$values);
+    }
 
-	// list tags
-	$foo = $wpdb->get_results("select tag from saasta_post_tags where post_id=".$postId." order by tag"); 
-	print '<p><small>';
-	foreach ($foo as $f) print $f->tag." ";
-	print '</small></p>';
+    // list tags
+    $foo = $wpdb->get_results("select tag from saasta_post_tags where post_id=".$postId." order by tag"); 
+    print '<p><small>';
+    foreach ($foo as $f) print $f->tag." ";
+    print '</small></p>';
 
-	// print add tags field
-	print '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input type="hidden" name="pid" value="'.$postId.'"><p>add tags: <input type="text" name="newtags" style=""/><input type="submit" value="add"/></form>';
+    // print add tags field
+    print '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input type="hidden" name="pid" value="'.$postId.'"><p>add tags: <input type="text" name="newtags" style=""/><input type="submit" value="add"/></form>';
 }
 
 /*
@@ -137,28 +137,28 @@ function saasta_print_tags() {
  * under construction
  */
 function saasta_list_faves() {
-	global $wpdb;
-	global $user_ID;
+    global $wpdb;
+    global $user_ID;
 
-	get_currentuserinfo();
+    get_currentuserinfo();
         if ('' == $user_ID)
                 return;
 
-	$foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from saasta_posts p,saasta_faves f where f.post_id=p.ID and f.user_id=".$user_ID);
-	if (count($foo) > 0) {
-		print '<li><h2>Your favorites</h2><ul>';
-		foreach ($foo as $f) {
-			print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
-	                print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
-        	        print '<input type="hidden" name="del_post_id" value="'.$f->post_id.'"/>';
-			print '<li><a href="'.get_permalink($f->post_id).'" title="'.$f->title.'">'.$f->title.'</a>';
-                	print ' <input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="del"/>';
-                	print '</form>';
+    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from saasta_posts p,saasta_faves f where f.post_id=p.ID and f.user_id=".$user_ID);
+    if (count($foo) > 0) {
+        print '<li><h2>Your favorites</h2><ul>';
+        foreach ($foo as $f) {
+            print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
+                    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
+                    print '<input type="hidden" name="del_post_id" value="'.$f->post_id.'"/>';
+            print '<li><a href="'.get_permalink($f->post_id).'" title="'.$f->title.'">'.$f->title.'</a>';
+                    print ' <input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="del"/>';
+                    print '</form>';
 
-			//print ' <a href="'.$url.'delfave='.$f->post_id.'" title="delete favorite">[x]</a>';
-		}
-		print '</ul></li>';
-	}
+            //print ' <a href="'.$url.'delfave='.$f->post_id.'" title="delete favorite">[x]</a>';
+        }
+        print '</ul></li>';
+    }
 }
 
 function kubrick_head() {
