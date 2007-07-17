@@ -52,20 +52,31 @@ function saasta_print_post_header() {
     if ($user_ID != '') {
         $foo = $wpdb->get_results("select post_id from saasta_faves where user_id=".$user_ID." and post_id=".get_the_ID());
 
-        print '<tr>'; //<td bgcolor="#DDD391" width="32" style="padding:0.2em;border-left:1px solid black;border-bottom:1px solid black;"></td>';
+        print '<tr>';
         print '<td bgcolor="#DDD391" valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;">';
 
-        // user hasn't marked this as fave
-        if (count($foo) == 0) {
+        // The extra table here is used here to force fave/unfave
+        // button and '# of faves' text to go on the same line.
+
+        print '<table><tr><td>';
+
+        // If user hasn't marked the post as a fave, add an "add fave"
+        // button.  Otherwise offer an "unfave" button.
+        if (count($foo) == 0) 
             saasta_print_add_fave_form ();
-        }
-        // user has marked post as fave, show how many other shave too
-        else {
-            $foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
-            if ($foo->numfaves > 1) print $foo->numfaves.' faves';
-            else if ($foo->numfaves == 1) print '1 fave';
-        }
-        print '</td></tr>';
+        else 
+            saasta_print_del_fave_form (get_the_ID());
+
+        print '</td><td>';
+
+        // How many people have faved this post?
+        $foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
+        if ($foo->numfaves > 1) print $foo->numfaves.' faves';
+        else if ($foo->numfaves == 1) print '1 fave';
+        print '</td></tr></table>';
+
+        print '</td>';
+        print '</tr>';
     }
     print '</table>';
 }
