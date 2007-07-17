@@ -22,13 +22,11 @@ $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id fro
 if (count($foo) > 0) {
 	foreach ($foo as $f) {
 		print '<tr><td width="100%" style="padding-top:0.5em;"><a href="'.get_permalink($f->post_id).'" title="'.$f->title.'">'.$f->title.'</a></td>';
-		print '<td valign="middle" align="right" style="padding-top:0.5em;"><form style="" action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return 
-confirm(\"You sure?\");">';
-// you want to delete \"'.$f->title.'\"?\')">';
-		print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
-		print '<input type="hidden" name="del_post_id" value="'.$f->post_id.'"/>';
-		print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="del"/>';
-		print '</form></td></tr>';
+		print '<td valign="middle" align="right" style="padding-top:0.5em;">';
+
+        saasta_print_del_fave_form($f->post_id);
+
+        print '</td></tr>';
 		print '<tr><td colspan="2" style="height:0.5empx;border-top:1px dashed #666666;"></td></tr>';
 	}
 }
