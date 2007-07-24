@@ -7,7 +7,6 @@ function index_js() {
 Event.observe( window, 'load', dashboard_init, false );
 function dashboard_init() {
 	var update1 = new Ajax.Updater( 'incominglinks', 'index-extra.php?jax=incominglinks' );
-	var update2 = new Ajax.Updater( 'devnews', 'index-extra.php?jax=devnews' );
 	var update3 = new Ajax.Updater( 'planetnews', 'index-extra.php?jax=planetnews'	);
 }
 </script>
