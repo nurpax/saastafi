@@ -23,29 +23,25 @@ Author URI: http://binarybonsai.com/
 body {
 	font-size: 62.5%; /* Resets 1em to 10px */
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	/*background: #d5d6d7 url('images/kubrickbgcolor.jpg');*/
-	background: #F2EED5 url('images/saasta_bgcolor.gif');
-	/*background: #E0DCC5;*/
-	color: black;
-	background-color: white; /*#F2EED5;*/
+	background: #d5d6d7 url('images/kubrickbgcolor.jpg');
+	color: #333;
 	text-align: center;
 	}
 
 #page {
 	background-color: white;
-	/*border: 1px solid #959596;*/
+	border: 1px solid #959596;
 	text-align: left;
 	}
 
 #header {
-	/*background: #73a0c5 url('images/kubrickheader.jpg') no-repeat bottom center;*/
-	background: #73a0c5 url('images/saasta_header.gif') no-repeat bottom center;
+	background: #73a0c5 url('images/kubrickheader.jpg') no-repeat bottom center;
 	}
 
 #headerimg 	{ 
 	margin: 7px 9px 0; 
-	width: 798px;
-	height: 209px; 
+	height: 192px; 
+	width: 740px; 
 	} 
 
 #content {
@@ -69,13 +65,13 @@ body {
 	}
 
 .alt {
-/*	background-color: #f8f8f8;*/
+	background-color: #f8f8f8;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	}
 
 #footer {
-	background: #eee url('images/saasta_footer.gif') no-repeat top; 
+	background: #eee url('images/kubrickfooter.jpg') no-repeat top; 
 	border: none;
 	}
 
@@ -122,17 +118,13 @@ h1, h1 a, h1 a:hover, h1 a:visited, #headerimg .description {
 	color: white;
 	}
 
-h2, h2 a, h2 a:visited, h3, h3 a, h3 a:visited, table td span a {
+h2, h2 a, h2 a:visited, h3, h3 a, h3 a:visited {
 	color: #333;
 	}
 
-h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar h2, #wp-calendar caption, cite, table td span a:hover, table td span a:visited {
+h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar h2, #wp-calendar caption, cite {
 	text-decoration: none;
 	}
-
-table td span a:hover {
- 	color: #9E5C0E;
-}
 
 .entry p a:visited {
 	color: #b85b5a;
@@ -185,13 +177,12 @@ acronym, abbr, span.caps
 	}
 
 a, h2 a:hover, h3 a:hover {
-	/*color: #06c;*/
-	color: #9E5C0E;
+	color: #06c;
 	text-decoration: none;
 	}
 
 a:hover {
-	/*color: white; 147;*/
+	color: #147;
 	text-decoration: underline;
 	}
 
@@ -226,39 +217,39 @@ body {
 	background-color: white;
 	margin: 20px auto;
 	padding: 0;
-	width: 818px;
+	width: 760px;
 	border: 1px solid #959596;
 	}
 
 #header {
 	background-color: #73a0c5;
-	margin: 0 0 0 0px; 
+	margin: 0 0 0 1px; 
 	padding: 0; 
-	height: 217px; 
-	width: 818px;
+	height: 200px; 
+	width: 758px;
 	}
 
 #headerimg {
 	margin: 0;
-	height: 217px;
+	height: 200px;
 	width: 100%;
 	}
 
 .narrowcolumn {
 	float: left;
-	padding: 0 0px 0px 29px;
+	padding: 0 0 20px 45px;
 	margin: 0px 0 0;
-	width: 500px;
+	width: 450px;
 	}
 
 .widecolumn {
-	padding: 0px 0 0px 0;
-	margin: 0px 0 0 29px;
-	width: 500px;
+	padding: 10px 0 20px 0;
+	margin: 5px 0 0 150px;
+	width: 450px;
 	}
 
 .post {
-	margin: 0 0 0 0px;
+	margin: 0 0 40px;
 	text-align: justify;
 	}
 
@@ -297,7 +288,7 @@ body {
 #footer {
 	padding: 0;
 	margin: 0 auto;
-	width: 817px;
+	width: 760px;
 	clear: both;
 	}
 
@@ -541,8 +532,8 @@ select {
 #sidebar
 {
 	padding: 20px 0 10px 0;
-	margin-left: 566px;
-	width: 220px;
+	margin-left: 545px;
+	width: 190px;
 	}
 
 #sidebar form {
@@ -634,9 +625,3 @@ a img {
 /* "Daisy, Daisy, give me your answer do. I'm half crazy all for the love of you.
 	It won't be a stylish marriage, I can't afford a carriage.
 	But you'll look sweet upon the seat of a bicycle built for two." */
-
-div.post h2 { 
-	background-color: #DDD391;
-	border-bottom: 1px solid black;
-	padding: 0.1em;
-}

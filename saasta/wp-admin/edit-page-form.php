@@ -2,18 +2,23 @@
 <div class="wrap">
 <h2 id="write-post"><?php _e('Write Page'); ?></h2>
 <?php
+
 if (0 == $post_ID) {
 	$form_action = 'post';
 	$nonce_action = 'add-page';
 	$temp_ID = -1 * time(); // don't change this formula without looking at wp_write_post()
 	$form_extra = "<input type='hidden' id='post_ID' name='temp_ID' value='$temp_ID' />";
 } else {
+	$post_ID = (int) $post_ID;
 	$form_action = 'editpost';
 	$nonce_action = 'update-page_' . $post_ID;
 	$form_extra = "<input type='hidden' id='post_ID' name='post_ID' value='$post_ID' />";
 }
 
-$sendto = attribute_escape(stripslashes(wp_get_referer()));
+$temp_ID = (int) $temp_ID;
+$user_ID = (int) $user_ID;
+
+$sendto = clean_url(stripslashes(wp_get_referer()));
 
 if ( 0 != $post_ID && $sendto == get_permalink($post_ID) )
 	$sendto = 'redo';
@@ -68,7 +73,7 @@ addLoadEvent(focusit);
 
 <fieldset id="passworddiv" class="dbx-box">
 <h3 class="dbx-handle"><?php _e('Page Password') ?></h3>
-<div class="dbx-content"><input name="post_password" type="text" size="13" id="post_password" value="<?php echo $post->post_password ?>" /></div>
+<div class="dbx-content"><input name="post_password" type="text" size="13" id="post_password" value="<?php echo attribute_escape( $post->post_password ); ?>" /></div>
 </fieldset>
 
 <fieldset id="pageparent" class="dbx-box">
@@ -93,12 +98,12 @@ addLoadEvent(focusit);
 
 <fieldset id="slugdiv" class="dbx-box">
 <h3 class="dbx-handle"><?php _e('Page Slug') ?></h3>
-<div class="dbx-content"><input name="post_name" type="text" size="13" id="post_name" value="<?php echo $post->post_name ?>" /></div>
+<div class="dbx-content"><input name="post_name" type="text" size="13" id="post_name" value="<?php echo attribute_escape( $post->post_name ); ?>" /></div>
 </fieldset>
 
 <?php if ( $authors = get_editable_authors( $current_user->id ) ) : // TODO: ROLE SYSTEM ?>
 <fieldset id="authordiv" class="dbx-box">
-<h3 class="dbx-handle"><?php _e('Page Author'); ?>:</h3>
+<h3 class="dbx-handle"><?php _e('Page Author'); ?></h3>
 <div class="dbx-content">
 <select name="post_author_override" id="post_author_override">
 <?php
@@ -106,6 +111,8 @@ foreach ($authors as $o) :
 $o = get_userdata( $o->ID );
 if ( $post->post_author == $o->ID || ( empty($post_ID) && $user_ID == $o->ID ) ) $selected = 'selected="selected"';
 else $selected = '';
+$o->ID = (int) $o->ID;
+$o->display_name = wp_specialchars( $o->display_name );
 echo "<option value='$o->ID' $selected>$o->display_name</option>";
 endforeach;
 ?>
@@ -126,12 +133,19 @@ endforeach;
 
 <fieldset id="titlediv">
   <legend><?php _e('Page Title') ?></legend>
-  <div><input type="text" name="post_title" size="30" tabindex="1" value="<?php echo $post->post_title; ?>" id="title" /></div>
+  <div><input type="text" name="post_title" size="30" tabindex="1" value="<?php echo attribute_escape( $post->post_title ); ?>" id="title" /></div>
 </fieldset>
 
 
 <fieldset id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>">
-    <legend><?php _e('Page Content') ?></legend>
+<legend><?php _e('Page Content') ?>
+
+<?php if ( 'publish' == $post->post_status ) { ?>
+<a href="<?php echo clean_url(get_permalink($post->ID)); ?>" style="position: absolute; right: 2em; margin-right: 19em; text-decoration: underline;" target="_blank"><?php _e('View &raquo;'); ?></a>
+<?php } elseif ( 'edit' == $action ) { ?>
+<a href="<?php echo clean_url(apply_filters('preview_post_link', add_query_arg('preview', 'true', get_permalink($post->ID)))); ?>" style="position: absolute; right: 2em; margin-right: 19em; text-decoration: underline;" target="_blank"><?php _e('Preview &raquo;'); ?></a>
+<?php } ?>
+</legend>
 	<?php the_editor($post->post_content); ?>
 </fieldset>
 

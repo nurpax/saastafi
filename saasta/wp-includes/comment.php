@@ -81,6 +81,7 @@ function &get_comment(&$comment, $output = OBJECT) {
 			$comment_cache[$comment->comment_ID] = &$comment;
 		$_comment = & $comment_cache[$comment->comment_ID];
 	} else {
+		$comment = (int) $comment;
 		if ( !isset($comment_cache[$comment]) ) {
 			$_comment = $wpdb->get_row("SELECT * FROM $wpdb->comments WHERE comment_ID = '$comment' LIMIT 1");
 			$comment_cache[$comment->comment_ID] = & $_comment;
@@ -169,7 +170,7 @@ function sanitize_comment_cookies() {
 	if ( isset($_COOKIE['comment_author_url_'.COOKIEHASH]) ) {
 		$comment_author_url = apply_filters('pre_comment_author_url', $_COOKIE['comment_author_url_'.COOKIEHASH]);
 		$comment_author_url = stripslashes($comment_author_url);
-		$comment_author_url = attribute_escape($comment_author_url);
+		$comment_author_url = clean_url($comment_author_url);
 		$_COOKIE['comment_author_url_'.COOKIEHASH] = $comment_author_url;
 	}
 }
@@ -177,7 +178,7 @@ function sanitize_comment_cookies() {
 
 function wp_allow_comment($commentdata) {
 	global $wpdb;
-	extract($commentdata);
+	extract($commentdata, EXTR_SKIP);
 
 	// Simple duplicate check
 	$dupe = "SELECT comment_ID FROM $wpdb->comments WHERE comment_post_ID = '$comment_post_ID' AND ( comment_author = '$comment_author' ";
@@ -324,7 +325,7 @@ function wp_get_current_commenter() {
 
 function wp_insert_comment($commentdata) {
 	global $wpdb;
-	extract($commentdata);
+	extract($commentdata, EXTR_SKIP);
 
 	if ( ! isset($comment_author_IP) )
 		$comment_author_IP = preg_replace( '/[^0-9., ]/', '',$_SERVER['REMOTE_ADDR'] );
@@ -345,7 +346,7 @@ function wp_insert_comment($commentdata) {
 	('$comment_post_ID', '$comment_author', '$comment_author_email', '$comment_author_url', '$comment_author_IP', '$comment_date', '$comment_date_gmt', '$comment_content', '$comment_approved', '$comment_agent', '$comment_type', '$comment_parent', '$user_id')
 	");
 
-	$id = $wpdb->insert_id;
+	$id = (int) $wpdb->insert_id;
 
 	if ( $comment_approved == 1)
 		wp_update_comment_count($comment_post_ID);
@@ -456,7 +457,7 @@ function wp_update_comment($commentarr) {
 	$commentarr = wp_filter_comment( $commentarr );
 
 	// Now extract the merged array.
-	extract($commentarr);
+	extract($commentarr, EXTR_SKIP);
 
 	$comment_content = apply_filters('comment_save_pre', $comment_content);
 
@@ -516,7 +517,7 @@ function discover_pingback_server_uri($url, $timeout_bytes = 2048) {
 	$x_pingback_str = 'x-pingback: ';
 	$pingback_href_original_pos = 27;
 
-	extract(parse_url($url));
+	extract(parse_url($url), EXTR_SKIP);
 
 	if ( !isset($host) ) // Not an URL. This should never happen.
 		return false;

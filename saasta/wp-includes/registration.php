@@ -32,7 +32,7 @@ function validate_username( $username ) {
 function wp_insert_user($userdata) {
 	global $wpdb;
 
-	extract($userdata);
+	extract($userdata, EXTR_SKIP);
 
 	// Are we updating or creating?
 	if ( !empty($ID) ) {
@@ -89,7 +89,7 @@ function wp_insert_user($userdata) {
 		$query = "UPDATE $wpdb->users SET user_pass='$user_pass', user_email='$user_email', user_url='$user_url', user_nicename = '$user_nicename', display_name = '$display_name' WHERE ID = '$ID'";
 		$query = apply_filters('update_user_query', $query);
 		$wpdb->query( $query );
-		$user_id = $ID;
+		$user_id = (int) $ID;
 	} else {
 		$query = "INSERT INTO $wpdb->users
 		(user_login, user_pass, user_email, user_url, user_registered, user_nicename, display_name)
@@ -97,7 +97,7 @@ function wp_insert_user($userdata) {
 		('$user_login', '$user_pass', '$user_email', '$user_url', '$user_registered', '$user_nicename', '$display_name')";
 		$query = apply_filters('create_user_query', $query);
 		$wpdb->query( $query );
-		$user_id = $wpdb->insert_id;
+		$user_id = (int) $wpdb->insert_id;
 	}
 
 	update_usermeta( $user_id, 'first_name', $first_name);

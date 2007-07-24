@@ -66,7 +66,7 @@ if (empty($title) && empty($tb_url) && empty($blog_name)) {
 	exit;
 }
 
-if ( !empty($tb_url) && !empty($title) && !empty($tb_url) ) {
+if ( !empty($tb_url) && !empty($title) ) {
 	header('Content-Type: text/xml; charset=' . get_option('blog_charset') );
 
 	$pingstatus = $wpdb->get_var("SELECT ping_status FROM $wpdb->posts WHERE ID = $tb_id");
@@ -84,7 +84,7 @@ if ( !empty($tb_url) && !empty($title) && !empty($tb_url) ) {
 		$title = (strlen($title) > 250) ? substr($title, 0, 250) . '...' : $title;
 	}
 
-	$comment_post_ID = $tb_id;
+	$comment_post_ID = (int) $tb_id;
 	$comment_author = $blog_name;
 	$comment_author_email = '';
 	$comment_author_url = $tb_url;
