@@ -4,7 +4,6 @@ require_once('admin.php');
 function index_js() {
 ?>
 <script type="text/javascript">
-Event.observe( window, 'load', dashboard_init, false );
 function dashboard_init() {
 	var update1 = new Ajax.Updater( 'incominglinks', 'index-extra.php?jax=incominglinks' );
 	var update3 = new Ajax.Updater( 'planetnews', 'index-extra.php?jax=planetnews'	);
