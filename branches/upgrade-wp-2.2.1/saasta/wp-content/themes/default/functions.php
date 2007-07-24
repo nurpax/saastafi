@@ -1,190 +1,11 @@
 <?php
-
-function saasta_print_add_fave_form() 
-{
-    print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
-    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
-    print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
-    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="add fave"/>';
-    print '</form>';
-}
-
-function saasta_print_del_fave_form($post_id)
-{
-    print '<form style="" action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return confirm(\"You sure?\");">';
-    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
-    print '<input type="hidden" name="del_post_id" value="'. $post_id .'"/>';
-    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="unfave"/>';
-    print '</form>';
-}
-
-function saasta_print_post_header() {
-    global $user_ID;
-    global $wpdb;
-
-    // TODO: use css classes
-    print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1.0em;">';
-    print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" bgcolor="#DDD391" style="padding:0.2em;border:1px solid black;">';
-    $icon = "people/unknown.png";
-
-    $pic_name = "people/" . get_the_author_login();
-
-    if (file_exists($pic_name . ".png"))
-        $icon = $pic_name . ".png";
-    else if (file_exists($pic_name . ".gif"))
-        $icon = $pic_name . ".gif";
-
-    print '<img src="' . $icon . '" width="32" height="32" border="0"></td>';
-    print '<td width="100%" bgcolor="#DDD391" style="padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
-    print '<a href="';
-    the_permalink();
-    print '" rel="bookmark" title="Permanent Link to ';
-    the_title();
-    print '">';
-    the_title();
-    print '</a></span><br><small>';
-    the_time('F jS, Y');
-    print ' by ';
-    the_author();
-    print '</small></td></tr>';
-
-    get_currentuserinfo();
-    if ($user_ID != '') {
-        $foo = $wpdb->get_results("select post_id from saasta_faves where user_id=".$user_ID." and post_id=".get_the_ID());
-
-        print '<tr>';
-        print '<td bgcolor="#DDD391" valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;">';
-
-        // The extra table here is used here to force fave/unfave
-        // button and '# of faves' text to go on the same line.
-
-        print '<table><tr><td>';
-
-        // If user hasn't marked the post as a fave, add an "add fave"
-        // button.  Otherwise offer an "unfave" button.
-        if (count($foo) == 0) 
-            saasta_print_add_fave_form ();
-        else 
-            saasta_print_del_fave_form (get_the_ID());
-
-        print '</td><td>';
-
-        // How many people have faved this post?
-        $foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
-        if ($foo->numfaves > 1) print $foo->numfaves.' faves';
-        else if ($foo->numfaves == 1) print '1 fave';
-        print '</td></tr></table>';
-
-        print '</td>';
-        print '</tr>';
-    }
-    print '</table>';
-}
-
-// under construction, do not touch -muumi
-function saasta_print_votebar() {
-    global $wpdb;
-    global $user_ID;
-
-    get_currentuserinfo();
-    // no user
-    if ('' == $user_ID)
-        return;
-
-    
-    
-    $query = "select count(*) as numvotes from saasta_votes where post_id=".get_the_ID()." and user_id=".$user_ID;
-    $foo = $wpdb->get_results($query);
-    // has not voted yet?
-    if ($foo[0]->numvotes == 0) {
-        print '<p>';
-        print '<a href="'.$_SERVER['REQUEST_URI'].'&vote=res&pid='.get_the_ID().'">res</a>';
-        print ' or ';
-        print '<a href="'.$_SERVER['REQUEST_URI'].'&vote=dis&pid='.get_the_ID().'">dis</a>';
-        print '</p>';
-    }
-    else {
-        // vote cast now?
-        if (isset($_REQUEST['vote']) && isset($_REQUEST['pid'])) {
-            $vote = $_REQUEST['vote'];
-            $pid = $_REQUEST['pid'];
-            $v = 0;
-            if ('res' == $vote) { $v = 1; }
-            if ('dis' == $vote) { $v = -1; }
-            if ($v != 0) {
-                $wpdb->query("delete from saasta_votes where post_id=".$pid." and user_id=".$user_ID);
-                $wpdb->query("insert into saasta_votes (post_id,user_id,vote) values (".$pid.",".$user_ID.",".$v.")");
-            }
-        }
-
-        $query = "select count(vote) as num_votes,SUM(vote) as tally from saasta_votes where post_id=".get_the_ID();
-        $foo = $wpdb->get_results($query);
-        print '<p>';
-        print $foo[0]->num_votes." votes cast, tally = ".$foo[0]->tally;
-        print '</p>';
-    }
-}
-
-// under construction, do not touch -muumi
-function saasta_print_tags() {
-    global $wpdb;
-    global $user_ID;
-    
-    get_currentuserinfo();
-    if ('' == $user_ID)
-        return;
-
-    $postId = get_the_ID();
-
-    if (isset($_REQUEST['pid']) && isset($_REQUEST['newtags'])) {
-        $tags = explode(" ",$_REQUEST['newtags']);
-        $values = "";
-        foreach ($tags as $t) {
-            if ($values != "") $values .= ",";
-            $values .= "(".$postId.",'".$t."')";
-        }
-        // the ignore should treat duplicate entries as warnings
-        $wpdb->query("insert ignore into saasta_post_tags (post_id,tag) values ".$values);
-    }
-
-    // list tags
-    $foo = $wpdb->get_results("select tag from saasta_post_tags where post_id=".$postId." order by tag"); 
-    print '<p><small>';
-    foreach ($foo as $f) print $f->tag." ";
-    print '</small></p>';
-
-    // print add tags field
-    print '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input type="hidden" name="pid" value="'.$postId.'"><p>add tags: <input type="text" name="newtags" style=""/><input type="submit" value="add"/></form>';
-}
-
-/*
- * list users favourites
- * under construction
- */
-function saasta_list_faves() {
-    global $wpdb;
-    global $user_ID;
-
-    get_currentuserinfo();
-        if ('' == $user_ID)
-                return;
-
-    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from saasta_posts p,saasta_faves f where f.post_id=p.ID and f.user_id=".$user_ID);
-    if (count($foo) > 0) {
-        print '<li><h2>Your favorites</h2><ul>';
-        foreach ($foo as $f) {
-            print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
-                    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
-                    print '<input type="hidden" name="del_post_id" value="'.$f->post_id.'"/>';
-            print '<li><a href="'.get_permalink($f->post_id).'" title="'.$f->title.'">'.$f->title.'</a>';
-                    print ' <input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="del"/>';
-                    print '</form>';
-
-            //print ' <a href="'.$url.'delfave='.$f->post_id.'" title="delete favorite">[x]</a>';
-        }
-        print '</ul></li>';
-    }
-}
+if ( function_exists('register_sidebar') )
+    register_sidebar(array(
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget' => '</li>',
+        'before_title' => '<h2 class="widgettitle">',
+        'after_title' => '</h2>',
+    ));
 
 function kubrick_head() {
 	$head = "<style type='text/css'>\n<!--";
@@ -211,7 +32,7 @@ function kubrick_header_image() {
 }
 
 function kubrick_upper_color() {
-	if ( strstr( $url = kubrick_header_image_url(), 'header-img.php?' ) ) {
+	if (strpos($url = kubrick_header_image_url(), 'header-img.php?') !== false) {
 		parse_str(substr($url, strpos($url, '?') + 1), $q);
 		return $q['upper'];
 	} else
@@ -219,7 +40,7 @@ function kubrick_upper_color() {
 }
 
 function kubrick_lower_color() {
-	if ( strstr( $url = kubrick_header_image_url(), 'header-img.php?' ) ) {
+	if (strpos($url = kubrick_header_image_url(), 'header-img.php?') !== false) {
 		parse_str(substr($url, strpos($url, '?') + 1), $q);
 		return $q['lower'];
 	} else
@@ -261,6 +82,7 @@ add_action('admin_menu', 'kubrick_add_theme_page');
 function kubrick_add_theme_page() {
 	if ( $_GET['page'] == basename(__FILE__) ) {
 		if ( 'save' == $_REQUEST['action'] ) {
+			check_admin_referer('kubrick-header');
 			if ( isset($_REQUEST['njform']) ) {
 				if ( isset($_REQUEST['defaults']) ) {
 					delete_option('kubrick_header_image');
@@ -269,13 +91,14 @@ function kubrick_add_theme_page() {
 				} else {
 					if ( '' == $_REQUEST['njfontcolor'] )
 						delete_option('kubrick_header_color');
-					else
-						update_option('kubrick_header_color', $_REQUEST['njfontcolor']);
-
+					else {
+						$fontcolor = preg_replace('/^.*(#[0-9a-fA-F]{6})?.*$/', '$1', $_REQUEST['njfontcolor']);
+						update_option('kubrick_header_color', $fontcolor);
+					}
 					if ( preg_match('/[0-9A-F]{6}|[0-9A-F]{3}/i', $_REQUEST['njuppercolor'], $uc) && preg_match('/[0-9A-F]{6}|[0-9A-F]{3}/i', $_REQUEST['njlowercolor'], $lc) ) {
 						$uc = ( strlen($uc[0]) == 3 ) ? $uc[0]{0}.$uc[0]{0}.$uc[0]{1}.$uc[0]{1}.$uc[0]{2}.$uc[0]{2} : $uc[0];
 						$lc = ( strlen($lc[0]) == 3 ) ? $lc[0]{0}.$lc[0]{0}.$lc[0]{1}.$lc[0]{1}.$lc[0]{2}.$lc[0]{2} : $lc[0];
-						update_option('kubrick_header_image', "header-img.php?upper=$uc&amp;lower=$lc");
+						update_option('kubrick_header_image', "header-img.php?upper=$uc&lower=$lc");
 					}
 
 					if ( isset($_REQUEST['toggledisplay']) ) {
@@ -288,20 +111,27 @@ function kubrick_add_theme_page() {
 			} else {
 
 				if ( isset($_REQUEST['headerimage']) ) {
+					check_admin_referer('kubrick-header');
 					if ( '' == $_REQUEST['headerimage'] )
 						delete_option('kubrick_header_image');
-					else
-						update_option('kubrick_header_image', $_REQUEST['headerimage']);
+					else {
+						$headerimage = preg_replace('/^.*?(header-img.php\?upper=[0-9a-fA-F]{6}&lower=[0-9a-fA-F]{6})?.*$/', '$1', $_REQUEST['headerimage']);
+						update_option('kubrick_header_image', $headerimage);
+					}
 				}
 
 				if ( isset($_REQUEST['fontcolor']) ) {
+					check_admin_referer('kubrick-header');
 					if ( '' == $_REQUEST['fontcolor'] )
 						delete_option('kubrick_header_color');
-					else
-						update_option('kubrick_header_color', $_REQUEST['fontcolor']);
+					else {
+						$fontcolor = preg_replace('/^.*?(#[0-9a-fA-F]{6})?.*$/', '$1', $_REQUEST['fontcolor']);
+						update_option('kubrick_header_color', $fontcolor);
+					}
 				}
 
 				if ( isset($_REQUEST['fontdisplay']) ) {
+					check_admin_referer('kubrick-header');
 					if ( '' == $_REQUEST['fontdisplay'] || 'inline' == $_REQUEST['fontdisplay'] )
 						delete_option('kubrick_header_display');
 					else
@@ -314,7 +144,7 @@ function kubrick_add_theme_page() {
 		}
 		add_action('admin_head', 'kubrick_theme_page_head');
 	}
-	add_theme_page('Customize Header', 'Header Image and Color', 'edit_themes', basename(__FILE__), 'kubrick_theme_page');
+	add_theme_page(__('Customize Header'), __('Header Image and Color'), 'edit_themes', basename(__FILE__), 'kubrick_theme_page');
 }
 
 function kubrick_theme_page_head() {
@@ -327,7 +157,7 @@ function kubrick_theme_page_head() {
 		kUpdate(ColorPicker_targetInput.id);
 	}
 	function PopupWindow_populate(contents) {
-		contents += '<br /><p style="text-align:center;margin-top:0px;"><input type="button" value="Close Color Picker" onclick="cp.hidePopup(\'prettyplease\')"></input></p>';
+		contents += '<br /><p style="text-align:center;margin-top:0px;"><input type="button" value="<?php echo attribute_escape(__('Close Color Picker')); ?>" onclick="cp.hidePopup(\'prettyplease\')"></input></p>';
 		this.contents = contents;
 		this.populated = false;
 	}
@@ -412,13 +242,13 @@ function kubrick_theme_page_head() {
 		document.getElementById('headerimg').style.display = document.getElementById('fontdisplay').value;
 	}
 	function kRevert() {
-		document.getElementById('headerimage').value = '<?php echo kubrick_header_image(); ?>';
-		document.getElementById('advuppercolor').value = document.getElementById('uppercolor').value = '#<?php echo kubrick_upper_color(); ?>';
-		document.getElementById('advlowercolor').value = document.getElementById('lowercolor').value = '#<?php echo kubrick_lower_color(); ?>';
-		document.getElementById('header').style.background = 'url("<?php echo kubrick_header_image_url(); ?>") center no-repeat';
+		document.getElementById('headerimage').value = '<?php echo js_escape(kubrick_header_image()); ?>';
+		document.getElementById('advuppercolor').value = document.getElementById('uppercolor').value = '#<?php echo js_escape(kubrick_upper_color()); ?>';
+		document.getElementById('advlowercolor').value = document.getElementById('lowercolor').value = '#<?php echo js_escape(kubrick_lower_color()); ?>';
+		document.getElementById('header').style.background = 'url("<?php echo js_escape(kubrick_header_image_url()); ?>") center no-repeat';
 		document.getElementById('header').style.color = '';
-		document.getElementById('advfontcolor').value = document.getElementById('fontcolor').value = '<?php echo kubrick_header_color_string(); ?>';
-		document.getElementById('fontdisplay').value = '<?php echo kubrick_header_display_string(); ?>';
+		document.getElementById('advfontcolor').value = document.getElementById('fontcolor').value = '<?php echo js_escape(kubrick_header_color_string()); ?>';
+		document.getElementById('fontdisplay').value = '<?php echo js_escape(kubrick_header_display_string()); ?>';
 		document.getElementById('headerimg').style.display = document.getElementById('fontdisplay').value;
 	}
 	function kInit() {
@@ -524,11 +354,11 @@ function kubrick_theme_page_head() {
 }
 
 function kubrick_theme_page() {
-	if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated fade"><p><strong>Options saved.</strong></p></div>';
+	if ( $_REQUEST['saved'] ) echo '<div id="message" class="updated fade"><p><strong>'.__('Options saved.').'</strong></p></div>';
 ?>
 <div class='wrap'>
 	<div id="kubrick-header">
-		<h2>Header Image and Color</h2>
+	<h2><?php _e('Header Image and Color'); ?></h2>
 		<div id="headwrap">
 			<div id="header">
 				<div id="headerimg">
@@ -540,41 +370,44 @@ function kubrick_theme_page() {
 		<br />
 		<div id="nonJsForm">
 			<form method="post" action="">
-				<div class="zerosize"><input type="submit" name="defaultsubmit" value="Save" /></div>
-				<label for="njfontcolor">Font Color:</label><input type="text" name="njfontcolor" id="njfontcolor" value="<?php echo kubrick_header_color(); ?>" /> Any CSS color (<code>red</code> or <code>#FF0000</code> or <code>rgb(255, 0, 0)</code>)<br />
-				<label for="njuppercolor">Upper Color:</label><input type="text" name="njuppercolor" id="njuppercolor" value="#<?php echo kubrick_upper_color(); ?>" /> HEX only (<code>#FF0000</code> or <code>#F00</code>)<br />
-				<label for="njlowercolor">Lower Color:</label><input type="text" name="njlowercolor" id="njlowercolor" value="#<?php echo kubrick_lower_color(); ?>" /> HEX only (<code>#FF0000</code> or <code>#F00</code>)<br />
-				<input type="hidden" name="hi" id="hi" value="<?php echo kubrick_header_image(); ?>" />
-				<input type="submit" name="toggledisplay" id="toggledisplay" value="Toggle Text" />
-				<input type="submit" name="defaults" value="Use Defaults" />
-				<input type="submit" class="defbutton" name="submitform" value="&nbsp;&nbsp;Save&nbsp;&nbsp;" />
+				<?php wp_nonce_field('kubrick-header'); ?>
+				<div class="zerosize"><input type="submit" name="defaultsubmit" value="<?php echo attribute_escape(__('Save')); ?>" /></div>
+					<label for="njfontcolor"><?php _e('Font Color:'); ?></label><input type="text" name="njfontcolor" id="njfontcolor" value="<?php echo attribute_escape(kubrick_header_color()); ?>" /> <?php printf(__('Any CSS color (%s or %s or %s)'), '<code>red</code>', '<code>#FF0000</code>', '<code>rgb(255, 0, 0)</code>'); ?><br />
+					<label for="njuppercolor"><?php _e('Upper Color:'); ?></label><input type="text" name="njuppercolor" id="njuppercolor" value="#<?php echo attribute_escape(kubrick_upper_color()); ?>" /> <?php printf(__('HEX only (%s or %s)'), '<code>#FF0000</code>', '<code>#F00</code>'); ?><br />
+				<label for="njlowercolor"><?php _e('Lower Color:'); ?></label><input type="text" name="njlowercolor" id="njlowercolor" value="#<?php echo attribute_escape(kubrick_lower_color()); ?>" /> <?php printf(__('HEX only (%s or %s)'), '<code>#FF0000</code>', '<code>#F00</code>'); ?><br />
+				<input type="hidden" name="hi" id="hi" value="<?php echo attribute_escape(kubrick_header_image()); ?>" />
+				<input type="submit" name="toggledisplay" id="toggledisplay" value="<?php echo attribute_escape(__('Toggle Text')); ?>" />
+				<input type="submit" name="defaults" value="<?php echo attribute_escape(__('Use Defaults')); ?>" />
+				<input type="submit" class="defbutton" name="submitform" value="&nbsp;&nbsp;<?php _e('Save'); ?>&nbsp;&nbsp;" />
 				<input type="hidden" name="action" value="save" />
 				<input type="hidden" name="njform" value="true" />
 			</form>
 		</div>
 		<div id="jsForm">
-			<form style="display:inline;" method="post" name="hicolor" id="hicolor" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-				<input type="button" onclick="tgt=document.getElementById('fontcolor');colorSelect(tgt,'pick1');return false;" name="pick1" id="pick1" value="Font Color"></input>
-				<input type="button" onclick="tgt=document.getElementById('uppercolor');colorSelect(tgt,'pick2');return false;" name="pick2" id="pick2" value="Upper Color"></input>
-				<input type="button" onclick="tgt=document.getElementById('lowercolor');colorSelect(tgt,'pick3');return false;" name="pick3" id="pick3" value="Lower Color"></input>
-				<input type="button" name="revert" value="Revert" onclick="kRevert()" />
-				<input type="button" value="Advanced" onclick="toggleAdvanced()" />
+			<form style="display:inline;" method="post" name="hicolor" id="hicolor" action="<?php echo attribute_escape($_SERVER['REQUEST_URI']); ?>">
+				<?php wp_nonce_field('kubrick-header'); ?>
+	<input type="button" onclick="tgt=document.getElementById('fontcolor');colorSelect(tgt,'pick1');return false;" name="pick1" id="pick1" value="<?php echo attribute_escape(__('Font Color')); ?>"></input>
+		<input type="button" onclick="tgt=document.getElementById('uppercolor');colorSelect(tgt,'pick2');return false;" name="pick2" id="pick2" value="<?php echo attribute_escape(__('Upper Color')); ?>"></input>
+		<input type="button" onclick="tgt=document.getElementById('lowercolor');colorSelect(tgt,'pick3');return false;" name="pick3" id="pick3" value="<?php echo attribute_escape(__('Lower Color')); ?>"></input>
+				<input type="button" name="revert" value="<?php echo attribute_escape(__('Revert')); ?>" onclick="kRevert()" />
+				<input type="button" value="<?php echo attribute_escape(__('Advanced')); ?>" onclick="toggleAdvanced()" />
 				<input type="hidden" name="action" value="save" />
-				<input type="hidden" name="fontdisplay" id="fontdisplay" value="<?php echo kubrick_header_display(); ?>" />
-				<input type="hidden" name="fontcolor" id="fontcolor" value="<?php echo kubrick_header_color(); ?>" />
-				<input type="hidden" name="uppercolor" id="uppercolor" value="<?php echo kubrick_upper_color(); ?>" />
-				<input type="hidden" name="lowercolor" id="lowercolor" value="<?php echo kubrick_lower_color(); ?>" />
-				<input type="hidden" name="headerimage" id="headerimage" value="<?php echo kubrick_header_image(); ?>" />
-				<p class="submit"><input type="submit" name="submitform" class="defbutton" value="<?php _e('Update Header &raquo;'); ?>" onclick="cp.hidePopup('prettyplease')" /></p>
+				<input type="hidden" name="fontdisplay" id="fontdisplay" value="<?php echo attribute_escape(kubrick_header_display()); ?>" />
+				<input type="hidden" name="fontcolor" id="fontcolor" value="<?php echo attribute_escape(kubrick_header_color()); ?>" />
+				<input type="hidden" name="uppercolor" id="uppercolor" value="<?php echo attribute_escape(kubrick_upper_color()); ?>" />
+				<input type="hidden" name="lowercolor" id="lowercolor" value="<?php echo attribute_escape(kubrick_lower_color()); ?>" />
+				<input type="hidden" name="headerimage" id="headerimage" value="<?php echo attribute_escape(kubrick_header_image()); ?>" />
+				<p class="submit"><input type="submit" name="submitform" class="defbutton" value="<?php echo attribute_escape(__('Update Header &raquo;')); ?>" onclick="cp.hidePopup('prettyplease')" /></p>
 			</form>
 			<div id="colorPickerDiv" style="z-index: 100;background:#eee;border:1px solid #ccc;position:absolute;visibility:hidden;"> </div>
 			<div id="advanced">
 				<form id="jsAdvanced" style="display:none;" action="">
-					<label for="advfontcolor">Font Color (CSS): </label><input type="text" id="advfontcolor" onchange="advUpdate(this.value, 'fontcolor')" value="<?php echo kubrick_header_color(); ?>" /><br />
-					<label for="advuppercolor">Upper Color (HEX): </label><input type="text" id="advuppercolor" onchange="advUpdate(this.value, 'uppercolor')" value="#<?php echo kubrick_upper_color(); ?>" /><br />
-					<label for="advlowercolor">Lower Color (HEX): </label><input type="text" id="advlowercolor" onchange="advUpdate(this.value, 'lowercolor')" value="#<?php echo kubrick_lower_color(); ?>" /><br />
-					<input type="button" name="default" value="Select Default Colors" onclick="kDefaults()" /><br />
-					<input type="button" onclick="toggleDisplay();return false;" name="pick" id="pick" value="Toggle Text Display"></input><br />
+					<?php wp_nonce_field('kubrick-header'); ?>
+					<label for="advfontcolor"><?php _e('Font Color (CSS):'); ?> </label><input type="text" id="advfontcolor" onchange="advUpdate(this.value, 'fontcolor')" value="<?php echo attribute_escape(kubrick_header_color()); ?>" /><br />
+					<label for="advuppercolor"><?php _e('Upper Color (HEX):');?> </label><input type="text" id="advuppercolor" onchange="advUpdate(this.value, 'uppercolor')" value="#<?php echo attribute_escape(kubrick_upper_color()); ?>" /><br />
+					<label for="advlowercolor"><?php _e('Lower Color (HEX):'); ?> </label><input type="text" id="advlowercolor" onchange="advUpdate(this.value, 'lowercolor')" value="#<?php echo attribute_escape(kubrick_lower_color()); ?>" /><br />
+					<input type="button" name="default" value="<?php echo attribute_escape(__('Select Default Colors')); ?>" onclick="kDefaults()" /><br />
+					<input type="button" onclick="toggleDisplay();return false;" name="pick" id="pick" value="<?php echo attribute_escape(__('Toggle Text Display')); ?>"></input><br />
 				</form>
 			</div>
 		</div>

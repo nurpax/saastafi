@@ -55,7 +55,7 @@ include ('admin-header.php');
 <div id="message" class="updated fade">
 	<p><strong><?php _e('User updated.') ?></strong></p>
 	<?php if ( $wp_http_referer ) : ?>
-	<p><a href="<?php echo attribute_escape($wp_http_referer); ?>"><?php _e('&laquo; Back to Authors and Users'); ?></a></p>
+	<p><a href="users.php"><?php _e('&laquo; Back to Authors and Users'); ?></a></p>
 	<?php endif; ?>
 </div>
 <?php endif; ?>
@@ -76,12 +76,16 @@ include ('admin-header.php');
 <form name="profile" id="your-profile" action="user-edit.php" method="post">
 <?php wp_nonce_field('update-user_' . $user_id) ?>
 <?php if ( $wp_http_referer ) : ?>
-	<input type="hidden" name="wp_http_referer" value="<?php echo wp_specialchars($wp_http_referer); ?>" />
+	<input type="hidden" name="wp_http_referer" value="<?php echo clean_url($wp_http_referer); ?>" />
 <?php endif; ?>
 <p>
 <input type="hidden" name="from" value="profile" />
 <input type="hidden" name="checkuser_id" value="<?php echo $user_ID ?>" />
 </p>
+
+<p><label for="rich_editing"><input name="rich_editing" type="checkbox" id="rich_editing" value="true" <?php checked('true', $profileuser->rich_editing); ?> /> <?php _e('Use the visual editor when writing'); ?></label></p>
+
+<p class="submit"><input type="submit" value="<?php _e('Update User &raquo;'); ?>" name="submit" /></p>
 
 <fieldset>
 <legend><?php _e('Name'); ?></legend>
