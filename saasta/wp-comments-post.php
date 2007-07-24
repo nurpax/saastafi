@@ -1,4 +1,10 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    header('Allow: POST');
+	header("HTTP/1.1 405 Method Not Allowed");
+	header("Content-type: text/plain");
+    exit;
+}
 require( dirname(__FILE__) . '/wp-config.php' );
 
 nocache_headers();
@@ -18,21 +24,27 @@ if ( empty($status->comment_status) ) {
 	exit;
 }
 
-$comment_author       = trim($_POST['author']);
+$comment_author       = trim(strip_tags($_POST['author']));
 $comment_author_email = trim($_POST['email']);
 $comment_author_url   = trim($_POST['url']);
 $comment_content      = trim($_POST['comment']);
 
 // If the user is logged in
 $user = wp_get_current_user();
-if ( $user->ID ) :
+if ( $user->ID ) {
 	$comment_author       = $wpdb->escape($user->display_name);
 	$comment_author_email = $wpdb->escape($user->user_email);
 	$comment_author_url   = $wpdb->escape($user->user_url);
-else :
+	if ( current_user_can('unfiltered_html') ) {
+		if ( wp_create_nonce('unfiltered-html-comment_' . $comment_post_ID) != $_POST['_wp_unfiltered_html_comment'] ) {
+			kses_remove_filters(); // start with a clean slate
+			kses_init_filters(); // set up the filters
+		}
+	}
+} else {
 	if ( get_option('comment_registration') )
 		wp_die( __('Sorry, you must be logged in to post a comment.') );
-endif;
+}
 
 $comment_type = '';
 

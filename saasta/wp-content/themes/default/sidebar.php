@@ -1,6 +1,7 @@
 	<div id="sidebar">
 		<ul>
-
+			<?php 	/* Widgetized sidebar, if you have the plugin installed. */
+					if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar() ) : ?>
 			<li>
 				<?php include (TEMPLATEPATH . '/searchform.php'); ?>
 			</li>
@@ -11,46 +12,39 @@
 			</li>
 			-->
 
-			<li>
+			<?php if ( is_404() || is_category() || is_day() || is_month() ||
+						is_year() || is_search() || is_paged() ) {
+			?> <li>
+
 			<?php /* If this is a 404 page */ if (is_404()) { ?>
 			<?php /* If this is a category archive */ } elseif (is_category()) { ?>
 			<p>You are currently browsing the archives for the <?php single_cat_title(''); ?> category.</p>
 
 			<?php /* If this is a yearly archive */ } elseif (is_day()) { ?>
-			<p>You are currently browsing the <a href="<?php bloginfo('home'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
+			<p>You are currently browsing the <a href="<?php bloginfo('url'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
 			for the day <?php the_time('l, F jS, Y'); ?>.</p>
 
 			<?php /* If this is a monthly archive */ } elseif (is_month()) { ?>
-			<p>You are currently browsing the <a href="<?php bloginfo('home'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
+			<p>You are currently browsing the <a href="<?php bloginfo('url'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
 			for <?php the_time('F, Y'); ?>.</p>
 
 			<?php /* If this is a yearly archive */ } elseif (is_year()) { ?>
-			<p>You are currently browsing the <a href="<?php bloginfo('home'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
+			<p>You are currently browsing the <a href="<?php bloginfo('url'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
 			for the year <?php the_time('Y'); ?>.</p>
 
 			<?php /* If this is a monthly archive */ } elseif (is_search()) { ?>
-			<p>You have searched the <a href="<?php echo bloginfo('home'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
+			<p>You have searched the <a href="<?php echo bloginfo('url'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives
 			for <strong>'<?php the_search_query(); ?>'</strong>. If you are unable to find anything in these search results, you can try one of these links.</p>
 
 			<?php /* If this is a monthly archive */ } elseif (isset($_GET['paged']) && !empty($_GET['paged'])) { ?>
-			<p>You are currently browsing the <a href="<?php echo bloginfo('home'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives.</p>
+			<p>You are currently browsing the <a href="<?php echo bloginfo('url'); ?>/"><?php echo bloginfo('name'); ?></a> weblog archives.</p>
 
 			<?php } ?>
-			</li>
+				
+			</li> <?php }?>
 
 			<?php wp_list_pages('title_li=<h2>Pages</h2>' ); ?>
 
-			<li>
-			<a href="<?php print get_permalink(916); ?>"><img src="champagne.png"/><br/><span style="font-size:2em;">Best Saasta of Q2/2007!</span></a>
-			</li>
-			
-			<li><h2>Random saasta</h2>
-			<ul><li>
-			<?php
-			$foo = $wpdb->get_row("SELECT ID,post_title FROM saasta_posts WHERE post_status='publish' ORDER BY RAND() LIMIT 1");
-			print '<a href="'.get_permalink($foo->ID).'" title="'.$foo->post_title.'">'.$foo->post_title.'</a>';
-			?>
-			</li></ul>
 			<li><h2>Archives</h2>
 				<ul>
 				<?php wp_get_archives('type=monthly'); ?>
@@ -59,7 +53,7 @@
 
 			<?php wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); ?>
 
-			<?php /* If this is the frontpage */ if ( 1 || is_home() || is_page() ) { ?>
+			<?php /* If this is the frontpage */ if ( is_home() || is_page() ) { ?>
 				<?php wp_list_bookmarks(); ?>
 
 				<li><h2>Meta</h2>
@@ -73,6 +67,8 @@
 				</ul>
 				</li>
 			<?php } ?>
+			
+			<?php endif; ?>
 		</ul>
 	</div>
 

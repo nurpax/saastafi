@@ -13,13 +13,13 @@ function wp_upload_display( $dims = false, $href = '' ) {
 	}
 	if ( isset($attachment_data['width']) )
 		list($width,$height) = wp_shrink_dimensions($attachment_data['width'], $attachment_data['height'], 171, 128);
-		
+
 	ob_start();
 		the_title();
 		$post_title = attribute_escape(ob_get_contents());
 	ob_end_clean();
-	$post_content = apply_filters( 'content_edit_pre', $post->post_content );
-	
+	$post_content = attribute_escape(apply_filters( 'content_edit_pre', $post->post_content ));
+
 	$class = 'text';
 	$innerHTML = get_attachment_innerHTML( $id, false, $dims );
 	if ( $image_src = get_attachment_icon_src() ) {
@@ -83,9 +83,9 @@ function wp_upload_view() {
 				echo '[&nbsp;';
 				echo '<a href="' . get_permalink() . '">' . __('view') . '</a>';
 				echo '&nbsp;|&nbsp;';
-					echo '<a href="' . attribute_escape(add_query_arg('action', 'edit')) . '" title="' . __('Edit this file') . '">' . __('edit') . '</a>';
+					echo '<a href="' . clean_url(add_query_arg('action', 'edit')) . '" title="' . __('Edit this file') . '">' . __('edit') . '</a>';
 				echo '&nbsp;|&nbsp;';
-				echo '<a href="' . attribute_escape(remove_query_arg(array('action', 'ID'))) . '" title="' . __('Browse your files') . '">' . __('cancel') . '</a>';
+				echo '<a href="' . clean_url(remove_query_arg(array('action', 'ID'))) . '" title="' . __('Browse your files') . '">' . __('cancel') . '</a>';
 				echo '&nbsp;]'; ?></span>
 		</div>
 
@@ -123,9 +123,9 @@ function wp_upload_form() {
 				echo '[&nbsp;';
 				echo '<a href="' . get_permalink() . '">' . __('view') . '</a>';
 				echo '&nbsp;|&nbsp;';
-					echo '<a href="' . attribute_escape(add_query_arg('action', 'view')) . '">' . __('links') . '</a>';
+					echo '<a href="' . clean_url(add_query_arg('action', 'view')) . '">' . __('links') . '</a>';
 				echo '&nbsp;|&nbsp;';
-				echo '<a href="' . attribute_escape(remove_query_arg(array('action','ID'))) . '" title="' . __('Browse your files') . '">' . __('cancel') . '</a>';
+				echo '<a href="' . clean_url(remove_query_arg(array('action','ID'))) . '" title="' . __('Browse your files') . '">' . __('cancel') . '</a>';
 				echo '&nbsp;]'; ?></span>
 		</div>
 
@@ -285,7 +285,7 @@ function wp_upload_posts_where( $where ) {
 function wp_upload_tab_browse() {
 	global $wpdb, $action, $paged;
 	$old_vars = compact( 'paged' );
-	
+
 	switch ( $action ) :
 	case 'edit' :
 	case 'view' :
@@ -355,3 +355,5 @@ function wp_upload_admin_head() {
 		echo "</style>";
 	}
 }
+
+?>

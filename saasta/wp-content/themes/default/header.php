@@ -4,7 +4,7 @@
 <head profile="http://gmpg.org/xfn/11">
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 
-<title>saasta.fi <?php if ( is_single() ) { ?> &raquo; Blog Archive <?php } ?> <?php wp_title(); ?></title>
+<title><?php bloginfo('name'); ?> <?php if ( is_single() ) { ?> &raquo; Blog Archive <?php } ?> <?php wp_title(); ?></title>
 
 <meta name="generator" content="WordPress <?php bloginfo('version'); ?>" /> <!-- leave this for stats -->
 
@@ -18,9 +18,9 @@
 // Checks to see whether it needs a sidebar or not
 if ( !$withcomments && !is_single() ) {
 ?>
-	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/saasta_bg.gif") repeat-y top; border: none; }
+	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/kubrickbg-<?php bloginfo('text_direction'); ?>.jpg") repeat-y top; border: none; }
 <?php } else { // No sidebar ?>
-	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/saasta_bg.gif") repeat-y top; border: none; }
+	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/kubrickbgwide.jpg") repeat-y top; border: none; }
 <?php } ?>
 
 </style>
@@ -33,11 +33,8 @@ if ( !$withcomments && !is_single() ) {
 
 <div id="header">
 	<div id="headerimg">
-	<a href="<?php echo get_option('home'); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/transp.gif" style="width:100%;height:100%;" border="0"></a>
-<!--
 		<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1>
 		<div class="description"><?php bloginfo('description'); ?></div>
--->
 	</div>
 </div>
 <hr />
