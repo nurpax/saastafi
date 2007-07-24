@@ -147,6 +147,7 @@ class MT_Import {
 		$authors = $this->get_mt_authors();
 		echo '<ol id="authors">';
 		echo '<form action="?import=mt&amp;step=2&amp;id=' . $this->id . '" method="post">';
+		wp_nonce_field('import-mt');
 		$j = -1;
 		foreach ($authors as $author) {
 			++ $j;
@@ -171,7 +172,7 @@ class MT_Import {
 			return;
 		}
 		$this->file = $file['file'];
-		$this->id = $file['id'];
+		$this->id = (int) $file['id'];
 
 		$this->get_entries();
 		$this->mt_authors_form();
@@ -295,7 +296,7 @@ class MT_Import {
 					}
 				}
 
-				$comment_post_ID = $post_id;
+				$comment_post_ID = (int) $post_id;
 				$comment_approved = 1;
 
 				// Now for comments
@@ -417,9 +418,11 @@ class MT_Import {
 				$this->greet();
 				break;
 			case 1 :
+				check_admin_referer('import-upload');
 				$this->select_authors();
 				break;
 			case 2:
+				check_admin_referer('import-mt');
 				$this->import();
 				break;
 		}

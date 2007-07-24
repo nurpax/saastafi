@@ -1,10 +1,12 @@
 <?php
+if ( isset($_GET['message']) )
+	  $_GET['message'] = (int) $_GET['message'];
 $messages[1] = __('Post updated');
 $messages[2] = __('Custom field updated');
 $messages[3] = __('Custom field deleted.');
 ?>
 <?php if (isset($_GET['message'])) : ?>
-<div id="message" class="updated fade"><p><?php echo $messages[$_GET['message']]; ?></p></div>
+<div id="message" class="updated fade"><p><?php echo wp_specialchars($messages[$_GET['message']]); ?></p></div>
 <?php endif; ?>
 
 <form name="post" action="post.php" method="post" id="post">
@@ -21,16 +23,17 @@ if (0 == $post_ID) {
 	$form_extra = "<input type='hidden' id='post_ID' name='temp_ID' value='$temp_ID' />";
 	wp_nonce_field('add-post');
 } else {
+	$post_ID = (int) $post_ID;
 	$form_action = 'editpost';
 	$form_extra = "<input type='hidden' id='post_ID' name='post_ID' value='$post_ID' />";
 	wp_nonce_field('update-post_' .  $post_ID);
 }
 
-$form_pingback = '<input type="hidden" name="post_pingback" value="' . get_option('default_pingback_flag') . '" id="post_pingback" />';
+$form_pingback = '<input type="hidden" name="post_pingback" value="' . (int) get_option('default_pingback_flag') . '" id="post_pingback" />';
 
-$form_prevstatus = '<input type="hidden" name="prev_status" value="' . $post->post_status . '" />';
+$form_prevstatus = '<input type="hidden" name="prev_status" value="' . attribute_escape( $post->post_status ) . '" />';
 
-$form_trackback = '<input type="text" name="trackback_url" style="width: 415px" id="trackback" tabindex="7" value="'. str_replace("\n", ' ', $post->to_ping) .'" />';
+$form_trackback = '<input type="text" name="trackback_url" style="width: 415px" id="trackback" tabindex="7" value="'. attribute_escape( str_replace("\n", ' ', $post->to_ping) ) .'" />';
 
 if ('' != $post->pinged) {
 	$pings = '<p>'. __('Already pinged:') . '</p><ul>';
@@ -41,16 +44,16 @@ if ('' != $post->pinged) {
 	$pings .= '</ul>';
 }
 
-$saveasdraft = '<input name="save" type="submit" id="save" tabindex="3" value="' . __('Save and Continue Editing') . '" />';
+$saveasdraft = '<input name="save" type="submit" id="save" tabindex="3" value="' . attribute_escape( __('Save and Continue Editing') ) . '" />';
 
 if (empty($post->post_status)) $post->post_status = 'draft';
 
 ?>
 
-<input type="hidden" name="user_ID" value="<?php echo $user_ID ?>" />
+<input type="hidden" name="user_ID" value="<?php echo (int) $user_ID ?>" />
 <input type="hidden" id="hiddenaction" name="action" value="<?php echo $form_action ?>" />
 <input type="hidden" id="originalaction" name="originalaction" value="<?php echo $form_action ?>" />
-<input type="hidden" name="post_author" value="<?php echo $post->post_author ?>" />
+<input type="hidden" name="post_author" value="<?php echo attribute_escape( $post->post_author ); ?>" />
 <input type="hidden" id="post_type" name="post_type" value="post" />
 
 <?php echo $form_extra ?>
@@ -88,12 +91,12 @@ addLoadEvent(focusit);
 
 <fieldset id="passworddiv" class="dbx-box">
 <h3 class="dbx-handle"><?php _e('Post Password') ?></h3> 
-<div class="dbx-content"><input name="post_password" type="text" size="13" id="post_password" value="<?php echo $post->post_password ?>" /></div>
+<div class="dbx-content"><input name="post_password" type="text" size="13" id="post_password" value="<?php echo attribute_escape( $post->post_password ); ?>" /></div>
 </fieldset>
 
 <fieldset id="slugdiv" class="dbx-box">
 <h3 class="dbx-handle"><?php _e('Post Slug') ?></h3> 
-<div class="dbx-content"><input name="post_name" type="text" size="13" id="post_name" value="<?php echo $post->post_name ?>" /></div>
+<div class="dbx-content"><input name="post_name" type="text" size="13" id="post_name" value="<?php echo attribute_escape( $post->post_name ); ?>" /></div>
 </fieldset>
 
 <fieldset id="poststatusdiv" class="dbx-box">
@@ -107,7 +110,7 @@ addLoadEvent(focusit);
 
 <?php if ( current_user_can('edit_posts') ) : ?>
 <fieldset id="posttimestampdiv" class="dbx-box">
-<h3 class="dbx-handle"><?php _e('Post Timestamp'); ?>:</h3>
+<h3 class="dbx-handle"><?php _e('Post Timestamp'); ?></h3>
 <div class="dbx-content"><?php touch_time(($action == 'edit')); ?></div>
 </fieldset>
 <?php endif; ?>
@@ -117,7 +120,7 @@ $authors = get_editable_authors( $current_user->id ); // TODO: ROLE SYSTEM
 if ( $authors && count( $authors ) > 1 ) :
 ?>
 <fieldset id="authordiv" class="dbx-box">
-<h3 class="dbx-handle"><?php _e('Post Author'); ?>:</h3>
+<h3 class="dbx-handle"><?php _e('Post Author'); ?></h3>
 <div class="dbx-content">
 <select name="post_author_override" id="post_author_override">
 <?php
@@ -125,7 +128,7 @@ foreach ($authors as $o) :
 $o = get_userdata( $o->ID );
 if ( $post->post_author == $o->ID || ( empty($post_ID) && $user_ID == $o->ID ) ) $selected = 'selected="selected"';
 else $selected = '';
-echo "<option value='$o->ID' $selected>$o->display_name</option>";
+echo "<option value='" . (int) $o->ID . "' $selected>" . wp_specialchars( $o->display_name ) . "</option>";
 endforeach;
 ?>
 </select>
@@ -140,11 +143,18 @@ endforeach;
 
 <fieldset id="titlediv">
 	<legend><?php _e('Title') ?></legend>
-	<div><input type="text" name="post_title" size="30" tabindex="1" value="<?php echo $post->post_title; ?>" id="title" /></div>
+	<div><input type="text" name="post_title" size="30" tabindex="1" value="<?php echo attribute_escape($post->post_title); ?>" id="title" /></div>
 </fieldset>
 
 <fieldset id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>">
-<legend><?php _e('Post') ?></legend>
+<legend><?php _e('Post') ?>
+
+<?php if ( 'publish' == $post->post_status ) { ?>
+<a href="<?php echo clean_url(get_permalink($post->ID)); ?>" class="view-link" target="_blank"><?php _e('View &raquo;'); ?></a>
+<?php } elseif ( 'edit' == $action ) { ?>
+<a href="<?php echo clean_url(apply_filters('preview_post_link', add_query_arg('preview', 'true', get_permalink($post->ID)))); ?>" class="view-link" target="_blank"><?php _e('Preview &raquo;'); ?></a>
+<?php } ?>
+</legend>
 
 	<?php the_editor($post->post_content); ?>
 </fieldset>
@@ -161,25 +171,25 @@ endforeach;
 if ('publish' != $post->post_status || 0 == $post_ID) {
 ?>
 <?php if ( current_user_can('publish_posts') ) : ?>
-	<input name="publish" type="submit" id="publish" tabindex="5" accesskey="p" value="<?php _e('Publish') ?>" /> 
+	<input name="publish" type="submit" id="publish" tabindex="5" accesskey="p" value="<?php _e('Publish'); ?>" /> 
 <?php endif; ?>
 <?php
 }
 ?>
 <input name="referredby" type="hidden" id="referredby" value="<?php 
 if ( !empty($_REQUEST['popupurl']) )
-	echo attribute_escape(stripslashes($_REQUEST['popupurl']));
+	echo clean_url(stripslashes($_REQUEST['popupurl']));
 else if ( url_to_postid(wp_get_referer()) == $post_ID )
 	echo 'redo';
 else
-	echo attribute_escape(stripslashes(wp_get_referer()));
+	echo clean_url(stripslashes(wp_get_referer()));
 ?>" /></p>
 
 <?php do_action('edit_form_advanced'); ?>
 
 <?php
 if (current_user_can('upload_files')) {
-	$uploading_iframe_ID = (0 == $post_ID ? $temp_ID : $post_ID);
+	$uploading_iframe_ID = (int) (0 == $post_ID ? $temp_ID : $post_ID);
 	$uploading_iframe_src = wp_nonce_url("upload.php?style=inline&amp;tab=upload&amp;post_id=$uploading_iframe_ID", 'inlineuploading');
 	$uploading_iframe_src = apply_filters('uploading_iframe_src', $uploading_iframe_src);
 	if ( false != $uploading_iframe_src )
@@ -244,7 +254,7 @@ list_meta($metadata);
 </div>
 
 <?php if ('edit' == $action) : $delete_nonce = wp_create_nonce( 'delete-post_' . $post_ID ); ?>
-<input name="deletepost" class="button delete" type="submit" id="deletepost" tabindex="10" value="<?php _e('Delete this post') ?>" <?php echo "onclick=\"if ( confirm('" . js_escape(sprintf(__("You are about to delete this post '%s'\n  'Cancel' to stop, 'OK' to delete."), $post->post_title )) . "') ) { document.forms.post._wpnonce.value = '$delete_nonce'; return true;}return false;\""; ?> />
+<input name="deletepost" class="button delete" type="submit" id="deletepost" tabindex="10" value="<?php echo ( 'draft' == $post->post_status ) ? __('Delete this draft') : __('Delete this post'); ?>" <?php echo "onclick=\"if ( confirm('" . js_escape(sprintf( ('draft' == $post->post_status) ? __("You are about to delete this draft '%s'\n  'Cancel' to stop, 'OK' to delete.") : __("You are about to delete this post '%s'\n  'Cancel' to stop, 'OK' to delete."), $post->post_title )) . "') ) { document.forms.post._wpnonce.value = '$delete_nonce'; return true;}return false;\""; ?> />
 <?php endif; ?>
 
 </div>
