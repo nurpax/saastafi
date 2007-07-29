@@ -14,7 +14,7 @@ Upgrading WP is not quite as simple as it is on a normal WP installation.  The r
 
 == Upgrade WP ==
  # Take a backup of your DB!  WP upgrade will modify your DB once you run it the first time, so it's good to have the old one available in case something goes wrong.
- # Follow WP's standard upgrade procedure
+ # Working in your newly created upgrade branch, upgrade WP using the standard WP upgrade procedure
  # Add all new files (run `svn st` and add all `?` files)
  # Submit everything before going any further
 
@@ -27,7 +27,6 @@ Here are the custom changes that we've done to WP.  The table lists both SVN cha
 || r54 || [http://code.google.com/p/saastafi/issues/detail?id=1 Issue 1: Max width thumbnail creation] ||
 
  
-
 
 
 
