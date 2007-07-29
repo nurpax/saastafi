@@ -1,0 +1,12 @@
+#summary How to upgrade WP on saasta
+
+= How to upgrade WP =
+
+Upgrading WP is not quite as simple as it is on a normal WP installation.  The reason is that we've modified WP's internals from a couple of places.
+
+== Create an upgrade development branch ==
+
+ # Create an "upgrade branch" 
+  * Make sure main branch up to date and committed (=`svn st` shouldn't print anything)
+  * `svn cp https://saastafi.googlecode.com/svn/trunk/ https://saastafi.googlecode.com/svn/branches/upgrade-wp-x.y.z` where x.y.z is the version number of WP you're upgrading to.  Commit the branch with "svn ci"
+ # Test that your upgrade branch works by pointing creating a link from your htdocs to the newly created branch.  The site should function as it was working from trunk.
