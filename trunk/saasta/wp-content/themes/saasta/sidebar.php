@@ -8,7 +8,7 @@
 <?php 
 $user = wp_get_current_user();
 if ( $user->ID ) {
-    printf ("<span style=\"font-size:1.2em;\">Howdy <span style=\"font-size : 1.3em; font-weight : bold; font-style:italic;\">%s</span>!</span></li>", $user->display_name);
+    printf ("<li><span style=\"font-size:1.2em;\">Howdy <span style=\"font-size : 1.3em; font-weight : bold; font-style:italic;\">%s</span>!</span></li>", $user->display_name);
 }
 ?>
 
