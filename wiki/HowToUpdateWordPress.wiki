@@ -23,12 +23,10 @@ Now this is the tricky part.  We need to apply our custom changes to the newly u
 
 Here are the custom changes that we've done to WP.  The table lists both SVN change numbers and issue numbers in the issue DB.  You should apply each change and verify that each change works by testing against the descriptions in the issue thread.
 
+As always, submit each change as its own changeset into SVN.  Keep working in the upgrade branch.
+
 || *SVN change* || *Issue* ||
 || r54 || [http://code.google.com/p/saastafi/issues/detail?id=1 Issue 1: Max width thumbnail creation] ||
 
- 
-
-
-
-
-
+== Merge upgrade branch into mainline ==
+As the final step, merge your upgrade branch into mainline (trunk).
