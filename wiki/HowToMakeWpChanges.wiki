@@ -5,7 +5,7 @@
  * First rule is: DON'T DO IT
  * Second rule: if you have a compelling reason to break the first rule, follow the instructions on this page!
 
-== Why can't I make changes? ==
+== Why can I not make changes? ==
 We shouldn't customize WP internals because this makes upgrading WP much more difficult as we need to apply our own changes again and again as we upgrade WP.
 
 We have made a couple of changes though.  Read below how to keep track of them in order to make upgrading possible.
