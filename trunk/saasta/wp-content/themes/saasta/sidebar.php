@@ -5,11 +5,13 @@
 				<?php include (TEMPLATEPATH . '/searchform.php'); ?>
 			</li>
 
-			<!-- Author information is disabled per default. Uncomment and fill in your details if you want to use it.
-			<li><h2>Author</h2>
-			<p>A little something about you, the author. Nothing lengthy, just an overview.</p>
-			</li>
-			-->
+<?php 
+$user = wp_get_current_user();
+if ( $user->ID ) {
+    printf ("<span style=\"font-size:1.2em;\">Howdy <span style=\"font-size : 1.3em; font-weight : bold; font-style:italic;\">%s</span>!</span></li>", $user->display_name);
+}
+?>
+
 
 			<li>
 			<?php /* If this is a 404 page */ if (is_404()) { ?>
