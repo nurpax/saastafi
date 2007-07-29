@@ -1,4 +1,5 @@
 #summary How to start development on saasta.fi
+#labels Featured
 
 = Getting started =
   * SettingUpTestPlatform
