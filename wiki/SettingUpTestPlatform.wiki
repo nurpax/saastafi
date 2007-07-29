@@ -5,11 +5,16 @@
 
 === Download and install MAMP ===
 
+==== Install ====
 http://www.mamp.info/en/download.html
 
 Mount disk image and drag MAMP to Applications.
 
 - Start Applications/MAMP/MAMP.app -- this will start MySQL and Apache automatically
+
+==== Configure MAMP ====
+ * Change PHP's max memory limit to 30M (default is 8M):
+  * Edit file `/Applications/MAMP/conf/php5/php.ini` and edit line `memory_limit = xxx` to `memory_limit = 30M`
 
 === Import DB ===
 - Download the latest mysql dump from saasta: ~/saasta/backup/<n>/saastafidb.dump.  It's better to use a backup rather than copying from the site, as this will test that backups are working
@@ -59,3 +64,4 @@ Browse to url http://localhost:8888/saasta/ and it all just works!
 === Working ===
 
 If it worked, you should now read UpdatingLiveServerFromSvn to familiarize yourself with edit/update workflow.
+
