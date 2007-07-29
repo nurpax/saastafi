@@ -30,3 +30,5 @@ As always, submit each change as its own changeset into SVN.  Keep working in th
 
 == Merge upgrade branch into mainline ==
 As the final step, merge your upgrade branch into mainline (trunk).
+
+Follow the merging best practices that are detailed here: http://svnbook.red-bean.com/en/1.0/ch04s04.html.
