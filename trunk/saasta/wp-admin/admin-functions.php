@@ -2226,7 +2226,7 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 
         $max_width = 500;
 
-		if ( $metadata['width']  >= $max_width ) {
+		if ( $metadata['width']  > $max_width ) {
 			$thumb = wp_create_thumbnail( $file, $max_width );
 
 			if ( @file_exists($thumb) )
