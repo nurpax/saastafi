@@ -29,7 +29,6 @@ function saasta_query_q3_2007_faves($user)
 }
 
 $user = wp_get_current_user();
-if ( $user->ID ) {
 ?>
 
 <h2>All Faved Posts of Q3/2007</h2>
@@ -59,6 +58,7 @@ if (isset($_REQUEST['all_faves']))
     echo '<br/><a href="' . get_permalink(922) . '&all_faves=1">Click here to expand..</a></br>';
 }
 
+if ( $user->ID ) {
 ?>
 
 <h2>Your favorites</h2>
