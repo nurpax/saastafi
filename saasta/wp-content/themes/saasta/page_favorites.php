@@ -44,11 +44,14 @@ if (isset($_REQUEST['all_faves']))
     $cnt = 1;
     foreach ($r as $f)
     {
+        $url = get_permalink($f->post_id);
         echo '<tr><td style="padding-right:1.0em;">' . $cnt . '</td>';
         echo '<td style="padding-right:1.0em;">' . $f->date_posted . '</td>';
-        echo '<td><a href="' . get_permalink($f->post_id) . '">';
-        echo $f->title . "</a>";
-        print "</tr>\n";
+        echo '<td><a href="' . $url . '">';
+
+        echo $f->title == "" ? $url : $f->title;
+
+        print "</a></tr>\n";
         $cnt++;
     }
     echo '</table>';
