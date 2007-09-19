@@ -38,15 +38,15 @@ if ( $user->ID ) {
 
 if (isset($_REQUEST['all_faves'])) 
 {
-    echo '<a href="' . get_permalink(922) . '">Click here to hide..</a>';
+    echo '<br/><a href="' . get_permalink(922) . '">Click here to hide..</a></br>';
 
-    echo '<table>';
+    echo '<table><tr><th></th><th>Posted on</th><th>Title</th></tr>';
     $r = saasta_query_q3_2007_faves($user);
     $cnt = 1;
     foreach ($r as $f)
     {
-        echo '<tr><td style="padding:0.2em;">' . $cnt . '</td>';
-        echo '<td> </td><td>' . $f->date_posted . '</td>';
+        echo '<tr><td style="padding-right:1.0em;">' . $cnt . '</td>';
+        echo '<td style="padding-right:1.0em;">' . $f->date_posted . '</td>';
         echo '<td><a href="' . get_permalink($f->post_id) . '">';
         echo $f->title . "</a>";
         print "</tr>\n";
@@ -56,7 +56,7 @@ if (isset($_REQUEST['all_faves']))
 
 } else
 {
-    echo '<a href="' . get_permalink(922) . '&all_faves=1">Click here to expand..</a>';
+    echo '<br/><a href="' . get_permalink(922) . '&all_faves=1">Click here to expand..</a></br>';
 }
 
 ?>
