@@ -23,6 +23,7 @@ let voteline_re = Pcre.regexp "^([0-9]). (.*)[ \n\r]*$"
 
 let read_vote_files () =
 
+  let vote_dir_name = "data/votes_q2_2007" in
   let parse_vote dst ndx s =
     let m = (Pcre.extract ~rex:voteline_re s) in
     let rank = m.(1) in
@@ -41,12 +42,12 @@ let read_vote_files () =
                 ndx+1) 0 inchnl) in
     votes in
 
-  let dir = Unix.opendir "votes" in
+  let dir = Unix.opendir vote_dir_name in
   let rec loop acc =
     try 
       let fname = Unix.readdir dir in
       if fname <> "." && fname <> ".." then
-        loop (read_votes ("votes/"^fname)::acc)
+        loop (read_votes (vote_dir_name^"/"^fname)::acc)
       else 
         loop acc
     with
@@ -69,98 +70,27 @@ let rank_score = function
   | 4 -> 1
   | _ -> assert false
 
-let post_author = 
-  List.fold_left (fun acc (post,auth) -> SMap.add post auth acc)
-    SMap.empty
-    [("http://www.saasta.fi/saasta/?p=467", "htimo");
-     ("http://www.saasta.fi/saasta/?p=459", "sampo");
-     ("http://www.saasta.fi/saasta/?p=858", "jasin");
-     ("http://www.saasta.fi/saasta/?p=781", "jasin");
-     ("http://www.saasta.fi/saasta/?p=733", "htimo");
-     ("http://www.saasta.fi/saasta/?p=670", "sampo");
-     ("http://www.saasta.fi/saasta/?p=664", "yaro");
+let wp =
+  new WordPress.api
+    ~url:"http://127.0.0.1:8000/saasta/xmlrpc.php"
+    ~blog_id:1
+    ~username:"admin"
+    ~password:(Sys.getenv "SAASTA_ADMIN_PASSWD")
 
-     ("http://www.saasta.fi/saasta/?p=691", "muumi");
-     ("http://www.saasta.fi/saasta/?p=860", "jasin");
-     ("http://www.saasta.fi/saasta/?p=770", "muumi");
-     ("http://www.saasta.fi/saasta/?p=308", "sampo");
-     ("http://www.saasta.fi/saasta/?p=346", "niko");
-     ("http://www.saasta.fi/saasta/?p=473", "niko");
-     ("http://www.saasta.fi/saasta/?p=418", "niko");
-     ("http://www.saasta.fi/saasta/?p=866", "jasin");
-     ("http://www.saasta.fi/saasta/?p=235", "jasin");
+module WPPost = WordPress.Post
 
-     ("http://www.saasta.fi/saasta/?p=432", "iiro");
-     ("http://www.saasta.fi/saasta/?p=537", "jasin");
-     ("http://www.saasta.fi/saasta/?p=256", "iiro");
-     ("http://www.saasta.fi/saasta/?p=790", "jugi");
-     ("http://www.saasta.fi/saasta/?p=462", "niko");
-     ("http://www.saasta.fi/saasta/?p=306", "teemu");
-     ("http://www.saasta.fi/saasta/?p=233", "jasin");
-     ("http://www.saasta.fi/saasta/?p=783", "sampo");
-     ("http://www.saasta.fi/saasta/?p=716", "niko");
-     ("http://www.saasta.fi/saasta/?p=541", "htimo");
-     ("http://www.saasta.fi/saasta/?p=713", "wili");
-     ("http://www.saasta.fi/saasta/?p=489", "jasin");
-     ("http://www.saasta.fi/saasta/?p=162", "muumi");
-     ("http://www.saasta.fi/saasta/?p=223", "muumi");
-     ("http://www.saasta.fi/saasta/?p=764", "muumi");
-     ("http://www.saasta.fi/saasta/?p=570", "htimo");
-     ("http://www.saasta.fi/saasta/?p=191", "andrew");
-     ("http://www.saasta.fi/saasta/?p=661", "jasin");
-     ("http://www.saasta.fi/saasta/?p=196", "sampo");
-     ("http://www.saasta.fi/saasta/?p=186", "muumi");
-     ("http://www.saasta.fi/saasta/?p=191", "andrew");
+let url_re = Pcre.regexp "^http://(www.)?saasta.fi/(.*)p=([0-9]+)$"
 
-     ("http://www.saasta.fi/saasta/?p=201", "sampo");
-     ("http://www.saasta.fi/saasta/?p=204", "sampo");
-     ("http://www.saasta.fi/saasta/?p=544", "jasin");
-     ("http://www.saasta.fi/saasta/?p=492", "meri");
-     ("http://www.saasta.fi/saasta/?p=244", "sampo");
-     ("http://www.saasta.fi/saasta/?p=814", "yaro");
-     ("http://www.saasta.fi/saasta/?p=816", "htimo");
-     ("http://www.saasta.fi/saasta/?p=521", "sampo");
-     ("http://www.saasta.fi/saasta/?p=199", "sampo");
-     ("http://www.saasta.fi/saasta/?p=279", "muumi");
-     ("http://www.saasta.fi/saasta/?p=785", "jasin");
-     ("http://www.saasta.fi/saasta/?p=496", "iiro");
-     ("http://www.saasta.fi/saasta/?p=461", "niko");
-     ("http://www.saasta.fi/saasta/?p=126", "janne");
-     ("http://www.saasta.fi/saasta/?p=188", "muumi");
-     ("http://www.saasta.fi/saasta/?p=175", "janne");
-     ("http://www.saasta.fi/saasta/?p=635", "jasin");
-     ("http://www.saasta.fi/saasta/?p=194", "muumi");
-
-     ("http://www.saasta.fi/saasta/?p=673", "muumi");
-     ("http://www.saasta.fi/saasta/?p=474", "janne");
-     ("http://www.saasta.fi/saasta/?p=367", "jussi");
-     ("http://www.saasta.fi/saasta/?p=750", "jasin");
-
-     ("http://www.saasta.fi/saasta/?p=731", "jasin");
-     ("http://www.saasta.fi/saasta/?p=579", "jasin");
-     ("http://www.saasta.fi/saasta/?p=863", "muumi");
-
-     ("http://www.saasta.fi/saasta/?p=283", "wili");
-     ("http://www.saasta.fi/saasta/?p=393", "wili");
-     ("http://www.saasta.fi/saasta/?p=556", "jasin");
-     ("http://www.saasta.fi/saasta/?p=693", "muumi");
-
-     ("http://www.saasta.fi/saasta/?p=831", "muumi");
-     ("http://www.saasta.fi/saasta/?p=718", "jasin");
-     ("http://www.saasta.fi/saasta/?p=830", "muumi");
-     ("http://www.saasta.fi/saasta/?p=787", "muumi");
-
-     ("http://www.saasta.fi/saasta/?p=292", "sampo");
-     ("http://www.saasta.fi/saasta/?p=705", "muumi");
-    ]
-
-let find_post_author post = 
-  try 
-    SMap.find post post_author 
-  with 
-    Not_found ->
-      P.printf "** couldn't find author for %s\n" post;
-      "unknown"
+(* Query post title & poster via xmlrpc.php directly from the site *)
+let find_post_author post =
+  let m = (Pcre.extract ~rex:url_re post) in
+  let post_id = int_of_string m.(3) in
+  P.printf "query post #%5i" post_id;
+  flush_all ();
+  let p = wp#get_post post_id in
+  P.printf " author: %-10s post title: '%s'\n" 
+    p.WPPost.wp_author_display_name p.WPPost.title;
+  p.WPPost.wp_author_display_name
 
 let compute_best_posts votes =
   let comp (an,_) (bn,_) = compare bn an  in

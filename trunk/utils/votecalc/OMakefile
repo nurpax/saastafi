@@ -3,11 +3,11 @@
 # Build an OCaml program
 #
 
-FILES[] = saastavote
+FILES[] = wordPress saastavote
 USE_OCAMLFIND=true
 
 PROGRAM = saastavote
 
-OCAMLPACKS += extlib pcre unix
+OCAMLPACKS += extlib pcre unix xmlrpc-light
 
 .DEFAULT: $(OCamlProgram $(PROGRAM), $(FILES))
