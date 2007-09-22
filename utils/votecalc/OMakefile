@@ -1,0 +1,13 @@
+
+################################################
+# Build an OCaml program
+#
+
+FILES[] = saastavote
+USE_OCAMLFIND=true
+
+PROGRAM = saastavote
+
+OCAMLPACKS += extlib pcre unix
+
+.DEFAULT: $(OCamlProgram $(PROGRAM), $(FILES))
