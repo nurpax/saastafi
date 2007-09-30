@@ -58,26 +58,19 @@ let read_vote_files () =
     let votes = Array.make 5 "" in
     with_open_in fname
       (fun inchnl ->
-         begin
-           try
-             for i = 0 to 4 do
-               parse_vote votes i (input_line inchnl);
-             done
-           with 
-             End_of_file ->
-               error (P.sprintf "premature end-of-file reading %s\n" fname)
-         end;
-         let hb = 
-           try 
-             parse_homebrew (input_line inchnl)
-           with
-             End_of_file ->
-               error (P.sprintf "homebrew missing from %s\n" fname) in
-         { 
-           v_top5 = votes;
-           v_hb = hb;
-         }) in
-
+         try
+           for i = 0 to 4 do
+             parse_vote votes i (input_line inchnl);
+           done;
+           let hb = 
+             parse_homebrew (input_line inchnl) in
+           { 
+             v_top5 = votes;
+             v_hb = hb;
+           }
+         with
+           End_of_file ->
+             error (P.sprintf "premature eof when reading %s\n" fname)) in
 
   let dir = Unix.opendir vote_dir_name in
   let rec loop acc =
