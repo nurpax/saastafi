@@ -6,6 +6,8 @@
 FILES[] = wordPress saastavote
 USE_OCAMLFIND=true
 
+BYTE_ENABLED=true
+NATIVE_ENABLED=false
 PROGRAM = saastavote
 
 OCAMLPACKS += extlib pcre unix xmlrpc-light
