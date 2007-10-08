@@ -139,10 +139,11 @@ let check_vote_validity pi =
   else
     ()
 
-let compute_best_posts votes =
+let sort_results m =
   let comp (an,_) (bn,_) = compare bn an  in
-  let sort_results m =
-    List.sort comp (SMap.fold (fun k v acc -> (v,k)::acc) m []) in
+  List.sort comp (SMap.fold (fun k v acc -> (v,k)::acc) m [])
+
+let compute_best_posts votes =
   let (post_histogram, post_scores, poster_score) =
     List.fold_left
       (fun (post_histo, post_score, poster_score) vote ->
@@ -168,9 +169,24 @@ let compute_best_posts votes =
    sort_results post_scores, 
    sort_results poster_score)
 
+let compute_homebrew_score votes =
+  let hb_post_histo =
+    List.fold_left
+      (fun post_histo vote ->
+         let post = vote.v_hb in
+         let post_info = 
+           query_post_info post in
+         check_vote_validity post_info;
+         let hist = default_find SMap.find post post_histo 0 in
+         SMap.add post (hist+1) post_histo)
+      SMap.empty votes in
+  sort_results hb_post_histo
+         
+
 let _ =
   let votes = read_vote_files () in
   let (post_counts,post_scores,poster_scores) = compute_best_posts votes in
+  let hb_top = compute_homebrew_score votes in
   P.printf "counts\n";
   List.iter
     (fun (n_posts,post) ->
@@ -182,4 +198,9 @@ let _ =
   P.printf "\nposter scores\n";
   List.iter
     (fun (score,poster) ->
-       Printf.printf "%s - %i\n" poster score) poster_scores
+       Printf.printf "%s - %i\n" poster score) poster_scores;
+  P.printf "\nhomebrew top\n";
+  List.iter
+    (fun (score,post) ->
+       Printf.printf "%s - %i\n" post score) hb_top
+
