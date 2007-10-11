@@ -6,7 +6,7 @@ module SMap = Map.Make (String)
 type vote = 
     {
       v_top5 : string array;
-      v_hb : string;
+      v_hb : string option;
     }
 
 type post_info = 
@@ -42,7 +42,7 @@ let homebrew_re = Pcre.regexp "^homebrew:[ \t]*(.*)[ \n\r]*$"
 
 let read_vote_files () =
 
-  let vote_dir_name = "data/votes_q3_test" in
+  let vote_dir_name = "data/votes_q3_2007" in
   let parse_vote dst ndx s =
     let m = (Pcre.extract ~rex:voteline_re s) in
     let rank = m.(1) in
@@ -51,8 +51,12 @@ let read_vote_files () =
     dst.(ndx) <- url in
 
   let parse_homebrew s =
-    let m = (Pcre.extract ~rex:homebrew_re s) in
-    m.(1) in
+    try
+      let m = (Pcre.extract ~rex:homebrew_re s) in
+      Some m.(1)
+    with 
+      Not_found ->
+        None in
     
   let read_votes fname =
     let votes = Array.make 5 "" in
@@ -173,12 +177,14 @@ let compute_homebrew_score votes =
   let hb_post_histo =
     List.fold_left
       (fun post_histo vote ->
-         let post = vote.v_hb in
-         let post_info = 
-           query_post_info post in
-         check_vote_validity post_info;
-         let hist = default_find SMap.find post post_histo 0 in
-         SMap.add post (hist+1) post_histo)
+         match vote.v_hb with
+           None -> post_histo
+         | Some post ->
+             let post_info = 
+               query_post_info post in
+             check_vote_validity post_info;
+             let hist = default_find SMap.find post post_histo 0 in
+             SMap.add post (hist+1) post_histo)
       SMap.empty votes in
   sort_results hb_post_histo
          
