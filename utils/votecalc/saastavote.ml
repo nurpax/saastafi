@@ -13,6 +13,7 @@ type post_info =
     {
       pi_author : string;
       pi_url : string;
+      pi_title : string;
       pi_month : int;
       pi_year : int;
     }
@@ -122,16 +123,14 @@ let datetime_month (_,m,_,_,_,_,_) = m
 let query_post_info post =
   let m = (Pcre.extract ~rex:url_re post) in
   let post_id = int_of_string m.(3) in
-  P.printf "query post #%-5i" post_id;
   flush_all ();
   let p = wp#get_post post_id in
   let p_year = datetime_year p.WPPost.date_created in
   let p_month = datetime_month p.WPPost.date_created in
-  P.printf " author: %-10s post title: '%s', year %i month %i\n" 
-    p.WPPost.wp_author_display_name p.WPPost.title p_year p_month;
   { 
     pi_author = p.WPPost.wp_author_display_name;
     pi_url = post;
+    pi_title = p.WPPost.title;
     pi_year = p_year;
     pi_month = p_month
   }
@@ -157,6 +156,8 @@ let compute_best_posts votes =
               let old_score = default_find SMap.find post post_score 0 in
               let post_info = 
                 query_post_info post in
+              P.printf "%s\n" post_info.pi_title;
+              flush_all ();
               check_vote_validity post_info;
               let poster = post_info.pi_author in
               let old_poster_score = 
@@ -200,13 +201,16 @@ let _ =
   P.printf "\nscores\n";
   List.iter
     (fun (score,post) ->
-       Printf.printf "%s - %i\n" post score) post_scores;
+       let pi = query_post_info post in
+       Printf.printf "%s\t%s\t%s\t%i\n" post pi.pi_title pi.pi_author score) post_scores;
   P.printf "\nposter scores\n";
   List.iter
     (fun (score,poster) ->
-       Printf.printf "%s - %i\n" poster score) poster_scores;
+       Printf.printf "%s\t%i\n" poster score) poster_scores;
   P.printf "\nhomebrew top\n";
   List.iter
     (fun (score,post) ->
-       Printf.printf "%s - %i\n" post score) hb_top
+       let pi = query_post_info post in
+       Printf.printf "%s\t%s\t%s\t%i\n" post pi.pi_title pi.pi_author score) 
+    hb_top
 
