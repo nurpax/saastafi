@@ -1,0 +1,8 @@
+#summary Useful SQL queries
+
+= Introduction =
+
+top X of faved posts:
+{{{
+select DISTINCT p.post_title as title,COUNT(p.post_title) as fave_count,f.post_id as post_id,dATE_FORMAT(p.post_date, '%b %d, %Y') as date_posted from saasta_posts p,saasta_faves f where f.post_id=p.ID AND DATE(p.post_date) >= '2007-10-01' AND DATE(p.post_date) < '2008-01-01' GROUP BY p.post_title ORDER BY fave_count DESC;
+}}}
