@@ -15,11 +15,12 @@ if (!defined('SAVEQUERIES'))
 
 class wpdb {
 
-	var $show_errors = true;
+	var $show_errors = false;
 	var $num_queries = 0;
 	var $last_query;
 	var $col_info;
 	var $queries;
+	var $ready = false;
 
 	// Our tables
 	var $posts;
@@ -34,6 +35,10 @@ class wpdb {
 	var $optiongroups;
 	var $optiongroup_options;
 	var $postmeta;
+	var $usermeta;
+	var $terms;
+	var $term_taxonomy;
+	var $term_relationships;
 
 	var $charset;
 	var $collate;
@@ -51,6 +56,9 @@ class wpdb {
 
 	function __construct($dbuser, $dbpassword, $dbname, $dbhost) {
 		register_shutdown_function(array(&$this, "__destruct"));
+
+		if ( defined('WP_DEBUG') and WP_DEBUG == true )
+			$this->show_errors();
 
 		if ( defined('DB_CHARSET') )
 			$this->charset = DB_CHARSET;
@@ -70,7 +78,10 @@ class wpdb {
 </ul>
 <p>If you're unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href='http://wordpress.org/support/'>WordPress Support Forums</a>.</p>
 ");
+			return;
 		}
+
+		$this->ready = true;
 
 		if ( !empty($this->charset) && version_compare(mysql_get_server_info(), '4.1.0', '>=') )
  			$this->query("SET NAMES '$this->charset'");
@@ -79,7 +90,7 @@ class wpdb {
 	}
 
 	function __destruct() {
-		return true;	
+		return true;
 	}
 
 	/**
@@ -88,14 +99,17 @@ class wpdb {
 	 */
 	function select($db) {
 		if (!@mysql_select_db($db, $this->dbh)) {
+			$this->ready = false;
 			$this->bail("
 <h1>Can&#8217;t select database</h1>
 <p>We were able to connect to the database server (which means your username and password is okay) but not able to select the <code>$db</code> database.</p>
 <ul>
 <li>Are you sure it exists?</li>
+<li>Does the user <code>".DB_USER."</code> have permission to use the <code>$db</code> database?</li>
 <li>On some systems the name of your database is prefixed with your username, so it would be like username_wordpress. Could that be the problem?</li>
 </ul>
 <p>If you don't know how to setup a database you should <strong>contact your host</strong>. If all else fails you may find help at the <a href='http://wordpress.org/support/'>WordPress Support Forums</a>.</p>");
+			return;
 		}
 	}
 
@@ -113,6 +127,29 @@ class wpdb {
 			return mysql_real_escape_string( $string, $this->dbh );
 	}
 
+	/**
+	 * Escapes content by reference for insertion into the database, for security
+	 * @param string $s
+	 */
+	function escape_by_ref(&$s) {
+		$s = $this->escape($s);
+	}
+
+	/**
+	 * Prepares a SQL query for safe use, using sprintf() syntax
+	 */
+	function prepare($args=NULL) {
+		if ( NULL === $args )
+			return;
+		$args = func_get_args();
+		$query = array_shift($args);
+		$query = str_replace("'%s'", '%s', $query); // in case someone mistakenly already singlequoted it
+		$query = str_replace('"%s"', '%s', $query); // doublequote unquoting
+		$query = str_replace('%s', "'%s'", $query); // quote the strings
+		array_walk($args, array(&$this, 'escape_by_ref'));
+		return @vsprintf($query, $args);
+	}
+
 	// ==================================================================
 	//	Print SQL/DB error.
 
@@ -122,29 +159,36 @@ class wpdb {
 		$EZSQL_ERROR[] =
 		array ('query' => $this->last_query, 'error_str' => $str);
 
+		$error_str = "WordPress database error $str for query $this->last_query";
+		error_log($error_str, 0);
+
+		// Is error output turned on or not..
+		if ( !$this->show_errors )
+			return false;
+
 		$str = htmlspecialchars($str, ENT_QUOTES);
 		$query = htmlspecialchars($this->last_query, ENT_QUOTES);
-		// Is error output turned on or not..
-		if ( $this->show_errors ) {
-			// If there is an error then take note of it
-			print "<div id='error'>
-			<p class='wpdberror'><strong>WordPress database error:</strong> [$str]<br />
-			<code>$query</code></p>
-			</div>";
-		} else {
-			return false;
-		}
+
+		// If there is an error then take note of it
+		print "<div id='error'>
+		<p class='wpdberror'><strong>WordPress database error:</strong> [$str]<br />
+		<code>$query</code></p>
+		</div>";
 	}
 
 	// ==================================================================
 	//	Turn error handling on or off..
 
-	function show_errors() {
-		$this->show_errors = true;
+	function show_errors( $show = true ) {
+		$errors = $this->show_errors;
+		$this->show_errors = $show;
+		return $errors;
 	}
 
 	function hide_errors() {
+		$show = $this->show_errors;
 		$this->show_errors = false;
+		return $show;
 	}
 
 	// ==================================================================
@@ -160,6 +204,9 @@ class wpdb {
 	//	Basic Query	- see docs for more detail
 
 	function query($query) {
+		if ( ! $this->ready )
+			return false;
+
 		// filter the query, if filters are available
 		// NOTE: some queries are made before the plugins have been loaded, and thus cannot be filtered with this method
 		if ( function_exists('apply_filters') )
@@ -255,7 +302,9 @@ class wpdb {
 		$this->func_call = "\$db->get_row(\"$query\",$output,$y)";
 		if ( $query )
 			$this->query($query);
-	
+		else
+			return null;
+
 		if ( !isset($this->last_result[$y]) )
 			return null;
 
@@ -280,6 +329,7 @@ class wpdb {
 		if ( $query )
 			$this->query($query);
 
+		$new_array = array();
 		// Extract the column values
 		for ( $i=0; $i < count($this->last_result); $i++ ) {
 			$new_array[$i] = $this->get_var(null, $x, $i);
@@ -298,6 +348,8 @@ class wpdb {
 
 		if ( $query )
 			$this->query($query);
+		else
+			return null;
 
 		// Send back array of objects. Each row is an object
 		if ( $output == OBJECT ) {
@@ -367,31 +419,14 @@ class wpdb {
 	 * @param string $message
 	 */
 	function bail($message) { // Just wraps errors in a nice header and footer
-		if ( !$this->show_errors )
+		if ( !$this->show_errors ) {
+			if ( class_exists('WP_Error') )
+				$this->error = new WP_Error('500', $message);
+			else
+				$this->error = $message;
 			return false;
-
-		header('Content-Type: text/html; charset=utf-8');
-
-		if (strpos($_SERVER['PHP_SELF'], 'wp-admin') !== false)
-			$admin_dir = '';
-		else
-			$admin_dir = 'wp-admin/';
-
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<title>WordPress &rsaquo; Error</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="<?php echo $admin_dir; ?>install.css" type="text/css" />
-</head>
-<body>
-	<h1 id="logo"><img alt="WordPress" src="<?php echo $admin_dir; ?>images/wordpress-logo.png" /></h1>
-	<p><?php echo $message; ?></p>
-</body>
-</html>
-<?php
-		die();
+		}
+		wp_die($message);
 	}
 }
 
