@@ -11,8 +11,8 @@ type vote =
 
 type post_info = 
     {
+      pi_post_id : int;
       pi_author : string;
-      pi_url : string;
       pi_title : string;
       pi_month : int;
       pi_year : int;
@@ -38,23 +38,29 @@ let with_open_in fname f =
     (fun () -> close_in inchnl)
     (fun chnl -> f chnl) inchnl
 
-let voteline_re = Pcre.regexp "^([0-9]). (.*)[ \n\r]*$"
-let homebrew_re = Pcre.regexp "^homebrew:[ \t]*(.*)[ \n\r]*$"
+let url_re_s = "http://(www.)?saasta.fi/(.*)p=([0-9]+)" 
+
+let url_re = Pcre.regexp ("^"^url_re_s^"$")
+
+let voteline_re = Pcre.regexp ("^([0-9]). "^url_re_s^"[ \n\r]*$")
+
+let homebrew_re = Pcre.regexp ("^homebrew: "^url_re_s^"[ \n\r]*$")
 
 let read_vote_files () =
 
-  let vote_dir_name = "data/votes_q3_2007" in
+  let vote_dir_name = "data/votes_q4_2007" in
   let parse_vote dst ndx s =
+    Printf.printf "voteline '%s'\n" s;
     let m = (Pcre.extract ~rex:voteline_re s) in
     let rank = m.(1) in
-    let url = m.(2) in
+    let url = m.(4) in
     assert (int_of_string rank = ndx+1);
     dst.(ndx) <- url in
 
   let parse_homebrew s =
     try
       let m = (Pcre.extract ~rex:homebrew_re s) in
-      Some m.(1)
+      Some m.(3)
     with 
       Not_found ->
         None in
@@ -114,22 +120,19 @@ let wp =
 
 module WPPost = WordPress.Post
 
-let url_re = Pcre.regexp "^http://(www.)?saasta.fi/(.*)p=([0-9]+)$"
-
 let datetime_year (y,_,_,_,_,_,_) = y
 let datetime_month (_,m,_,_,_,_,_) = m
 
 (* Query post title & poster via xmlrpc.php directly from the site *)
-let query_post_info post =
-  let m = (Pcre.extract ~rex:url_re post) in
-  let post_id = int_of_string m.(3) in
+let query_post_info post_id_s =
+  let post_id = int_of_string post_id_s in
   flush_all ();
   let p = wp#get_post post_id in
   let p_year = datetime_year p.WPPost.date_created in
   let p_month = datetime_month p.WPPost.date_created in
   { 
+    pi_post_id = post_id;
     pi_author = p.WPPost.wp_author_display_name;
-    pi_url = post;
     pi_title = p.WPPost.title;
     pi_year = p_year;
     pi_month = p_month
@@ -137,10 +140,13 @@ let query_post_info post =
 
 (* Business logic for Q3/2007 *)
 let check_vote_validity pi = 
-  if not (List.mem pi.pi_month [7; 8; 9]) then
-    error (P.sprintf "post '%s' not created in Q3/2007!" pi.pi_url)
-  else
+  if pi.pi_post_id = 0 then
     ()
+  else 
+    if not ((List.mem pi.pi_month [10; 11; 12]) && pi.pi_year = 2007) then
+      error (P.sprintf "post '%i' not created in Q3/2007! month %i year %i" pi.pi_post_id pi.pi_month pi.pi_year)
+    else
+      ()
 
 let sort_results m =
   let comp (an,_) (bn,_) = compare bn an  in
@@ -152,22 +158,29 @@ let compute_best_posts votes =
       (fun (post_histo, post_score, poster_score) vote ->
          arr_fold_lefti
            (fun ndx (post_histo, post_score, poster_score) post ->
-              let hist = default_find SMap.find post post_histo 0 in
-              let old_score = default_find SMap.find post post_score 0 in
-              let post_info = 
-                query_post_info post in
-              P.printf "%s\n" post_info.pi_title;
-              flush_all ();
-              check_vote_validity post_info;
-              let poster = post_info.pi_author in
-              let old_poster_score = 
-                default_find SMap.find poster poster_score 0 in
-              let score = rank_score ndx in
-              let post_histo' = SMap.add post (hist+1) post_histo in
-              let post_score' = SMap.add post (old_score+score) post_score in
-              let poster_score' = 
-                SMap.add poster (old_poster_score+score) poster_score in
-              (post_histo', post_score', poster_score')) 
+              if post <> "0" then
+                begin
+                  let hist = default_find SMap.find post post_histo 0 in
+                  let old_score = default_find SMap.find post post_score 0 in
+                  (* Skip empty entries in Top 5's *)
+                  P.printf "%s\n" post;
+                  let post_info = 
+                    query_post_info post in
+                  P.printf "%s\n" post_info.pi_title;
+                  flush_all ();
+                  check_vote_validity post_info;
+                  let poster = post_info.pi_author in
+                  let old_poster_score = 
+                    default_find SMap.find poster poster_score 0 in
+                  let score = rank_score ndx in
+                  let post_histo' = SMap.add post (hist+1) post_histo in
+                  let post_score' = SMap.add post (old_score+score) post_score in
+                  let poster_score' = 
+                    SMap.add poster (old_poster_score+score) poster_score in
+                  (post_histo', post_score', poster_score')
+                end
+              else
+                (post_histo, post_score, poster_score))
            (post_histo, post_score, poster_score) vote.v_top5)
       (SMap.empty, SMap.empty, SMap.empty) votes in
   (sort_results post_histogram, 
@@ -181,6 +194,7 @@ let compute_homebrew_score votes =
          match vote.v_hb with
            None -> post_histo
          | Some post ->
+             P.printf "hb '%s'\n" post;
              let post_info = 
                query_post_info post in
              check_vote_validity post_info;
