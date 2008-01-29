@@ -45,25 +45,15 @@ function wp_create_thumbnail( $file, $max_side, $effect = '' ) {
 
 			$image_attr = getimagesize( $file );
 
-			// figure out the longest side
-
-			if ( $image_attr[0] > $image_attr[1] ) {
-				$image_width = $image_attr[0];
-				$image_height = $image_attr[1];
-				$image_new_width = $max_side;
-
-				$image_ratio = $image_width / $image_new_width;
-				$image_new_height = $image_height / $image_ratio;
-				//width is > height
-			} else {
-				$image_width = $image_attr[0];
-				$image_height = $image_attr[1];
-				$image_new_height = $max_side;
-
-				$image_ratio = $image_height / $image_new_height;
-				$image_new_width = $image_width / $image_ratio;
-				//height > width
-			}
+            $max_width = 500;
+ 
+            // Scale image to max_width size
+            $image_width = $image_attr['0'];
+            $image_height = $image_attr['1'];
+            $image_new_width = $max_width;
+ 
+            $image_ratio = $image_width / $image_new_width;
+            $image_new_height = $image_height / $image_ratio;
 
 			$thumbnail = imagecreatetruecolor( $image_new_width, $image_new_height);
 			@ imagecopyresampled( $thumbnail, $image, 0, 0, 0, 0, $image_new_width, $image_new_height, $image_attr[0], $image_attr[1] );
@@ -147,16 +137,17 @@ function wp_generate_attachment_metadata( $attachment_id, $file ) {
 		$metadata['hwstring_small'] = "height='$uheight' width='$uwidth'";
 		$metadata['file'] = $file;
 
-		$max = apply_filters( 'wp_thumbnail_creation_size_limit', 3 * 1024 * 1024, $attachment_id, $file );
+        /* TODO jjhellst - make max_width configurable */
+ 
+        $max_width = 500;
+ 
+        if ( $metadata['width']  >= $max_width ) {
+            $thumb = wp_create_thumbnail( $file, $max_width );
 
-		if ( $max < 0 || $metadata['width'] * $metadata['height'] < $max ) {
-			$max_side = apply_filters( 'wp_thumbnail_max_side_length', 128, $attachment_id, $file );
-			$thumb = wp_create_thumbnail( $file, $max_side );
-
-			if ( @file_exists($thumb) )
-				$metadata['thumb'] = basename($thumb);
-		}
-	}
+            if ( @file_exists($thumb) )
+                $metadata['thumb'] = basename($thumb);
+        }
+    }   
 	return apply_filters( 'wp_generate_attachment_metadata', $metadata );
 }
 
