@@ -43,7 +43,7 @@ if ( $user->ID ) {
 			<?php wp_list_pages('title_li=<h2>Pages</h2>' ); ?>
 
 			<li>
-			<a href="<?php print get_permalink(2448); ?>"><img src="vote.gif"/><br/><span style="font-size:2em;">VOTE NOW!</span></a>
+            <a href="<?php print get_permalink(2553); ?>"><img src="champagne.png"/><br/><span style="font-size:2em;">Winners of Q4/2007!</span></a>
 			</li>
 
 			<li>
