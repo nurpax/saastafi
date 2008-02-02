@@ -12,6 +12,32 @@ if ( $user->ID ) {
 }
 ?>
 
+			<?php /* If this is the frontpage */ if ( 1 || is_home() || is_page() ) { ?>
+	<?php /* wp_list_bookmarks();*/ ?>
+
+			<li>
+            <a href="<?php print get_permalink(2553); ?>"><img src="champagne.png"/><br/><span style="font-size:2em;">Winners of Q4/2007!</span></a>
+			</li>
+
+				<li><h2>Meta</h2>
+				<ul>
+					<?php wp_register(); ?>
+					<li><?php wp_loginout(); ?></li>
+					 <li><a href="<?php print get_permalink(140); ?>"><?php print get_the_title(140); ?></a></li>
+					 <li><a href="<?php print get_permalink(922); ?>"><?php print get_the_title(922); ?></a></li>
+                     <li><a href="<?php print get_permalink(2598); ?>"><?php print get_the_title(2598); ?></a></li>
+					<?php wp_meta(); ?>
+				</ul>
+				</li>
+			<?php } ?>
+
+			<li><h2>Random saasta</h2>
+			<ul><li>
+			<?php
+			$foo = $wpdb->get_row("SELECT ID,post_title FROM saasta_posts WHERE post_status='publish' ORDER BY RAND() LIMIT 1");
+			print '<a href="'.get_permalink($foo->ID).'" title="'.$foo->post_title.'">'.$foo->post_title.'</a>';
+			?>
+			</li></ul>
 
 			<li>
 			<?php /* If this is a 404 page */ if (is_404()) { ?>
@@ -40,45 +66,14 @@ if ( $user->ID ) {
 			<?php } ?>
 			</li>
 
-			<?php wp_list_pages('title_li=<h2>Pages</h2>' ); ?>
+			<?php wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); ?>
 
-			<li>
-            <a href="<?php print get_permalink(2553); ?>"><img src="champagne.png"/><br/><span style="font-size:2em;">Winners of Q4/2007!</span></a>
-			</li>
-
-			<li>
-			<a href="<?php print get_permalink(1828); ?>"><span style="font-size:1.5em;">Best Saasta of Q3/2007!</span></a>
-			</li>
-			
-			<li><h2>Random saasta</h2>
-			<ul><li>
-			<?php
-			$foo = $wpdb->get_row("SELECT ID,post_title FROM saasta_posts WHERE post_status='publish' ORDER BY RAND() LIMIT 1");
-			print '<a href="'.get_permalink($foo->ID).'" title="'.$foo->post_title.'">'.$foo->post_title.'</a>';
-			?>
-			</li></ul>
 			<li><h2>Archives</h2>
 				<ul>
 				<?php wp_get_archives('type=monthly'); ?>
 				</ul>
 			</li>
 
-			<?php wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); ?>
-
-			<?php /* If this is the frontpage */ if ( 1 || is_home() || is_page() ) { ?>
-				<?php wp_list_bookmarks(); ?>
-
-				<li><h2>Meta</h2>
-				<ul>
-					<?php wp_register(); ?>
-					<li><?php wp_loginout(); ?></li>
-					<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
-					<li><a href="http://gmpg.org/xfn/"><abbr title="XHTML Friends Network">XFN</abbr></a></li>
-					<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress</a></li>
-					<?php wp_meta(); ?>
-				</ul>
-				</li>
-			<?php } ?>
 		</ul>
 	</div>
 
