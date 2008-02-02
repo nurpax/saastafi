@@ -55,36 +55,31 @@ function saasta_print_post_header() {
     print '</small></td></tr>';
 
     get_currentuserinfo();
-    if ($user_ID != '') {
-        $foo = $wpdb->get_results("select post_id from saasta_faves where user_id=".$user_ID." and post_id=".get_the_ID());
 
-        print '<tr>';
-        print '<td bgcolor="#DDD391" valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;">';
-
-        // The extra table here is used here to force fave/unfave
-        // button and '# of faves' text to go on the same line.
-
-        print '<table><tr><td>';
-
-        // If user hasn't marked the post as a fave, add an "add fave"
-        // button.  Otherwise offer an "unfave" button.
-        if (count($foo) == 0) 
-            saasta_print_add_fave_form ();
-        else 
-            saasta_print_del_fave_form (get_the_ID());
-
-        print '</td><td>';
-
-        // How many people have faved this post?
-        $foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
-        if ($foo->numfaves > 1) print $foo->numfaves.' faves';
-        else if ($foo->numfaves == 1) print '1 fave';
-        print '</td></tr></table>';
-
-        print '</td>';
-        print '</tr>';
-    }
-    print '</table>';
+	print '<tr>';
+	print '<td bgcolor="#DDD391" valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;">';
+	
+	// The extra table here is used here to force fave/unfave
+	// button and '# of faves' text to go on the same line.
+	
+	print '<table><tr><td>';
+	
+	// If user hasn't marked the post as a fave, add an "add fave"
+	// button.  Otherwise offer an "unfave" button.
+	if ($user_ID == '') print "&nbsp;";
+	else if (count($foo) == 0) 
+		saasta_print_add_fave_form ();
+	else 
+		saasta_print_del_fave_form (get_the_ID());
+	
+	print '</td><td>';
+	
+	// How many people have faved this post?
+	$foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
+	if ($foo->numfaves > 1) print $foo->numfaves.' faves';
+	else if ($foo->numfaves == 1) print '1 fave';
+	print '</td></tr></table>';
+	print '</td></tr></table>';
 }
 
 // under construction, do not touch -muumi
@@ -131,38 +126,6 @@ function saasta_print_votebar() {
     }
 }
 
-// under construction, do not touch -muumi
-function saasta_print_tags() {
-    global $wpdb;
-    global $user_ID;
-    
-    get_currentuserinfo();
-    if ('' == $user_ID)
-        return;
-
-    $postId = get_the_ID();
-
-    if (isset($_REQUEST['pid']) && isset($_REQUEST['newtags'])) {
-        $tags = explode(" ",$_REQUEST['newtags']);
-        $values = "";
-        foreach ($tags as $t) {
-            if ($values != "") $values .= ",";
-            $values .= "(".$postId.",'".$t."')";
-        }
-        // the ignore should treat duplicate entries as warnings
-        $wpdb->query("insert ignore into saasta_post_tags (post_id,tag) values ".$values);
-    }
-
-    // list tags
-    $foo = $wpdb->get_results("select tag from saasta_post_tags where post_id=".$postId." order by tag"); 
-    print '<p><small>';
-    foreach ($foo as $f) print $f->tag." ";
-    print '</small></p>';
-
-    // print add tags field
-    print '<form action="'.$_SERVER['REQUEST_URI'].'" method="post"><input type="hidden" name="pid" value="'.$postId.'"><p>add tags: <input type="text" name="newtags" style=""/><input type="submit" value="add"/></form>';
-}
-
 /*
  * list users favourites
  * under construction
@@ -172,8 +135,8 @@ function saasta_list_faves() {
     global $user_ID;
 
     get_currentuserinfo();
-        if ('' == $user_ID)
-                return;
+	if ('' == $user_ID)
+		return;
 
     $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from saasta_posts p,saasta_faves f where f.post_id=p.ID and f.user_id=".$user_ID);
     if (count($foo) > 0) {
