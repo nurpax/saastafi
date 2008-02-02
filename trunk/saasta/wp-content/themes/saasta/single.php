@@ -17,7 +17,13 @@
 			-->
 			<div class="entry">
 				<?php the_content('<p class="serif">Read the rest of this entry &raquo;</p>'); ?>
+			<?php
+			  /* list tags -muumi 080202 */
+			if (get_the_tag_list())
+				echo get_the_tag_list('<hr/><p>Tags: ',', ','</p><hr/>');
+?>
 				<?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
+
 				<p class="postmetadata alt">
 					<small>
 						This entry was posted
