@@ -35,8 +35,11 @@ class SearchActions {
 			}
 
 			$where .= ") AND (post_status = 'publish'))";
+
+			/* another change to search by author as well */
+			$where .= " OR ($wpdb->users.display_name LIKE '%".$searchInput."%')";
 		}
-	
+		error_log("where = ".$where);
 		return $where;
 	}
 		
@@ -49,7 +52,11 @@ class SearchActions {
 			$tabletaxonomy = $table_prefix . "term_taxonomy";
 			
 			$join .= " LEFT JOIN (select distinct tr.object_id, t.name from $tablepost2tag tr inner join $tabletaxonomy tt on tt.term_taxonomy_id = tr.term_taxonomy_id inner join $tabletags t on t.term_id = tt.term_id where tt.taxonomy='post_tag') tr on $wpdb->posts.ID = tr.object_id ";
+
+			/* another change to search by author as well */
+			$join .= " LEFT JOIN $wpdb->users ON ($wpdb->posts.post_author = $wpdb->users.ID)";
 		}
+
 		return $join;
 	}
 
