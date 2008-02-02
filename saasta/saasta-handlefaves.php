@@ -23,7 +23,7 @@ if ( $user->ID ) {
 
 		$foo = $wpdb->get_row("SELECT COUNT(*) AS cnt FROM saasta_faves WHERE post_id=".$postId);
 
-        $msg = "Your saasta '".$post->post_title."' (".$post->guid.") was just faved! It has now a total of ".$foo->cnt." faves! High five!";
+        $msg = "Your saasta '".$post->post_title."' (".$post->guid.") was just faved! It now has a total of ".$foo->cnt." faves! High five!";
 
         wp_mail($author->user_email, "[saasta.fi] - your post got faved!", $msg);
     }
