@@ -25,8 +25,16 @@ class SearchActions {
 			
 			$searchInput = str_replace('"', '', $searchInput);
 			$searchInput = str_replace("'", '', $searchInput);
-			$where .= " OR (tr.name like '%" . $searchInput . 
-				"%' AND post_status = 'publish')";
+			
+			/* changed plugin's default search to allow multiple tags -muumi */
+			$tags = explode(" ",$searchInput);
+			$where .= " OR ((";
+			for ($i = 0; $i < count($tags); $i++) {
+				if ($i > 0) $where .= " OR ";
+			    $where .= "(tr.name LIKE '%".trim($tags[$i])."%')";
+			}
+
+			$where .= ") AND (post_status = 'publish'))";
 		}
 	
 		return $where;
