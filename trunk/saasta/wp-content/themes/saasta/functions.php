@@ -2,8 +2,11 @@
 
 function saasta_print_add_fave_form() 
 {
+	$redirectURI = attribute_escape($_SERVER['REQUEST_URI']);
+	$redirectURI .= "#saasta".get_the_ID();
+
     print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
-    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
+    print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
     print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="add fave"/>';
     print '</form>';
@@ -11,8 +14,11 @@ function saasta_print_add_fave_form()
 
 function saasta_print_del_fave_form($post_id)
 {
+	$redirectURI = attribute_escape($_SERVER['REQUEST_URI']);
+	$redirectURI .= "#saasta".get_the_ID();
+
     print '<form style="" action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return confirm(\"You sure?\");">';
-    print '<input type="hidden" name="redirect_to" value="'.attribute_escape($_SERVER['REQUEST_URI']).'"/>';
+    print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="del_post_id" value="'. $post_id .'"/>';
     print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="unfave"/>';
     print '</form>';
@@ -36,7 +42,7 @@ function saasta_print_post_header() {
 
     print '<img src="' . $icon . '" width="32" height="32" border="0"></td>';
     print '<td width="100%" bgcolor="#DDD391" style="padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
-    print '<a href="';
+    print '<a name="saasta'.get_the_ID().'" href="';
     the_permalink();
     print '" rel="bookmark" title="Permanent Link to ';
     the_title();
