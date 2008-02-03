@@ -39,7 +39,6 @@ class SearchActions {
 			/* another change to search by author as well */
 			$where .= " OR ($wpdb->users.display_name LIKE '%".$searchInput."%')";
 		}
-		error_log("where = ".$where);
 		return $where;
 	}
 		
