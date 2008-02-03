@@ -12,6 +12,8 @@ select DISTINCT p.post_title as title,COUNT(p.post_title) as fave_count,f.post_i
 ==Top X faved posts part deux==
 The same but a bit more advanced - uses QUARTER() to determine range of posts and also outputs post author and direct (although hardcoded) link to the post. Replace QUARTER(NOW()) and YEAR(NOW()) with fixed values (e.g. 4 and 2007, respectively) to come up with stats for any given quarter.
 
+Update 2008-02-03: Now also ignores faves to own posts (p.post_author <> f.user_id)
+
 {{{
 SELECT DISTINCT 
        p.post_title AS title,	
@@ -26,6 +28,7 @@ FROM
      saasta_users u
 WHERE 
       f.post_id=p.ID AND 
+      p.post_author <> f.user_id AND
       p.post_author=u.ID AND      
       QUARTER(p.post_date)=QUARTER(NOW()) AND
       YEAR(p.post_date)=YEAR(NOW())
