@@ -4,12 +4,12 @@ require( dirname(__FILE__) . '/wp-config.php' );
 
 nocache_headers();
 
-if (isset($_POST['add_post_id'])) {
+if (isset($_REQUEST['add_post_id'])) {
     $add = true;
-    $postId = (int) $_POST['add_post_id'];
-} else if (isset($_POST['del_post_id'])) {
+    $postId = (int) $_REQUEST['add_post_id'];
+} else if (isset($_REQUEST['del_post_id'])) {
     $add = false;
-    $postId = (int) $_POST['del_post_id'];
+    $postId = (int) $_REQUEST['del_post_id'];
 }
 
 // If the user is logged in
@@ -30,8 +30,13 @@ if ( $user->ID ) {
     else {
         $wpdb->query("delete from saasta_faves where user_id=".$user->ID." and post_id=".$postId);
     }
+    wp_redirect($_REQUEST['redirect_to']);
+} 
+else
+{
+    $url = "wp-login.php?redirect_to=" . urlencode("saasta-handlefaves.php" . "?add_post_id=" . $postId . "&redirect_to=" . $_REQUEST['redirect_to']);
+    wp_redirect($url);
 }
 
-wp_redirect($_POST['redirect_to']);
 
 ?>
