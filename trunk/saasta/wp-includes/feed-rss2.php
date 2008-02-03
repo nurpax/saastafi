@@ -23,7 +23,19 @@ $more = 1;
 	<?php do_action('rss2_head'); ?>
 	<?php while( have_posts()) : the_post(); ?>
 	<item>
-	<title><?php the_title_rss() ?> (<?php $arr = get_the_category(); for ($i = 0; $i < count($arr); $i++) { if ($i > 0) print ", "; print $arr[$i]->name; }?>)</title>
+
+       <title><?php the_title_rss() ?><?php
+    $arr = get_the_category();
+    $catStr = "";
+    for ($i = 0, $j = 0; $i < count($arr); $i++) {
+        if (strcmp($arr[$i]->name, "saasta") < 0) {
+            if ($j > 0) $catStr .= ", ";
+            $catStr .= trim($arr[$i]->name);
+            $j++;
+        }
+     }
+    if ($catStr != "") print (" (" . $catStr . ")"); ?></title>
+
 		<link><?php the_permalink_rss() ?></link>
 		<comments><?php comments_link(); ?></comments>
 		<pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?></pubDate>
