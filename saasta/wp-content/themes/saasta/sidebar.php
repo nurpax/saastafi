@@ -26,6 +26,7 @@ if ( $user->ID ) {
 					 <li><a href="<?php print get_permalink(140); ?>"><?php print get_the_title(140); ?></a></li>
 					 <li><a href="<?php print get_permalink(922); ?>"><?php print get_the_title(922); ?></a></li>
                      <li><a href="<?php print get_permalink(2598); ?>"><?php print get_the_title(2598); ?></a></li>
+                     <li><a href="<?php bloginfo('rss2_url'); ?>">Saasta RSS feed</a></li>
 					<?php wp_meta(); ?>
 				</ul>
 				</li>
