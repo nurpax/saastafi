@@ -23,7 +23,7 @@ $more = 1;
 	<?php do_action('rss2_head'); ?>
 	<?php while( have_posts()) : the_post(); ?>
 	<item>
-		<title><?php the_title_rss() ?></title>
+	<title><?php the_title_rss() ?> (<?php $arr = get_the_category(); for ($i = 0; $i < count($arr); $i++) { if ($i > 0) print ", "; print $arr[$i]->name; }?>)</title>
 		<link><?php the_permalink_rss() ?></link>
 		<comments><?php comments_link(); ?></comments>
 		<pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?></pubDate>
@@ -36,7 +36,7 @@ $more = 1;
 <?php else : ?>
 		<description><![CDATA[<?php the_excerpt_rss() ?>]]></description>
 	<?php if ( strlen( $post->post_content ) > 0 ) : ?>
-		<content:encoded><![CDATA[<?php the_content() ?>]]></content:encoded>
+			 <content:encoded><![CDATA[<?php the_content() ?> <?php if (get_the_tag_list()) print get_the_tag_list('<p>(Tags: ',', ',')</p>'); ?>]]></content:encoded>
 	<?php else : ?>
 		<content:encoded><![CDATA[<?php the_excerpt_rss() ?>]]></content:encoded>
 	<?php endif; ?>
