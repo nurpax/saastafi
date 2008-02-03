@@ -67,10 +67,13 @@ function saasta_print_post_header() {
 	// If user hasn't marked the post as a fave, add an "add fave"
 	// button.  Otherwise offer an "unfave" button.
 	if ($user_ID == '') print "&nbsp;";
-	else if (count($foo) == 0) 
-		saasta_print_add_fave_form ();
-	else 
-		saasta_print_del_fave_form (get_the_ID());
+	else {
+		$foo = $wpdb->get_results("select post_id from saasta_faves where user_id=".$user_ID." and post_id=".get_the_ID());
+		if (count($foo) == 0) 
+			saasta_print_add_fave_form ();
+		else 
+			saasta_print_del_fave_form (get_the_ID());
+	}
 	
 	print '</td><td>';
 	
