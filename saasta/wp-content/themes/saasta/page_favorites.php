@@ -14,7 +14,7 @@ function saasta_query_user_faves($user)
 {
     global $wpdb;
 
-    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from saasta_posts p,saasta_faves f where f.post_id=p.ID and f.user_id=".$user->ID." ORDER BY title");
+    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from ".$wpdb->posts." p,".$wpdb->prefix."faves f where f.post_id=p.ID and f.user_id=".$user->ID." ORDER BY title");
 
     return $foo;
 }
@@ -23,7 +23,7 @@ function saasta_query_q3_2007_faves($user)
 {
     global $wpdb;
 
-    $foo = $wpdb->get_results("select DISTINCT p.post_title as title,f.post_id as post_id,dATE_FORMAT(p.post_date, '%b %d, %Y') as date_posted from saasta_posts p,saasta_faves f where f.post_id=p.ID AND DATE(p.post_date) >= '2007-07-01' AND DATE(p.post_date) < '2007-10-01' ORDER BY p.post_date");
+    $foo = $wpdb->get_results("select DISTINCT p.post_title as title,f.post_id as post_id,dATE_FORMAT(p.post_date, '%b %d, %Y') as date_posted from ".$wpdb->posts." p,".$wpdb->prefix."faves f where f.post_id=p.ID AND DATE(p.post_date) >= '2007-07-01' AND DATE(p.post_date) < '2007-10-01' ORDER BY p.post_date");
 
     return $foo;
 }

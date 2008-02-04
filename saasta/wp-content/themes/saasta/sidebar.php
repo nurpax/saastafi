@@ -35,7 +35,7 @@ if ( $user->ID ) {
 			<li><h2>Random saasta</h2>
 			<ul><li>
 			<?php
-			$foo = $wpdb->get_row("SELECT ID,post_title FROM saasta_posts WHERE post_status='publish' ORDER BY RAND() LIMIT 1");
+			$foo = $wpdb->get_row("SELECT ID,post_title FROM ".$wpdb->posts." WHERE post_status='publish' ORDER BY RAND() LIMIT 1");
 			print '<a href="'.get_permalink($foo->ID).'" title="'.$foo->post_title.'">'.$foo->post_title.'</a>';
 			?>
 			</li></ul>
