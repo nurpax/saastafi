@@ -70,7 +70,7 @@ function saasta_print_post_header() {
         saasta_print_add_fave_form ();
     }
 	else {
-		$foo = $wpdb->get_results("select post_id from saasta_faves where user_id=".$user_ID." and post_id=".get_the_ID());
+		$foo = $wpdb->get_results("select post_id from ".$wpdb->prefix."faves where user_id=".$user_ID." and post_id=".get_the_ID());
 		if (count($foo) == 0) 
 			saasta_print_add_fave_form ();
 		else 
@@ -80,7 +80,7 @@ function saasta_print_post_header() {
 	print '</td><td>';
 	
 	// How many people have faved this post?
-	$foo = $wpdb->get_row("select count(post_id) as numfaves from saasta_faves where post_id=".get_the_ID());
+	$foo = $wpdb->get_row("select count(post_id) as numfaves from ".$wpdb->prefix."faves where post_id=".get_the_ID());
 	if ($foo->numfaves > 1) print $foo->numfaves.' faves';
 	else if ($foo->numfaves == 1) print '1 fave';
 	print '</td></tr></table>';
@@ -143,7 +143,7 @@ function saasta_list_faves() {
 	if ('' == $user_ID)
 		return;
 
-    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from saasta_posts p,saasta_faves f where f.post_id=p.ID and f.user_id=".$user_ID);
+    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from ".$wpdb->posts." p,".$wpdb->prefix."faves f where f.post_id=p.ID and f.user_id=".$user_ID);
     if (count($foo) > 0) {
         print '<li><h2>Your favorites</h2><ul>';
         foreach ($foo as $f) {
