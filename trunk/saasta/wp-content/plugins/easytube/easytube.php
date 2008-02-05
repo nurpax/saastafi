@@ -46,6 +46,9 @@ add_filter('the_content','tube_content');
 
 add_filter('the_content','googlevideo_content');
 
+# 2008-02-06 jjhellst - add support for comments
+add_filter('comment_text','tube_content');
+add_filter('comment_text','googlevideo_content');
 
 
 
