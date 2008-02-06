@@ -24,6 +24,7 @@ if ( $user->ID ) {
 					<?php wp_register(); ?>
 					<li><?php wp_loginout(); ?></li>
 					 <li><a href="<?php print get_permalink(140); ?>"><?php print get_the_title(140); ?></a></li>
+					 <li><a href="<?php print get_permalink(2624); ?>"><?php print get_the_title(2624); ?></a></li>
 					 <li><a href="<?php print get_permalink(922); ?>"><?php print get_the_title(922); ?></a></li>
                      <li><a href="<?php print get_permalink(2598); ?>"><?php print get_the_title(2598); ?></a></li>
                                                                                                                        <li>RSS: <a href="<?php bloginfo('rss2_url'); ?>">Entries</a> and <a href="<?php bloginfo('comments_rss2_url'); ?>">Comments</a></li>
