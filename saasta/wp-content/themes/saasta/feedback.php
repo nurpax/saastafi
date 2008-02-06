@@ -28,8 +28,11 @@ function saasta_print_feedback_form()
 <?php if (isset($_GET['saved'])) { ?>
 <p><strong>Feedback sent.  Thank you!</strong></p>
 <?php } else { ?>
-<h2>Feedback to Saasta Administrations</h2>
-<p>Let us know what you think about our site:</p>
+<h2>Feedback to the Saasta Administration</h2>
+<p>Send anonymous feedback on our site.  Improvement suggestions.. DIS..? RES! etc.</p>
+
+<p>If you wish to be contacted by our officials, remember to include your e-mail address in your letter.</p>
+
 <?php saasta_print_feedback_form (); ?>
 <?php } ?>
 
