@@ -20,20 +20,36 @@ function saasta_print_feedback_form()
     print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="Send"/>';
     print '</form>';
 }
-
 ?>
 
 <div id="content" class="narrowcolumn">
 
 <?php if (isset($_GET['saved'])) { ?>
 <p><strong>Feedback sent.  Thank you!</strong></p>
-<?php } else { ?>
+<?php } ?>
+
+<?php
+      // Simple spammer protection, maybe this will fool their simple
+      // crawlers..
+      if (!isset($_POST['not_sniffing_around']))
+      {
+          print '<form action="'.get_option('siteurl').'/?page_id=2624" method="post">';
+          print '<input type="hidden" name="not_sniffing_around" value="1">';
+          print '<input type="submit" name="spam" value="I am not a spammer">';
+          print '</form>';
+      } else
+      {
+?>
+
+<?php if (!isset($_GET['saved'])) { ?>
 <h2>Feedback to the Saasta Administration</h2>
 <p>Send anonymous feedback on our site.  Improvement suggestions.. DIS..? RES! etc.</p>
 
 <p>If you wish to be contacted by our officials, remember to include your e-mail address in your letter.</p>
 
 <?php saasta_print_feedback_form (); ?>
+<?php } ?>
+
 <?php } ?>
 
 </div>
