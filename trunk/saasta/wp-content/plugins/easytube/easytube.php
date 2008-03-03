@@ -52,13 +52,14 @@ function tube_content($content) {
 			{
 				$height = "";
 			}
-			$replace = '<object class="embed" width="'.$width.'" height="'.$height.'" type="application/x-shockwave-flash" data="http://www.youtube.com/v/'.$vid.'"><param name="movie" value="http://www.youtube.com/v/'.$vid.'" /><param name="wmode" value="transparent" /><em>You need to a flashplayer enabled browser to view this YouTube video</em></object>';
+            $replace='<object width="'.$width.'" height="'.$height.'"><param name="movie" value="http://www.youtube.com/v/'.$vid.'&rel=1&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$vid.'&rel=1&border=0" type="application/x-shockwave-flash" wmode="transparent"width="425" height="355"></embed></object>';
 		}
 		else
 		{
 			$vid= explode('=',$matches[1][$x]);
 			$vid = $vid[1];
-			$replace = '<object class="embed" width="425" height="350" type="application/x-shockwave-flash" data="http://www.youtube.com/v/'.$vid.'"><param name="wmode" value="transparent" /><param name="movie" value="http://www.youtube.com/v/'.$vid.'" /><em>You need to a flashplayer enabled browser to view this YouTube video</em></object>';
+
+            $replace='<object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/'.$vid.'&rel=1&border=0"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/'.$vid.'&rel=1&border=0" type="application/x-shockwave-flash" wmode="transparent"width="425" height="355"></embed></object>';
 		}
 		$content = str_replace($matches[0][$x], $replace, $content);
 	}
@@ -66,6 +67,8 @@ function tube_content($content) {
 	return $content;
 }
 
+// TODO janne: this stuff here may not be using the most recent Google
+// Video embed code and may thus not work on all browsers as expected.
 function googlevideo_content($content)
 {
     $regex = '/\[googlevideo:(.*?)]/i';
