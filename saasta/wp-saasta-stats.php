@@ -88,8 +88,7 @@ WHERE
         tax.count > 0
 ORDER BY
       num_posts DESC,
-      tag
-LIMIT 1,5";
+      tag";
 
 	return $wpdb->get_results($query);
 }
@@ -106,8 +105,8 @@ LIMIT 1,5";
 
 <body>
 
-<p style="border:2px black solid; background-color: #caccaa;">
-<b>MENU</b><br>
+<p style="border:2px black solid; padding: 1.0em; background-color: #caccaa;">
+<b>LÉ MOTHERFUCKING MENU SILVUPLEE</b><br>
 <br>
 <a href="wp-saasta-stats.php">posts per quarter</a><br>
 <a href="wp-saasta-stats.php?m=faves">top faved posts per quarter</a><br>
