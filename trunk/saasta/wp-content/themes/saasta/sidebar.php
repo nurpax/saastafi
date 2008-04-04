@@ -22,7 +22,10 @@ if ( $user->ID ) {
 				<li><h2>Meta</h2>
 				<ul>
 					<?php wp_register(); ?>
-					<li><?php wp_loginout(); ?></li>
+				    <li><?php wp_loginout(); ?></li>
+<?php if ($user->ID) { ?>
+<li><a href="<?php get_bloginfo('wpurl').'/wp-admin/post-new.php' ?>">Write a new post</a></li>
+<?php } ?>
 					 <li><a href="<?php print get_permalink(140); ?>"><?php print get_the_title(140); ?></a></li>
 					 <li><a href="<?php print get_permalink(2624); ?>"><?php print get_the_title(2624); ?></a></li>
 					 <li><a href="<?php print get_permalink(922); ?>"><?php print get_the_title(922); ?></a></li>
