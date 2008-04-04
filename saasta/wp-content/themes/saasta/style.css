@@ -335,7 +335,9 @@ h3.comments {
 /* End Headers */
 
 
-
+div.entry img {
+    border:1px solid black;
+}
 /* Begin Images */
 p img {
 	padding: 0;
