@@ -70,6 +70,20 @@ if ( $user->ID ) {
 
 			<?php wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); ?>
 
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-7907497075456864";
+/* 200x200, created 4/4/08 */
+google_ad_slot = "8643141691";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
 			<li><h2>Archives</h2>
 				<ul>
 				<?php wp_get_archives('type=monthly'); ?>
@@ -77,5 +91,6 @@ if ( $user->ID ) {
 			</li>
 
 		</ul>
+
 	</div>
 
