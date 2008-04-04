@@ -134,7 +134,7 @@ if ($mode == 'tags') {
 	$foo = query_top_tags();
 	print '<table cellspacing="2"><tr><td><b>tag</b></td><td><b>num posts</b></td></tr>';
 	foreach ($foo as $f) {
-		print '<tr><td>'.$f->tag.'</td><td>'.$f->num_posts.'</td></tr>';
+		print '<tr><td><a href="/saasta/?tag='.$f->tag.'">'.$f->tag.'</a></td><td>'.$f->num_posts.'</td></tr>';
 	}
 	print '</table>';
  }
@@ -195,7 +195,7 @@ if ($mode == 'faves') {
 	foreach ($foo as $f) {
 		print "<tr>";
 		print "<td>".$f->name."</td>";
-		print "<td>".$f->num_comments."</td>";
+		print "<td>".$f->num_posts."</td>";
 		print "</tr>";
 		
 		$totalPosts += $f->num_posts;
