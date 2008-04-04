@@ -71,7 +71,27 @@ ORDER BY
       fave_count DESC";
 
 	return $wpdb->get_results($query);
+}
 
+function query_top_tags() {
+	global $wpdb;
+
+	$query = "SELECT
+        term.name as tag,
+        tax.count as num_posts
+FROM 
+     saasta_terms term,
+     saasta_term_taxonomy tax
+WHERE
+        tax.term_id = term.term_id AND
+        tax.taxonomy = 'post_tag' AND
+        tax.count > 0
+ORDER BY
+      num_posts DESC,
+      tag
+LIMIT 1,5";
+
+	return $wpdb->get_results($query);
 }
 
 //$n_posts = query_total_num_posts();
@@ -91,11 +111,25 @@ ORDER BY
 <br>
 <a href="wp-saasta-stats.php">posts per quarter</a><br>
 <a href="wp-saasta-stats.php?m=faves">top faved posts per quarter</a><br>
+<a href="wp-saasta-stats.php?m=tags">top tags</a><br>
 </p>
 
 <h1>saasta.fi statistics page</h1>
 
 <?php
+
+$mode = $_REQUEST['m'];
+
+if ($mode == 'tags') {
+	$foo = query_top_tags();
+	print '<table cellspacing="2"><tr><td><b>tag</b></td><td><b>num posts</b></td></tr>';
+	foreach ($foo as $f) {
+		print '<tr><td>'.$f->tag.'</td><td>'.$f->num_posts.'</td></tr>';
+	}
+	print '</table>';
+ }
+ else 
+
 for ($year = 2008; $year >= 2007; $year--)
 	for ($q = 4; $q >= 1; $q--) {
 ?>
@@ -104,7 +138,7 @@ for ($year = 2008; $year >= 2007; $year--)
 
 <?php
 
-$mode = $_REQUEST['m'];
+
 if ($mode == 'faves') {
 	print '<tr><th style="background-color:#cccccc;" colspan="6">Q'.$q.'/'.$year.'</th></tr>';
 
