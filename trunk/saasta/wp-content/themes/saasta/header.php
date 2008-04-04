@@ -8,7 +8,8 @@
 
 <meta name="generator" content="WordPress <?php bloginfo('version'); ?>" /> <!-- leave this for stats -->
 
-<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
+<!--<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />-->
+<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen"/>
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
@@ -22,22 +23,15 @@ if ( !$withcomments && !is_single() ) {
 <?php } else { // No sidebar ?>
 	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/saasta_bg.gif") repeat-y top; border: none; }
 <?php } ?>
-
 </style>
 
 <?php wp_head(); ?>
 </head>
 <body>
 <div id="page">
-
-
 <div id="header">
 	<div id="headerimg">
 	<a href="<?php echo get_option('home'); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/transp.gif" style="width:100%;height:100%;" border="0"></a>
-<!--
-		<h1><a href="<?php echo get_option('home'); ?>/"><?php bloginfo('name'); ?></a></h1>
-		<div class="description"><?php bloginfo('description'); ?></div>
--->
 	</div>
 </div>
 <hr />
