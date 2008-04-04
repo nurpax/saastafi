@@ -29,8 +29,7 @@ body {
 	}
 
 #header {
-	/*background: #73a0c5 url('images/kubrickheader.jpg') no-repeat bottom center;*/
-	background: #73a0c5 url('images/saasta_header.gif') no-repeat bottom center;
+	background: #737381 url('images/saasta_header.gif') no-repeat bottom center;*/
 	}
 
 #headerimg 	{ 
@@ -40,7 +39,7 @@ body {
 	} 
 
 #content {
-	font-size: 1.2em
+	font-size: 1.2em;
 	}
 
 .widecolumn .entry p {
@@ -60,7 +59,6 @@ body {
 	}
 
 .alt {
-/*	background-color: #f8f8f8;*/
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	}
@@ -68,6 +66,7 @@ body {
 #footer {
 	background: #eee url('images/saasta_footer.gif') no-repeat top; 
 	border: none;
+	height: 347px;
 	}
 
 small {
@@ -122,11 +121,12 @@ h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar
 	}
 
 table td span a:hover {
- 	color: #9E5C0E;
+ 	/*color: #9E5C0E;*/
+	color: #CC0000;
 }
 
 .entry p a:visited {
-	color: #b85b5a;
+	color: #000000; /*#b85b5a;*/
 	}
 
 .commentlist li, #commentform input, #commentform textarea {
@@ -162,7 +162,8 @@ table td span a:hover {
 	}
 
 small, #sidebar ul ul li, #sidebar ul ol li, .nocomments, .postmetadata, blockquote, strike {
-	color: #777;
+       	/*color: #777;*/
+	color: #333333;
 	}
 
 code {
@@ -177,7 +178,8 @@ acronym, abbr, span.caps
 
 a, h2 a:hover, h3 a:hover {
 	/*color: #06c;*/
-	color: #9E5C0E;
+	/*color: #9E5C0E;*/
+	color: #000000; /*#193c7b;*/
 	text-decoration: none;
 	}
 
@@ -222,7 +224,7 @@ body {
 	}
 
 #header {
-	background-color: #73a0c5;
+	background-color: #737381;
 	margin: 0 0 0 0px; 
 	padding: 0; 
 	height: 217px; 
@@ -630,4 +632,8 @@ div.post h2 {
 	background-color: #DDD391;
 	border-bottom: 1px solid black;
 	padding: 0.1em;
+}
+
+.saastaFooter {
+	height: 356px; 
 }

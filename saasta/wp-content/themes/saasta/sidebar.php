@@ -16,7 +16,7 @@ if ( $user->ID ) {
 	<?php /* wp_list_bookmarks();*/ ?>
 
 			<li>
-            <a href="<?php print get_permalink(2553); ?>"><img src="champagne.png"/><br/><span style="font-size:2em;">Winners of Q4/2007!</span></a>
+            <a href="<?php print get_permalink(2553); ?>"><span style="font-size:2em;">Winners of Q4/2007!</span></a>
 			</li>
 
 				<li><h2>Meta</h2>

@@ -8,7 +8,7 @@ function saasta_print_add_fave_form()
     print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
     print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
-    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="add fave"/>';
+    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#dac8c7;" value="add fave"/>';
     print '</form>';
 }
 
@@ -20,7 +20,7 @@ function saasta_print_del_fave_form($post_id)
     print '<form style="" action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return confirm(\"You sure?\");">';
     print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="del_post_id" value="'. $post_id .'"/>';
-    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#ddd391" value="unfave"/>';
+    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#dac8c7;" value="unfave"/>';
     print '</form>';
 }
 
@@ -28,9 +28,13 @@ function saasta_print_post_header() {
     global $user_ID;
     global $wpdb;
 
+	/*
+	 * old color #ddd391
+	 * new color #dac8c7
+	 */
     // TODO: use css classes
     print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1.0em;">';
-    print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" bgcolor="#DDD391" style="padding:0.2em;border:1px solid black;">';
+    print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" style="padding:0.2em;border:1px solid black;background-color:#dac8c7;">';
     $icon = "people/unknown.png";
 
     $pic_name = "people/" . get_the_author_login();
@@ -41,7 +45,7 @@ function saasta_print_post_header() {
         $icon = $pic_name . ".gif";
 
     print '<img src="' . $icon . '" width="32" height="32" border="0"></td>';
-    print '<td width="100%" bgcolor="#DDD391" style="padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
+    print '<td width="100%" style="background-color:#dac8c7;padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
     print '<a name="saasta'.get_the_ID().'" href="';
     the_permalink();
     print '" rel="bookmark" title="Permanent Link to ';
@@ -57,7 +61,7 @@ function saasta_print_post_header() {
     get_currentuserinfo();
 
 	print '<tr>';
-	print '<td bgcolor="#DDD391" valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;">';
+	print '<td valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;background-color:#dac8c7;">';
 	
 	// The extra table here is used here to force fave/unfave
 	// button and '# of faves' text to go on the same line.
