@@ -26,7 +26,6 @@ Here are the custom changes that we've done to WP.  The table lists both SVN cha
 As always, submit each change as its own changeset into SVN.  Keep working in the upgrade branch.
 
 || *SVN change* || *Issue* ||
-|| r91 (see r54 for older WP's) || [http://code.google.com/p/saastafi/issues/detail?id=1 Issue 1: Max width thumbnail creation] ||
 || r97 || [http://code.google.com/p/saastafi/issues/detail?id=29 Issue 29: Jesse "Raksa" Heap's search-tags plugin doesn't search for multiple tag] ||
 || r113,r118 || [http://code.google.com/p/saastafi/issues/detail?id=27 Issue 27: Include category tags in the RSS feed entries].  No need to apply two patches separately on upgrade, you can just combine both changes into one, say by doing `svn diff -r 112:119 saasta/wp-includes/feed-rss2.php` ||
 
