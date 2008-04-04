@@ -93,6 +93,16 @@ ORDER BY
 	return $wpdb->get_results($query);
 }
 
+function query_top_commenters_in_quarter($q, $y) {
+	global $wpdb;
+
+	$query = "select su.display_name as name,count(sc.comment_ID) as num_comments 
+from saasta_comments sc, saasta_users su 
+where quarter(comment_date)=".$q." and year(comment_date)=".$y." and sc.comment_author=su.display_name 
+group by name order by num_comments desc,name";
+	return $wpdb->get_results($query);
+}
+
 //$n_posts = query_total_num_posts();
 
 ?>
@@ -111,6 +121,7 @@ ORDER BY
 <a href="wp-saasta-stats.php">posts per quarter</a><br>
 <a href="wp-saasta-stats.php?m=faves">top faved posts per quarter</a><br>
 <a href="wp-saasta-stats.php?m=tags">top tags</a><br>
+<a href="wp-saasta-stats.php?m=commenters">top commenters</a><br>
 </p>
 
 <h1>saasta.fi statistics page</h1>
@@ -162,7 +173,18 @@ if ($mode == 'faves') {
 		print '</tr>';
 	}
 }
-else {
+ else if ($mode == 'commenters') {
+	print '<tr><th style="background-color:#cccccc;" colspan="2">Q'.$q.'/'.$year.'</th></tr>';
+	$foo = query_top_commenters_in_quarter($q, $year);
+	print '<tr><th>name</th><th>num comments</th></tr>';
+	foreach ($foo as $f) {
+		print "<tr>";
+		print "<td>".$f->name."</td>";
+		print "<td>".$f->num_comments."</td>";
+		print "</tr>";	   
+	}	
+ } 
+ else {
 	print '<tr><th style="background-color:#cccccc;" colspan="2">Q'.$q.'/'.$year.'</th></tr>';
 
 	$foo = query_num_posts_in_quarter($q, $year);
@@ -173,7 +195,7 @@ else {
 	foreach ($foo as $f) {
 		print "<tr>";
 		print "<td>".$f->name."</td>";
-		print "<td>".$f->num_posts."</td>";
+		print "<td>".$f->num_comments."</td>";
 		print "</tr>";
 		
 		$totalPosts += $f->num_posts;
