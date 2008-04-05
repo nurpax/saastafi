@@ -338,6 +338,11 @@ h3.comments {
 div.entry img {
     border:1px solid black;
 }
+
+div.entry img.wp-smiley {
+	border:none;
+}
+
 /* Begin Images */
 p img {
 	padding: 0;
