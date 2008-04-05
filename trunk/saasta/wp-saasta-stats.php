@@ -111,6 +111,11 @@ group by name order by num_comments desc,name";
 
 <head>
 <title>Saasta.fi statistics</title>
+<style type="text/css">
+	body,td,th { font: 0.8em 'Courier New', Courier, Fixed; }
+th { background-color: #cccccc; font-weight: bold; border-bottom: 2px solid black; }
+td { border-bottom: 1px dashed #999999; }
+</style>
 </head>
 
 <body>
@@ -132,7 +137,7 @@ $mode = $_REQUEST['m'];
 
 if ($mode == 'tags') {
 	$foo = query_top_tags();
-	print '<table cellspacing="2"><tr><td><b>tag</b></td><td><b>num posts</b></td></tr>';
+	print '<table cellspacing="2"><tr><th>tag</th><th>num posts</th></tr>';
 	foreach ($foo as $f) {
 		print '<tr><td><a href="/saasta/?tag='.$f->tag.'">'.$f->tag.'</a></td><td>'.$f->num_posts.'</td></tr>';
 	}
@@ -144,13 +149,13 @@ for ($year = 2008; $year >= 2007; $year--)
 	for ($q = 4; $q >= 1; $q--) {
 ?>
 <p>
-<table>
+<table border="0" cellspacing="0" cellpadding="2">
 
 <?php
 
 
 if ($mode == 'faves') {
-	print '<tr><th style="background-color:#cccccc;" colspan="6">Q'.$q.'/'.$year.'</th></tr>';
+	print '<tr><th colspan="6">Q'.$q.'/'.$year.'</th></tr>';
 
 	print '<tr>
 <th>title</th>
@@ -174,7 +179,7 @@ if ($mode == 'faves') {
 	}
 }
  else if ($mode == 'commenters') {
-	print '<tr><th style="background-color:#cccccc;" colspan="2">Q'.$q.'/'.$year.'</th></tr>';
+	print '<tr><th colspan="2">Q'.$q.'/'.$year.'</th></tr>';
 	$foo = query_top_commenters_in_quarter($q, $year);
 	print '<tr><th>name</th><th>num comments</th></tr>';
 	foreach ($foo as $f) {
@@ -185,7 +190,7 @@ if ($mode == 'faves') {
 	}	
  } 
  else {
-	print '<tr><th style="background-color:#cccccc;" colspan="2">Q'.$q.'/'.$year.'</th></tr>';
+	print '<tr><th colspan="2">Q'.$q.'/'.$year.'</th></tr>';
 
 	$foo = query_num_posts_in_quarter($q, $year);
 
