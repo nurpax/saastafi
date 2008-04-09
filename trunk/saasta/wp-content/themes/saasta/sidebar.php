@@ -2,7 +2,6 @@
 /* Figure out if we're on the index/home page or on a single post view */
 $is_single_post = !(is_home () || is_page());
 $user = wp_get_current_user();
-$logged_in = $user->ID;
 
 function saasta_print_permalink($id) 
 {
@@ -14,6 +13,12 @@ function saasta_print_permalink($id)
     print '</a>';
 }
 
+function saasta_print_if_logged_in($s)
+{
+    if (is_user_logged_in())
+        print $s;
+}
+
 ?>
 
 	<div id="sidebar">
@@ -21,23 +26,18 @@ function saasta_print_permalink($id)
 <?php if (!$is_single_post) print "<li>"; ?>
 <?php if (!$is_single_post) include (TEMPLATEPATH . '/searchform.php'); ?>
 <?php if (!$is_single_post) { print "</li>"; } ?>
-<?php 
-if ( $logged_in ) {
-    printf ("<li><span style=\"font-size:1.2em;\">Howdy <span style=\"font-size : 1.3em; font-weight : bold; font-style:italic;\">%s</span>!</span></li>", $user->display_name);
-}
-?>
 			<?php /* If this is the frontpage */ if ( 1 || is_home() || is_page() ) { ?>
 
-    <?php if (!$is_single_post) print '<li><a href="<?php print get_permalink(2553); ?>"><span style="font-size:2em;">Winners of Q4/2007!</span></a></li>'; ?>
+    <?php if (!$is_single_post) { print '<li><a href="'; print get_permalink(2553) . "\"><span style=\"font-size:2em;\">Winners of Q4/2007!</span></a></li>"; } ?>
 
 				<li><h2>Meta</h2>
 				<ul>
-					<?php wp_register(); ?>
-				    <li><?php wp_loginout(); ?></li>
-<?php if ($logged_in) { print "<li><a href=\""; print get_bloginfo('wpurl').'/wp-admin/post-new.php">Write a new post</a></li>'; } ?>
-					 <?php if ($is_logged_in) { print "<li>"; print saasta_print_permalink(140); print "</li>"; } ?>
+                     <?php wp_register(); ?>
+                     <li><?php wp_loginout();  saasta_print_if_logged_in(" [$user->display_name]"); ?></li>
+<?php if (is_user_logged_in()) { print "<li><a href=\""; print get_bloginfo('wpurl').'/wp-admin/post-new.php">Write a new post</a></li>'; } ?>
+<?php if (is_user_logged_in()) { print "<li>"; print saasta_print_permalink(140); print "</li>"; } ?>
 					 <li><?php print saasta_print_permalink(2624); ?></li>
-					 <?php if ($is_logged_in) { print "<li>"; print saasta_print_permalink(922); print "</li>"; } ?>
+					 <?php if (is_user_logged_in()) { print "<li>"; print saasta_print_permalink(922); print "</li>"; } ?>
                      <li><?php print saasta_print_permalink(2598); ?></li>
                                                                                                                        <li>RSS: <a href="<?php bloginfo('rss2_url'); ?>">Entries</a> and <a href="<?php bloginfo('comments_rss2_url'); ?>">Comments</a></li>
 					<?php wp_meta(); ?>
