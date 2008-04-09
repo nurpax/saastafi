@@ -34,9 +34,7 @@ if ( $logged_in ) {
 				<ul>
 					<?php wp_register(); ?>
 				    <li><?php wp_loginout(); ?></li>
-<?php if ($logged_in) { ?>
-<li><a href="<?php get_bloginfo('wpurl').'/wp-admin/post-new.php' ?>">Write a new post</a></li>
-<?php } ?>
+<?php if ($logged_in) { print "<li><a href=\""; print get_bloginfo('wpurl').'/wp-admin/post-new.php">Write a new post</a></li>'; } ?>
 					 <?php if ($is_logged_in) { print "<li>"; print saasta_print_permalink(140); print "</li>"; } ?>
 					 <li><?php print saasta_print_permalink(2624); ?></li>
 					 <?php if ($is_logged_in) { print "<li>"; print saasta_print_permalink(922); print "</li>"; } ?>
