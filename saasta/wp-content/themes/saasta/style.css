@@ -59,8 +59,8 @@ body {
 	}
 
 .alt {
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
 	}
 
 #footer {
@@ -125,10 +125,12 @@ table td span a:hover {
 	color: #CC0000;
 }
 
+/*
 .entry p a:visited {
-	color: #000000; /*#b85b5a;*/
+	color: #333366;
+	text-decoration: underline;
 	}
-
+*/
 .commentlist li, #commentform input, #commentform textarea {
 	font: 0.9em 'Lucida Grande', Verdana, Arial, Sans-Serif;
 	}
@@ -177,15 +179,11 @@ acronym, abbr, span.caps
 	}
 
 a, h2 a:hover, h3 a:hover {
-	/*color: #06c;*/
-	/*color: #9E5C0E;*/
-	color: #333366; /*#193c7b;*/
+	color: #990000; 
 	text-decoration: none;
 	}
 
-a:hover {
-	/*color: white; 147;*/
-	text-decoration: underline;
+/*div.entry a, div.entry a:visited { */
 	}
 
 #wp-calendar #prev a, #wp-calendar #next a {
@@ -257,6 +255,7 @@ body {
 
 .post hr {
 	display: block;
+
 	}
 
 .widecolumn .post {
@@ -644,3 +643,15 @@ div.post h2 {
 .saastaFooter {
 	height: 356px; 
 }
+
+.entry a, .entry a:visited {
+       color: #990000;
+       text-decoration: none;
+}
+
+.navigation a:hover, 
+.postmetadata a:hover, 
+.entry a:hover,
+li a:hover,
+form a:hover { text-decoration: underline; }
+
