@@ -44,7 +44,7 @@ function saasta_print_post_header() {
     else if (file_exists($pic_name . ".gif"))
         $icon = $pic_name . ".gif";
 
-    print '<img src="' . $icon . '" width="32" height="32" border="0"></td>';
+    print '<img src="' . $icon . '" width="32" height="32" border="0" alt="'.get_the_author_login().'"/></td>';
     print '<td width="100%" style="background-color:#dac8c7;padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
     print '<a name="saasta'.get_the_ID().'" href="';
     the_permalink();
@@ -52,7 +52,7 @@ function saasta_print_post_header() {
     the_title();
     print '">';
     the_title();
-    print '</a></span><br><small>';
+    print '</a></span><br/><small>';
     the_time('F jS, Y');
     print ' by ';
     the_author();

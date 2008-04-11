@@ -51,7 +51,7 @@ function saasta_print_if_logged_in($s)
 			$foo = $wpdb->get_row("SELECT ID,post_title FROM ".$wpdb->posts." WHERE post_status='publish' ORDER BY RAND() LIMIT 1");
 			print '<a href="'.get_permalink($foo->ID).'" title="'.$foo->post_title.'">'.$foo->post_title.'</a>';
 			?>
-			</li></ul>
+			</li></ul></li>
 
 			<li>
 			<?php /* If this is a 404 page */ if (is_404()) { ?>
@@ -82,7 +82,7 @@ function saasta_print_if_logged_in($s)
 
 			<?php if (!$is_single_post) { wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); } ?>
 
-
+</ul>
 <script type="text/javascript"><!--
 google_ad_client = "pub-7907497075456864";
 /* 160x600, created 4/4/08 */
@@ -94,7 +94,7 @@ google_ad_height = 600;
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
-
+<ul>
 			<li><h2>Archives</h2>
 				<ul>
 				<?php wp_get_archives('type=monthly'); ?>
