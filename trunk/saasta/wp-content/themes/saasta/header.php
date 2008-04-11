@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen"/>
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-
 <style type="text/css" media="screen">
 
 <?php
@@ -31,7 +30,7 @@ if ( !$withcomments && !is_single() ) {
 <div id="page">
 <div id="header">
 	<div id="headerimg">
-	<a href="<?php echo get_option('home'); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/transp.gif" style="width:100%;height:100%;" border="0"></a>
+	<a href="<?php echo get_option('home'); ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/images/transp.gif" style="width:100%;height:100%;" border="0" alt="saasta.fi"/></a>
 	</div>
 </div>
 <hr />
