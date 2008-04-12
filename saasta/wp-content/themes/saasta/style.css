@@ -29,7 +29,7 @@ body {
 	}
 
 #header {
-	background: #737381 url('images/saasta_header.gif') no-repeat bottom center;*/
+	background: #82706f url('images/saasta_header.gif') no-repeat bottom center;*/
 	}
 
 #headerimg 	{ 
@@ -237,9 +237,9 @@ body {
 
 .narrowcolumn {
 	float: left;
-	padding: 0 0px 0px 29px;
+	padding: 0 0px 0px 28px;
 	margin: 0px 0 0;
-	width: 500px;
+	width: 502px;
 	}
 
 .widecolumn {
