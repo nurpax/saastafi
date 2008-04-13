@@ -28,8 +28,6 @@ function saasta_print_if_logged_in($s)
 <?php if (!$is_single_post) { print "</li>"; } ?>
 			<?php /* If this is the frontpage */ if ( 1 || is_home() || is_page() ) { ?>
 
-    <?php if (!$is_single_post) { print '<li><a href="'; print get_permalink(2553) . "\"><span style=\"font-size:2em;\">Winners of Q4/2007!</span></a></li>"; } ?>
-
 				<li><h2>Meta</h2>
 				<ul>
                      <?php wp_register(); ?>
