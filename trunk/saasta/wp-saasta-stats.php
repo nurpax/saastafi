@@ -51,7 +51,7 @@ function query_top_faved_posts($q,$y) {
        u.display_name      AS author,
        COUNT(p.post_title) AS fave_count,
        f.post_id           AS post_id,
-       CONCAT('http://saasta.fi/saasta/?p=',f.post_id) AS url,
+       CONCAT('".get_bloginfo('wpurl')."/?p=',f.post_id) AS url,
        DATE_FORMAT(p.post_date, '%b %d, %Y')           AS date_posted
 FROM 
      saasta_posts p,
@@ -227,6 +227,8 @@ function best_posters_cmp($a, $b) {
 		return -1;
 }
 
+/**
+ */
 function query_most_commented_posts($q, $y) {
 	global $wpdb;
 
@@ -234,7 +236,7 @@ function query_most_commented_posts($q, $y) {
 SELECT
   COUNT(sc.comment_post_ID) AS num_comments,
   sp.post_title AS title,
-  CONCAT('http://www.saasta.fi/saasta/?p=',sp.ID) AS url,
+  CONCAT('".get_bloginfo('wpurl')."/?p=',sp.ID) AS url,
   su.display_name AS author
 FROM
   saasta_posts sp, saasta_users su, saasta_comments sc
@@ -297,9 +299,8 @@ if ($mode == 'tags') {
 		print '<tr><td><a href="/saasta/?tag='.$f->tag.'">'.$f->tag.'</a></td><td>'.$f->num_posts.'</td></tr>';
 	}
 	print '</table>';
- }
- else 
-
+}
+else 
 for ($year = 2008; $year >= 2007; $year--)
 	for ($q = 4; $q >= 1; $q--) {
 ?>
@@ -309,14 +310,13 @@ for ($year = 2008; $year >= 2007; $year--)
 
 if ($mode == 'mostcommented') {
 	print '<tr><th colspan="4">Q'.$q.'/'.$year.'</th></tr>';
-	print '<tr><th>post</th><th>num comments</th><th>author</th><th>url</th></tr>';
+	print '<tr><th>post</th><th>num comments</th><th>author</th></tr>';
 	$foo = query_most_commented_posts($q, $year);
 	foreach ($foo as $f) {
 		print "<tr>";
-		print "<td>{$f->title}</td>";
+		print "<td><a href=\"{$f->url}\">{$f->title}</a></td>";
 		print "<td>{$f->num_comments}</td>";
 		print "<td>{$f->author}</td>";
-		print "<td>{$f->url}</td>";
 		print "</tr>";
 	}
 }

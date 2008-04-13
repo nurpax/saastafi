@@ -1,31 +1,15 @@
 <?php 
 /* Figure out if we're on the index/home page or on a single post view */
-$is_single_post = !(is_home () || is_page());
+$is_single_post = is_single(); //!(is_home () || is_page());
 $user = wp_get_current_user();
-
-function saasta_print_permalink($id) 
-{
-    global $wpdb;
-    print '<a href="';
-    print get_permalink($id);
-    print '">';
-    print get_the_title($id);
-    print '</a>';
-}
-
-function saasta_print_if_logged_in($s)
-{
-    if (is_user_logged_in())
-        print $s;
-}
 
 ?>
 
 	<div id="sidebar">
 		<ul>
-<?php if (!$is_single_post) print "<li>"; ?>
-<?php if (!$is_single_post) include (TEMPLATEPATH . '/searchform.php'); ?>
-<?php if (!$is_single_post) { print "</li>"; } ?>
+<?php if (!is_single()) print "<li>"; ?>
+<?php if (!is_single()) include (TEMPLATEPATH . '/searchform.php'); ?>
+<?php if (!is_single()) { print "</li>"; } ?>
 			<?php /* If this is the frontpage */ if ( 1 || is_home() || is_page() ) { ?>
 
 				<li><h2>Meta</h2>
@@ -33,11 +17,11 @@ function saasta_print_if_logged_in($s)
                      <?php wp_register(); ?>
                      <li><?php wp_loginout();  saasta_print_if_logged_in(" [$user->display_name]"); ?></li>
 <?php if (is_user_logged_in()) { print "<li><a href=\""; print get_bloginfo('wpurl').'/wp-admin/post-new.php">Write a new post</a></li>'; } ?>
-<?php if (is_user_logged_in()) { print "<li>"; print saasta_print_permalink(140); print "</li>"; } ?>
-					 <li><?php print saasta_print_permalink(2624); ?></li>
-					 <?php if (is_user_logged_in()) { print "<li>"; print saasta_print_permalink(922); print "</li>"; } ?>
-                     <li><?php print saasta_print_permalink(2598); ?></li>
-                                                                                                                       <li>RSS: <a href="<?php bloginfo('rss2_url'); ?>">Entries</a> and <a href="<?php bloginfo('comments_rss2_url'); ?>">Comments</a></li>
+<?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(140); print "</li>"; } ?>
+					 <li><?php saasta_print_permalink(2624); ?></li>
+					 <?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(922); print "</li>"; } ?>
+                     <li><?php saasta_print_permalink(2598); ?></li>
+                     <li>RSS: <a href="<?php bloginfo('rss2_url'); ?>">Entries</a> and <a href="<?php bloginfo('comments_rss2_url'); ?>">Comments</a></li>
 					<?php wp_meta(); ?>
 				</ul>
 				</li>
@@ -78,7 +62,7 @@ function saasta_print_if_logged_in($s)
 			<?php } ?>
 			</li>
 
-			<?php if (!$is_single_post) { wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); } ?>
+			<?php if (!is_single()) { wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); } ?>
 
 </ul>
 <script type="text/javascript"><!--
