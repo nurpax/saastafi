@@ -271,6 +271,8 @@ td { border-bottom: 1px dashed #999999; }
 
 <h1>saasta.fi top sekret statistics page</h1>
 
+<p><?php print ("Options: blog_charset ". get_option('blog_charset')); ?></p>
+
 <p style="border:2px black solid; padding: 1.0em; background-color: #caccaa;">
 <b>LE MOTHERFUCKING MENU SILVUPLEE</b><br>
 <br>
