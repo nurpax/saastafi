@@ -102,7 +102,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 $foo = saasta_list_recent_faves(5);
 
 foreach ($foo as $f) {
-	print '<li><a href="'.$f->url.'">'.$f->title.' ('.$f->num_faves.')</a></li>';
+	print '<li><a href="'.$f->url.'">'.$f->title.'</a> ('.$f->num_faves.')</li>';
     print "\n";
 }
 ?>
