@@ -228,12 +228,15 @@ function best_posters_cmp($a, $b) {
 
 ?>
 
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 
-<head>
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 <title>Saasta.fi statistics</title>
 <style type="text/css">
-	body,td,th { font: 0.8em 'Courier New', Courier, Fixed; }
+	body,td,th { font: 1.0em 'Courier New', Courier, Fixed; }
 th { background-color: #cccccc; font-weight: bold; border-bottom: 2px solid black; }
 td { border-bottom: 1px dashed #999999; }
 </style>
@@ -244,7 +247,7 @@ td { border-bottom: 1px dashed #999999; }
 <h1>saasta.fi top sekret statistics page</h1>
 
 <p style="border:2px black solid; padding: 1.0em; background-color: #caccaa;">
-<b>LÉ MOTHERFUCKING MENU SILVUPLEE</b><br>
+<b>LE MOTHERFUCKING MENU SILVUPLEE</b><br>
 <br>
 <a href="wp-saasta-stats.php">posts per quarter</a><br>
 <a href="wp-saasta-stats.php?m=faves">top faved posts per quarter</a><br>
@@ -297,7 +300,7 @@ else if ($mode == 'faves') {
 	$foo = query_top_faved_posts($q,$year);
 	foreach ($foo as $f) {
 		print '<tr>';
-		print '<td><a href="'.$f->url.'">'.$f->title.'</a></td>';
+		print '<td><a href="'.utf8_decode($f->url).'">'.$f->title.'</a></td>';
 		print '<td>'.$f->author.'</td>';
 		print '<td>'.$f->fave_count.'</td>';
 		print '<td>'.$f->post_id.'</td>';
