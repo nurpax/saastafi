@@ -32,9 +32,14 @@ function saasta_print_post_header() {
 	 * old color #ddd391
 	 * new color #dac8c7
 	 */
+
+	$color = "#dac8c7";
+
+	saasta_print_admin_notice(TRUE);
+
     // TODO: use css classes
     print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1.0em;">';
-    print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" style="padding:0.2em;border:1px solid black;background-color:#dac8c7;">';
+    print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" style="padding:0.2em;border:1px solid black;background-color:'.$color.';">';
     $icon = "people/unknown.png";
 
     $pic_name = "people/" . get_the_author_login();
@@ -45,7 +50,7 @@ function saasta_print_post_header() {
         $icon = $pic_name . ".gif";
 
     print '<img src="' . $icon . '" width="32" height="32" border="0" alt="'.get_the_author_login().'"/></td>';
-    print '<td width="100%" style="background-color:#dac8c7;padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
+    print '<td width="100%" style="background-color:'.$color.';padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
     print '<a name="saasta'.get_the_ID().'" href="';
     the_permalink();
     print '" rel="bookmark" title="Permanent Link to ';
@@ -61,7 +66,7 @@ function saasta_print_post_header() {
     get_currentuserinfo();
 
 	print '<tr>';
-	print '<td valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;background-color:#dac8c7;">';
+	print '<td valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;background-color:'.$color.';">';
 	
 	// The extra table here is used here to force fave/unfave
 	// button and '# of faves' text to go on the same line.
@@ -88,7 +93,37 @@ function saasta_print_post_header() {
 	if ($foo->numfaves > 1) print $foo->numfaves.' faves';
 	else if ($foo->numfaves == 1) print '1 fave';
 	print '</td></tr></table>';
-	print '</td></tr></table>';
+	print '</td></tr>';
+	// muumi 080411: show prev/next links for single posts
+	if (is_single()) {
+		print '<tr><td width="100%" colspan="2" style="background-color:'.$color.';padding:0.2em;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;"><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td align="left">';
+		next_post_link('&laquo; %link');
+		print '</td><td align="right">';
+		previous_post_link('%link &raquo;');
+		print '</td></tr></table></td></tr>';
+	}
+	print '</table>';
+}
+
+/**
+ */
+function saasta_print_admin_notice($start) {
+
+	if (get_the_author_login() != 'admin')
+		return;
+
+	if ($start) {
+		$margin = "0.5";
+		$text = "PAY ATTENTION BITCHES!";
+	}
+	else {
+		$margin = "1";
+		$text = "THANK YOU COME AGAIN!";
+	}
+
+	print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:'.$margin.'em;margin-bottom:0.5em;">';
+	print '<tr><td style="border:1px solid black;padding:0.5em;background-color:#cc0000;color:#ffffff;font-weight:bold;text-align:center;">'.$text.'</td></tr>';
+	print '</table>';
 }
 
 // under construction, do not touch -muumi
@@ -162,6 +197,40 @@ function saasta_list_faves() {
         }
         print '</ul></li>';
     }
+}
+
+/**
+ * List n recent faved posts. Orders by fave date (in saasta_faves)
+ * and then by post id, both in descending order.
+ *
+ * @param limit how many faves to show (defaults to 30)
+ * @return a list of associative arrays {url,title,author,num_faves}
+ */
+function saasta_list_recent_faves($limit=30) {	
+	global $wpdb;
+
+	$query = "
+SELECT
+  CONCAT('".get_option('home')."?p=',sp.ID) AS url,
+  sp.post_title AS title,
+  su.display_name AS author,
+  COUNT(sf.post_id) AS num_faves
+FROM 
+  saasta_faves sf, saasta_posts sp, saasta_users su
+WHERE
+  sf.post_id=sp.ID AND
+  sf.fave_date IS NOT NULL AND
+  su.ID=sp.post_author
+GROUP BY
+  sf.post_id
+ORDER BY
+  sf.fave_date DESC,
+  sf.post_id DESC
+LIMIT 
+  1,{$limit}
+";
+
+	return $wpdb->get_results($query);
 }
 
 function kubrick_head() {
