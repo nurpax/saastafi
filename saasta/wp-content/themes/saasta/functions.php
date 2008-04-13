@@ -107,22 +107,13 @@ function saasta_print_post_header() {
 
 /**
  */
-function saasta_print_admin_notice($start) {
+function saasta_print_admin_notice() {
 
 	if (get_the_author_login() != 'admin')
 		return;
 
-	if ($start) {
-		$margin = "0.5";
-		$text = "PAY ATTENTION BITCHES!";
-	}
-	else {
-		$margin = "1";
-		$text = "THANK YOU COME AGAIN!";
-	}
-
-	print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:'.$margin.'em;margin-bottom:0.5em;">';
-	print '<tr><td style="border:1px solid black;padding:0.5em;background-color:#cc0000;color:#ffffff;font-weight:bold;text-align:center;">'.$text.'</td></tr>';
+	print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:0.5em;margin-bottom:0.5em;">';
+	print '<tr><td style="border:1px solid black;padding:0.5em;background-color:#cc0000;color:#ffffff;font-weight:bold;text-align:center;">ACHTUNG!</td></tr>';
 	print '</table>';
 }
 
