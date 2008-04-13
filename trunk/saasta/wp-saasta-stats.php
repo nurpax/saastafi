@@ -300,7 +300,7 @@ else if ($mode == 'faves') {
 	$foo = query_top_faved_posts($q,$year);
 	foreach ($foo as $f) {
 		print '<tr>';
-		print '<td><a href="'.utf8_decode($f->url).'">'.$f->title.'</a></td>';
+		print '<td><a href="'.$f->url.'">'.$f->title.'</a></td>';
 		print '<td>'.$f->author.'</td>';
 		print '<td>'.$f->fave_count.'</td>';
 		print '<td>'.$f->post_id.'</td>';
