@@ -292,16 +292,15 @@ if ($mode == 'bestposters') {
 else if ($mode == 'faves') {
 	print '<tr><th colspan="6">Q'.$q.'/'.$year.'</th></tr>';
 
-	print '<tr><th>title</th><th>author</th><th>num faves</th><th>post id</th><th>url</th><th>date posted</th></tr>';
+	print '<tr><th>title</th><th>author</th><th>num faves</th><th>post id</th><th>date posted</th></tr>';
 
 	$foo = query_top_faved_posts($q,$year);
 	foreach ($foo as $f) {
 		print '<tr>';
-		print '<td>'.$f->title.'</td>';
+		print '<td><a href="'.$f->url.'">'.$f->title.'</a></td>';
 		print '<td>'.$f->author.'</td>';
 		print '<td>'.$f->fave_count.'</td>';
 		print '<td>'.$f->post_id.'</td>';
-		print '<td><a href="'.$f->url.'">view saasta</a></td>';
 		print '<td>'.$f->date_posted.'</td>';
 		print '</tr>';
 	}
