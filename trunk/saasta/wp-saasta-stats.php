@@ -226,6 +226,31 @@ function best_posters_cmp($a, $b) {
 		return -1;
 }
 
+function query_most_commented_posts($q, $y) {
+	global $wpdb;
+
+	$query = "
+SELECT
+  COUNT(sc.comment_post_ID) AS num_comments,
+  sp.post_title AS title,
+  CONCAT('http://www.saasta.fi/saasta/?p=',sp.ID) AS url,
+  su.display_name AS author
+FROM
+  saasta_posts sp, saasta_users su, saasta_comments sc
+WHERE
+  QUARTER(sp.post_date)={$q} AND
+  YEAR(sp.post_date)={$y} AND
+  su.ID=sp.post_author AND
+  sc.comment_post_ID=sp.ID  
+GROUP BY
+  sc.comment_post_ID
+ORDER BY
+  num_comments DESC
+";
+
+	return $wpdb->get_results($query);
+}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -236,7 +261,7 @@ function best_posters_cmp($a, $b) {
 
 <title>Saasta.fi statistics</title>
 <style type="text/css">
-	body,td,th { font: 1.0em 'Courier New', Courier, Fixed; }
+body,td,th { font: 1.0em 'Courier New', Courier, Fixed; }
 th { background-color: #cccccc; font-weight: bold; border-bottom: 2px solid black; }
 td { border-bottom: 1px dashed #999999; }
 </style>
@@ -255,6 +280,7 @@ td { border-bottom: 1px dashed #999999; }
 <a href="wp-saasta-stats.php?m=commenters">top commenters</a><br>
 <a href="wp-saasta-stats.php?m=bestposters">best posters per quarter (UNDER CONSTRUCTION)</a><br>
 <a href="wp-saasta-stats.php?m=topfavers">top favers per quarter</a><br>
+<a href="wp-saasta-stats.php?m=mostcommented">most commented posts per quarter</a><br>
 </p>
 
 <?php
@@ -278,7 +304,20 @@ for ($year = 2008; $year >= 2007; $year--)
 <table border="0" cellspacing="0" cellpadding="4">
 <?php
 
-if ($mode == 'bestposters') {
+if ($mode == 'mostcommented') {
+	print '<tr><th colspan="4">Q'.$q.'/'.$year.'</th></tr>';
+	print '<tr><th>post</th><th>num comments</th><th>author</th><th>url</th></tr>';
+	$foo = query_most_commented_posts($q, $year);
+	foreach ($foo as $f) {
+		print "<tr>";
+		print "<td>{$f->title}</td>";
+		print "<td>{$f->num_comments}</td>";
+		print "<td>{$f->author}</td>";
+		print "<td>{$f->url}</td>";
+		print "</tr>";
+	}
+}
+else if ($mode == 'bestposters') {
 	print '<tr><th colspan="5">Q'.$q.'/'.$year.'</th></tr>';
 	print '<tr><th>name</th><th>num faves</th><th>num posts</th><th>faves per post</th><th>fave weight</th></tr>';
 	$foo = query_best_posters_in_quarter($q, $year);
