@@ -12,13 +12,14 @@
 					<?php the_content('Read the rest of this entry &raquo;'); ?>
 				</div>
 				<p class="postmetadata"><?php the_tags('Tags: ', ', ', '<br />'); ?> Posted in <?php the_category(', ') ?> | <?php edit_post_link('Edit', '', ' | '); ?>  <?php comments_popup_link('No Comments &#187;', '1 Comment &#187;', '% Comments &#187;'); ?></p>
+
 			</div>
 
 		<?php endwhile; ?>
 
 		<div class="navigation">
-			<div class="alignleft"><?php next_posts_link('&laquo; Older saasta') ?></div>
-			<div class="alignright"><?php previous_posts_link('Newer saasta &raquo;') ?></div>
+			<div class="alignleft"><?php previous_posts_link('&laquo; Newer saasta') ?></div>
+			<div class="alignright"><?php next_posts_link('Older saasta &raquo;') ?></div>
 		</div>
 
 	<?php else : ?>

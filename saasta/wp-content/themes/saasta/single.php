@@ -3,12 +3,8 @@
 	<div id="content" class="narrowcolumn">
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<!--
-		<div class="navigation">
-			<div class="alignleft"><?php previous_post_link('&laquo; %link') ?></div>
-			<div class="alignright"><?php next_post_link('%link &raquo;') ?></div>
-		</div>
--->
+
+
 		<div class="post" id="post-<?php the_ID(); ?>">
 			<?php saasta_print_post_header(); ?>
 			<!--
@@ -17,10 +13,9 @@
 			-->
 			<div class="entry">
 				<?php the_content('<p class="serif">Read the rest of this entry &raquo;</p>'); ?>
-			<?php
-			  /* list tags -muumi 080202 */
-			if (get_the_tag_list())
-				echo get_the_tag_list('<p style="border-top:1px solid #333;padding-top:5px;">Tags: ',', ','</p>');
+
+<?php if (get_the_tag_list())
+echo get_the_tag_list('<p style="border-top:1px solid #333;padding-top:5px;">Tags: ',', ','</p>');
 ?>
 				<?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
 
@@ -66,6 +61,7 @@
 		<p>Sorry, no posts matched your criteria.</p>
 
 <?php endif; ?>
+
 
 	</div>
 

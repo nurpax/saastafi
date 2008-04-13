@@ -95,6 +95,18 @@ google_ad_height = 600;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 <ul>
+
+<li><h2>Recent faves</h2>
+<ul>
+<?php
+$foo = saasta_list_recent_faves(5);
+
+foreach ($foo as $f) {
+	print '<li><a href="'.$f->url.'">'.$f->title.' ('.$f->num_faves.')</a>';
+}
+?>
+</ul>
+</li>
 			<li><h2>Archives</h2>
 				<ul>
 				<?php wp_get_archives('type=monthly'); ?>
