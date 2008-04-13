@@ -117,6 +117,21 @@ function saasta_print_admin_notice() {
 	print '</table>';
 }
 
+function saasta_print_permalink($id) 
+{
+    print '<a href="';
+    print get_permalink($id);
+    print '">';
+    print get_the_title($id);
+    print '</a>';
+}
+
+function saasta_print_if_logged_in($s)
+{
+    if (is_user_logged_in())
+        print $s;
+}
+
 // under construction, do not touch -muumi
 function saasta_print_votebar() {
     global $wpdb;
