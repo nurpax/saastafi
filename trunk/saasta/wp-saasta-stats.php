@@ -1,8 +1,9 @@
 <?php
+header ('Content-type: text/html; charset=utf-8');
 error_reporting(E_ALL);
 if (empty($wp)) {
 	require_once('./wp-config.php');
- }
+}
 
 get_currentuserinfo();
 // no user
