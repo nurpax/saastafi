@@ -219,13 +219,13 @@ function saasta_list_recent_faves($limit=30) {
 SELECT
   CONCAT('".get_option('home')."?p=',sp.ID) AS url,
   sp.post_title AS title,
-  su.display_name AS author,
-  COUNT(sf.post_id) AS num_faves
+  COUNT(sf.post_id) AS num_faves,
+  sf.fave_date AS date,
+  su.display_name AS name
 FROM 
-  saasta_faves sf, saasta_posts sp, saasta_users su
+  saasta_faves sf,saasta_posts sp,saasta_users su
 WHERE
-  sf.post_id=sp.ID AND
-  sf.fave_date IS NOT NULL AND
+  sp.ID=sf.post_id AND 
   su.ID=sp.post_author
 GROUP BY
   sf.post_id
@@ -233,7 +233,7 @@ ORDER BY
   sf.fave_date DESC,
   sf.post_id DESC
 LIMIT 
-  1,{$limit}
+  {$limit}
 ";
 
 	return $wpdb->get_results($query);
