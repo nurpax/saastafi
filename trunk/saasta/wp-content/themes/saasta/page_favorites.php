@@ -14,7 +14,7 @@ function saasta_query_user_faves($user)
 {
     global $wpdb;
 
-    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from ".$wpdb->posts." p,".$wpdb->prefix."faves f where f.post_id=p.ID and f.user_id=".$user->ID." ORDER BY title");
+    $foo = $wpdb->get_results("select p.post_title as title,f.post_id as post_id from ".$wpdb->posts." p,".$wpdb->prefix."faves f where f.post_id=p.ID and f.user_id=".$user->ID." ORDER BY f.fave_date desc, title");
 
     return $foo;
 }
