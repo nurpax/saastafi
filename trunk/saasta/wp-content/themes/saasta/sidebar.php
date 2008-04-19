@@ -14,9 +14,9 @@ $user = wp_get_current_user();
 
 				<li><h2>Meta</h2>
 				<ul>
+<?php if (is_user_logged_in()) { print "<li><a href=\""; print get_bloginfo('wpurl').'/wp-admin/post-new.php">Write a new post</a></li>'; } ?>
                      <?php wp_register(); ?>
                      <li><?php wp_loginout();  saasta_print_if_logged_in(" [$user->display_name]"); ?></li>
-<?php if (is_user_logged_in()) { print "<li><a href=\""; print get_bloginfo('wpurl').'/wp-admin/post-new.php">Write a new post</a></li>'; } ?>
 <?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(140); print "</li>"; } ?>
 					 <li><?php saasta_print_permalink(2624); ?></li>
 					 <?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(922); print "</li>"; } ?>
