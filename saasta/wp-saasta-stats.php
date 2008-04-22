@@ -254,6 +254,29 @@ ORDER BY
 	return $wpdb->get_results($query);
 }
 
+function query_user_activity() {
+	global $wpdb;
+
+	$query = "
+SELECT
+	su.display_name AS jope,
+	COUNT(sp.ID)/(TO_DAYS(NOW())-TO_DAYS(su.user_registered)) AS posts_per_day,
+	COUNT(sp.ID) AS num_posts,
+	(TO_DAYS(NOW())-TO_DAYS(su.user_registered)) AS days_active
+FROM
+	saasta_users su, saasta_posts sp
+WHERE
+	sp.post_author = su.ID AND
+	sp.post_status = 'publish'
+GROUP BY
+	su.ID
+ORDER BY
+	posts_per_day, jope
+";
+
+	return $wpdb->get_results($query);
+}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -274,8 +297,6 @@ td { border-bottom: 1px dashed #999999; }
 
 <h1>saasta.fi top sekret statistics page</h1>
 
-<p><?php print ("Options: blog_charset ". get_option('blog_charset')); ?></p>
-
 <p style="border:2px black solid; padding: 1.0em; background-color: #caccaa;">
 <b>LE MOTHERFUCKING MENU SILVUPLEE</b><br>
 <br>
@@ -286,6 +307,7 @@ td { border-bottom: 1px dashed #999999; }
 <a href="wp-saasta-stats.php?m=bestposters">best posters per quarter (UNDER CONSTRUCTION)</a><br>
 <a href="wp-saasta-stats.php?m=topfavers">top favers per quarter</a><br>
 <a href="wp-saasta-stats.php?m=mostcommented">most commented posts per quarter</a><br>
+<a href="wp-saasta-stats.php?m=useractivity">user activity</a><br>
 </p>
 
 <?php
@@ -297,6 +319,14 @@ if ($mode == 'tags') {
 	print '<table cellspacing="2"><tr><th>tag</th><th>num posts</th></tr>';
 	foreach ($foo as $f) {
 		print '<tr><td><a href="/saasta/?tag='.$f->tag.'">'.$f->tag.'</a></td><td>'.$f->num_posts.'</td></tr>';
+	}
+	print '</table>';
+}
+else if ($mode == 'useractivity') {
+	$foo = query_user_activity();
+	print '<table cellspacing="2"><tr><th>user</th><th>posts per day</th><th>num posts</th><th>days active</th></tr>';
+	foreach ($foo as $f) {
+		print '<tr><td>'.$f->jope.'</td><td>'.$f->posts_per_day.'</td><td>'.$f->num_posts.'</td><td>'.$f->days_active.'</td></tr>';
 	}
 	print '</table>';
 }
