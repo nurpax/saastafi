@@ -219,7 +219,7 @@ function saasta_list_recent_faves($limit=30) {
 SELECT
   CONCAT('".get_option('home')."?p=',sp.ID) AS url,
   sp.post_title AS title,
-  COUNT(sf.post_id) AS num_faves,
+  (SELECT COUNT(post_id) FROM saasta_faves WHERE post_id=sp.ID) AS num_faves,
   sf.fave_date AS date,
   su.display_name AS name
 FROM 
@@ -227,8 +227,6 @@ FROM
 WHERE
   sp.ID=sf.post_id AND 
   su.ID=sp.post_author
-GROUP BY
-  sf.post_id
 ORDER BY
   sf.fave_date DESC,
   sf.post_id DESC
