@@ -21,7 +21,7 @@
 		<h2 class="pagetitle">Author Archive</h2>
 
 		<?php /* If this is a paged archive */ } elseif (isset($_GET['paged']) && !empty($_GET['paged'])) { ?>
-		<h2 class="pagetitle">Blog Archives</h2>
+		<h2 class="pagetitle">Archives</h2>
 
 		<?php } ?>
 
