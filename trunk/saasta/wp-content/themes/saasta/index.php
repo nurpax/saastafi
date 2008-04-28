@@ -2,6 +2,8 @@
 
 	<div id="content" class="narrowcolumn">
 
+    <?php saasta_print_upper_adsense_link_unit(); ?>
+
 	<?php if (have_posts()) : ?>
 
 		<?php while (have_posts()) : the_post(); ?>

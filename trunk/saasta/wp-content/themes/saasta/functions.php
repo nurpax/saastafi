@@ -1,5 +1,24 @@
 <?php
 
+function saasta_print_upper_adsense_link_unit()
+{
+    print '
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7907497075456864";
+/* 468x15, created 4/13/08 (single post title) */
+google_ad_slot = "9932303725";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+';
+}
+
 function saasta_print_add_fave_form() 
 {
 	$redirectURI = attribute_escape($_SERVER['REQUEST_URI']);
