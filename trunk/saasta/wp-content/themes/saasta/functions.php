@@ -3,19 +3,17 @@
 function saasta_print_upper_adsense_link_unit()
 {
     print '
-<center>
 <script type="text/javascript"><!--
 google_ad_client = "pub-7907497075456864";
-/* 468x15, created 4/13/08 (single post title) */
-google_ad_slot = "9932303725";
+/* 468x60, created 5/25/08 */
+google_ad_slot = "6808140057";
 google_ad_width = 468;
-google_ad_height = 15;
+google_ad_height = 60;
 //-->
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
-</center>
 ';
 }
 
