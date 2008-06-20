@@ -64,8 +64,10 @@ function saasta_add_menus()
 function saasta_sidebar_links() 
 {
     if (get_option('saasta_sidebar_survey_enabled')) {
+		$imgurl = get_template_directory_uri() . '/images/' . "poll_obama.png";
+
         $url = get_option('saasta_sidebar_survey_url');
-        echo "<span style=\"font-size:1.5em; font-weight:bold;\"><a href=\"$url\">Take the Saasta Survey!</a></span>";
+        echo "<span style=\"font-size:1.5em; font-weight:bold;\"><a href=\"$url\"><img src=\"$imgurl\" alt=\"poll\" /> Take the Saasta Survey!</a></span>";
     }
 }
 
