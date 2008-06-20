@@ -27,6 +27,8 @@ $user = wp_get_current_user();
 				</li>
 			<?php } ?>
 
+            <li><?php /* configurable links from saasta.fi plugin: */ do_action('saasta_sidebar_links'); ?></li>
+
 			<li><h2>Random saasta</h2>
 			<ul><li>
 			<?php
