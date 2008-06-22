@@ -1,0 +1,23 @@
+
+Average page load times as measured WebWait (http://webwait.com).
+
+How to run
+----------
+
+- Navigate to http://webwait.com with Firefox
+- Calls 5, Call Interval 30s
+- Time It!
+
+
+T1: http://www.saasta.fi
+T2: http://www.saasta.fi/saasta/?p=1
+
+Samples
+-------
+
+Note: use tabs to delimit columns so that this can be copy&pasted into
+      Excel!
+
+  Date            T1     T2
+-------------+--------+--------
+2008-05-26	2.44	0.63
