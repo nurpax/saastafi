@@ -65,9 +65,10 @@ function saasta_sidebar_links()
 {
     if (get_option('saasta_sidebar_survey_enabled')) {
 		$imgurl = get_template_directory_uri() . '/images/' . "poll_obama.png";
-
         $url = get_option('saasta_sidebar_survey_url');
-        echo "<span style=\"font-size:1.5em; font-weight:bold;\"><a href=\"$url\"><img src=\"$imgurl\" alt=\"poll\" /> Take the Saasta Survey #1!</a></span>";
+        echo "<p>";
+        echo "<span style=\"font-size:1.4em; font-weight:bold;\"><a href=\"$url\"><img src=\"$imgurl\" alt=\"poll\" /> Take the Saasta Survey #1!</a></span><br/>";
+        echo "<span style=\"color:#444;\">[you have until July 15 to respond]</span></p>";
     }
 }
 
