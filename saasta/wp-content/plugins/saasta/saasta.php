@@ -39,12 +39,17 @@ function saasta_config_submenu()
     <h3>Configure saasta.fi</h3>
     <form name="form1" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
     <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
-    <p>
-    <input type="checkbox" name="saasta_sidebar_survey_enabled" <?php echo bool_to_checked($survey_link_enabled); ?>> Survey no. 1 link enabled in sidebar?</input>
-    </p>
-    <p>
-    Link to the survey post: <input type="text" size="40" name="saasta_sidebar_survey_url" value="<?php echo $survey_url ?>"/>
-    </p>
+
+    <h4>Sidebar links</h4>
+    <table>
+    <tr>
+     <td>
+         URL: <input type="text" size="40" name="saasta_sidebar_survey_url" value="<?php echo $survey_url ?>"/>
+     </td>
+         <td><input type="checkbox" name="saasta_sidebar_survey_enabled" <?php echo bool_to_checked($survey_link_enabled); ?>> Enabled? (survey no. 1)</input>
+     </td>
+    </tr>
+    </table>
     <p class="submit">
     <input type="submit" name="Submit" value="<?php _e('Update Options', 'saasta_config' ) ?>" />
     </p>
