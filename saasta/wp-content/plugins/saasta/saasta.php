@@ -8,7 +8,7 @@ Version: 1.0
 */
 
 // Options
-add_option('saasta_sidebar_survey_enabled', 1, null);
+add_option('saasta_sidebar_survey_enabled', 0, null);
 
 function bool_to_checked($i)
 {
@@ -67,7 +67,7 @@ function saasta_sidebar_links()
 		$imgurl = get_template_directory_uri() . '/images/' . "poll_obama.png";
 
         $url = get_option('saasta_sidebar_survey_url');
-        echo "<span style=\"font-size:1.5em; font-weight:bold;\"><a href=\"$url\"><img src=\"$imgurl\" alt=\"poll\" /> Take the Saasta Survey!</a></span>";
+        echo "<span style=\"font-size:1.5em; font-weight:bold;\"><a href=\"$url\"><img src=\"$imgurl\" alt=\"poll\" /> Take the Saasta Survey #1!</a></span>";
     }
 }
 
