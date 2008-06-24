@@ -7,8 +7,15 @@ Author: Janne Hellsten
 Version: 1.0
 */
 
+?>
+    <div style="margin:1.0em;">
+<?php
+
 // Options
 add_option('saasta_sidebar_survey_enabled', 0, null);
+
+add_option('saasta_sidebar_survey_link_text', "Take the Saasta Survey #1", null);
+add_option('saasta_sidebar_survey_caption', "you have until July 15 to respond", null);
 
 function bool_to_checked($i)
 {
@@ -22,6 +29,8 @@ function saasta_config_submenu()
 {
     $hidden_field_name = 'saasta_submit_hidden';
 
+    $saved_settings = false;
+
     // Read user inputs and update DB for new values:
     if( $_POST[ $hidden_field_name ] == 'Y' ) {
         $opt_val = $_POST['saasta_sidebar_survey_enabled'];
@@ -29,11 +38,26 @@ function saasta_config_submenu()
 
         $opt_val = $_POST['saasta_sidebar_survey_url'];
         update_option('saasta_sidebar_survey_url', $opt_val);
+
+        $opt_val = $_POST['saasta_sidebar_survey_link_text'];
+        update_option('saasta_sidebar_survey_link_text', $opt_val);
+
+        $opt_val = $_POST['saasta_sidebar_survey_caption'];
+        update_option('saasta_sidebar_survey_caption', $opt_val);
+        $saved_settings = true;
     }
 
     $survey_link_enabled = get_option('saasta_sidebar_survey_enabled');
     $survey_url = get_option('saasta_sidebar_survey_url');
+    $survey_link_text = get_option('saasta_sidebar_survey_link_text');
+    $survey_caption = get_option('saasta_sidebar_survey_caption');
 
+    if ($saved_settings)
+    {
+        ?><div id="message" class="updated fade">
+        <p>Options saved.</p>
+        </div><?php
+    }
 
 ?>
     <h3>Configure saasta.fi</h3>
@@ -44,9 +68,18 @@ function saasta_config_submenu()
     <table>
     <tr>
      <td>
-         URL: <input type="text" size="40" name="saasta_sidebar_survey_url" value="<?php echo $survey_url ?>"/>
+         URL: <input type="text" size="35" name="saasta_sidebar_survey_url" value="<?php echo $survey_url ?>"/>
      </td>
-         <td><input type="checkbox" name="saasta_sidebar_survey_enabled" <?php echo bool_to_checked($survey_link_enabled); ?>> Enabled? (survey no. 1)</input>
+
+     <td>
+         Link text: <input type="text" size="35" name="saasta_sidebar_survey_link_text" value="<?php echo $survey_link_text ?>"/>
+     </td>
+
+     <td>
+         Link text: <input type="text" size="35" name="saasta_sidebar_survey_caption" value="<?php echo $survey_caption ?>"/>
+     </td>
+
+     <td><input type="checkbox" name="saasta_sidebar_survey_enabled" <?php echo bool_to_checked($survey_link_enabled); ?>> Enabled?</input>
      </td>
     </tr>
     </table>
@@ -56,6 +89,7 @@ function saasta_config_submenu()
     </form>
 
 </p><hr />
+</div>
 
 <?php
 }
@@ -69,11 +103,13 @@ function saasta_add_menus()
 function saasta_sidebar_links() 
 {
     if (get_option('saasta_sidebar_survey_enabled')) {
+        $link_text = get_option('saasta_sidebar_survey_link_text');
+        $caption = get_option('saasta_sidebar_survey_caption');
 		$imgurl = get_template_directory_uri() . '/images/' . "poll_obama.png";
         $url = get_option('saasta_sidebar_survey_url');
         echo "<p>";
-        echo "<span style=\"font-size:1.4em; font-weight:bold;\"><a href=\"$url\"><img src=\"$imgurl\" alt=\"poll\" /> Take the Saasta Survey #1!</a></span><br/>";
-        echo "<span style=\"color:#444;\">[you have until July 15 to respond]</span></p>";
+        echo "<span style=\"font-size:1.4em; font-weight:bold;\"><a href=\"$url\"><img src=\"$imgurl\" alt=\"poll\" /> $link_text</a></span><br/>";
+        echo "<span style=\"color:#444;\">[$caption]</span></p>";
     }
 }
 
