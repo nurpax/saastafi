@@ -7,10 +7,6 @@ Author: Janne Hellsten
 Version: 1.0
 */
 
-?>
-    <div style="margin:1.0em;">
-<?php
-
 // Options
 add_option('saasta_sidebar_survey_enabled', 0, null);
 
@@ -27,6 +23,9 @@ function bool_to_checked($i)
 
 function saasta_config_submenu() 
 {
+?>
+    <div style="margin:1.0em;">
+<?php
     $hidden_field_name = 'saasta_submit_hidden';
 
     $saved_settings = false;
