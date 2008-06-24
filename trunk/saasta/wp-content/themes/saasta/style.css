@@ -14,7 +14,6 @@ Author URI: http://saasta.fi
 body {
 	font-size: 62.5%; /* Resets 1em to 10px */
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	/*background: #d5d6d7 url('images/kubrickbgcolor.jpg');*/
 	background: #F2EED5 url('images/saasta_bgcolor.gif');
 	/*background: #E0DCC5;*/
 	color: black;
