@@ -14,7 +14,6 @@ Author URI: http://saasta.fi
 body {
 	font-size: 62.5%; /* Resets 1em to 10px */
 	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	background: #F2EED5 url('images/saasta_bgcolor.gif');
 	/*background: #E0DCC5;*/
 	color: black;
 	background-color: white; /*#F2EED5;*/
@@ -28,7 +27,6 @@ body {
 	}
 
 #header {
-	background: #82706f url('images/saasta_header.gif') no-repeat bottom center;*/
 	}
 
 #headerimg 	{ 
@@ -63,7 +61,6 @@ body {
 	}
 
 #footer {
-	background: #eee url('images/saasta_footer.gif') no-repeat top; 
 	border: none;
 	height: 347px;
 	}
@@ -182,9 +179,6 @@ a, h2 a:hover, h3 a:hover {
 	text-decoration: none;
 	}
 
-/*div.entry a, div.entry a:visited { */
-	}
-
 #wp-calendar #prev a, #wp-calendar #next a {
 	font-size: 9pt;
 	}
@@ -298,7 +292,6 @@ body {
 	text-align: center;
 	}
 /* End Structure */
-
 
 
 /*	Begin Headers */

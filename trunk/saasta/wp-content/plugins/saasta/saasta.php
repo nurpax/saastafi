@@ -13,6 +13,8 @@ add_option('saasta_sidebar_survey_enabled', 0, null);
 add_option('saasta_sidebar_survey_link_text', "Take the Saasta Survey #1", null);
 add_option('saasta_sidebar_survey_caption', "you have until July 15 to respond", null);
 
+add_option('saasta_subsite', "saasta", null);
+
 function bool_to_checked($i)
 {
     if ($i) 
