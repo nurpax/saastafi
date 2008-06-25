@@ -7,19 +7,21 @@
 <title>saasta.fi <?php if ( is_single() ) { ?> &raquo; Archive <?php } ?> <?php wp_title(); ?></title>
 
 <meta name="generator" content="WordPress <?php bloginfo('version'); ?>" /> <!-- leave this for stats -->
-<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen"/>
+<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); echo ("/".get_option('saasta_subsite').".css"); ?>" type="text/css" media="screen"/>
 <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="shortcut icon" href="favicon.ico"/>
 <style type="text/css" media="screen">
 
 <?php
+$saasta_subsite=get_option('saasta_subsite');
+
 // Checks to see whether it needs a sidebar or not
 if ( !$withcomments && !is_single() ) {
 ?>
-	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/saasta_bg.gif") repeat-y top; border: none; }
+	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/<?php echo $saasta_subsite; ?>/saasta_bg.gif") repeat-y top; border: none; }
 <?php } else { // No sidebar ?>
-	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/saasta_bg.gif") repeat-y top; border: none; }
+	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images//<?php echo $saasta_subsite; ?>/saasta_bg.gif") repeat-y top; border: none; }
 <?php } ?>
 </style>
 
