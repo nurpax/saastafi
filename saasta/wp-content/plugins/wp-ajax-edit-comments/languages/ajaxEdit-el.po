@@ -1,0 +1,676 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPAjaxEditComments\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-11 20:57-0600\n"
+"PO-Revision-Date: 2008-06-11 20:57-0600\n"
+"Last-Translator: Ronald Huereca <ron@ronalfy.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-ajax-edit-comments.php:121
+msgid "Click to Edit"
+msgstr ""
+
+#: wp-ajax-edit-comments.php:137
+#: wp-ajax-edit-comments.php:156
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: wp-ajax-edit-comments.php:142
+#: wp-ajax-edit-comments.php:159
+msgid "Moderate"
+msgstr "Προς Επιθεώρηση"
+
+#: wp-ajax-edit-comments.php:145
+msgid "Not Spam"
+msgstr "Μη ανεπιθύμητο"
+
+#: wp-ajax-edit-comments.php:148
+#: wp-ajax-edit-comments.php:165
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: wp-ajax-edit-comments.php:162
+msgid "Spam"
+msgstr "Ανεπιθύμητο"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:587
+#: wp-ajax-edit-comments.php:476
+#, php-format
+msgid "A comment has been edited on post %s"
+msgstr "Έγινε επξεργαστία σχολίου στο post %s"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:588
+#: wp-ajax-edit-comments.php:477
+#, php-format
+msgid "Author: %s\n"
+msgstr "Συγγραφέας: %s\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:589
+#: wp-ajax-edit-comments.php:478
+#, php-format
+msgid "Author URL: %s\n"
+msgstr "URL Συγγραφέα: %s\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:588
+#: wp-ajax-edit-comments.php:479
+#, php-format
+msgid "Author E-mail: %s\n"
+msgstr "Συγγραφέας: %s\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:590
+#: wp-ajax-edit-comments.php:480
+msgid "Comment:\n"
+msgstr "Σχόλιο:\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:591
+#: wp-ajax-edit-comments.php:481
+msgid "See all comments on this post here:\n"
+msgstr "Δείτε όλα τα σχόλια εδώ:\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:593
+#: wp-ajax-edit-comments.php:483
+#, php-format
+msgid "New Edited Comment On: %s"
+msgstr "Νέο επεξεργασμένο σχόλιο στο: %s"
+
+#: wp-ajax-edit-comments.php:594
+msgid "Unknown error."
+msgstr "Άγνωστο σφάλμα."
+
+#: wp-ajax-edit-comments.php:653
+msgid "You cannot edit a comment after other comments have been posted."
+msgstr "Δεν μπορείτε να επεξεργαστείτε σχόλιο, όταν έχουν ήδη εισαχθεί νεώτερα."
+
+#: wp-ajax-edit-comments.php:654
+msgid "The time to edit your comment has elapsed."
+msgstr "Το χρονικό διάστημα επεξεργασίας σχολίου έχει λήξει."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: wp-ajax-edit-comments.php:655
+msgid "You do not have permission to edit this comment."
+msgstr "Δεν έχετε άδεια για επεξεργασία αυτού του σχολίου."
+
+#: wp-ajax-edit-comments.php:657
+msgid "This comment cannot be edited because it is marked as spam."
+msgstr "Δεν επιτρέπεται η επεξεργασία σε σχόλιο που αναφέρθηκε ως Ανεπιθύμητο."
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:347
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:347
+#: wp-ajax-edit-comments.php:658
+msgid "Comment loading failed."
+msgstr "Η φόρτωση του σχολίου απέτυχε."
+
+#: wp-ajax-edit-comments.php:659
+msgid "Comment editing has been disabled."
+msgstr "Η επεξεργασία σχολίων έχει απενεργοποιηθεί."
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:46
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:46
+#: wp-ajax-edit-comments.php:660
+msgid "Could not mark as spam."
+msgstr "Αδύνατη η σημείωση ως ανεπιθύμητο."
+
+#: wp-ajax-edit-comments.php:661
+msgid "You do not have permission to mark this comment as Spam."
+msgstr "Δεν έχετε άδεια για την αναφορά του σχολίου ως Ανεπιθύμητο."
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:39
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:39
+#: wp-ajax-edit-comments.php:662
+msgid "Could not delete comment."
+msgstr "Αδύνατη η διαγραφή του σχολίου."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: wp-ajax-edit-comments.php:663
+msgid "You do not have permission to delete this comment."
+msgstr "Δεν έχετε άδεια για να διαγράψετε αυτό το σχόλιο."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: wp-ajax-edit-comments.php:664
+msgid "You do not have permission to approve this comment."
+msgstr "Δεν έχετε άδεια για να εγκρίνετε αυτό το σχόλιο."
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:39
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:39
+#: wp-ajax-edit-comments.php:665
+msgid "Could not approve comment."
+msgstr "Αδύνατη η έγκριση του σχολίου."
+
+#: wp-ajax-edit-comments.php:666
+msgid "Could not mark this comment for moderation."
+msgstr "Το σχόλιο αυτό δεν μπορεί να χαρακτηριστεί Για επιθεώρηση."
+
+#: wp-ajax-edit-comments.php:667
+msgid "You do not have permission to mark this comment for moderation."
+msgstr "Δεν έχετε άδεια για την σημείωση αυτού του σχολίου Για Επιθεώρηση."
+
+#: wp-ajax-edit-comments.php:668
+msgid "Please enter a valid email address."
+msgstr "Παρακαλώ εισάγετε έγκυρη διεύθυνση ηλ. ταχυδρομείου."
+
+#: wp-ajax-edit-comments.php:669
+msgid "Please fill in the required fields (Name, E-mail)"
+msgstr "Παρακαλώ συμπληρώστε τα απαιτούμενα πεδία (Όνομα, Ηλ. Ταχυδρομείο)"
+
+#: wp-ajax-edit-comments.php:670
+msgid "You cannot have an empty comment."
+msgstr "Δεν μπορείτε να έχετε ενα κενό σχόλιο."
+
+#: wp-ajax-edit-comments.php:843
+msgid "Your edited comment was marked as spam.  If this is in error, please contact the admin."
+msgstr "Το επεξεργασμένο σχόλιό σας χαρακτηρίστικε ως Ανεπιθύμητο. Εαν αυτό είναι λάθος, επικοινωνήστε με τον διαχειριστή."
+
+#: js/comment-editor.js.php:74
+msgid "Loading..."
+msgstr "Φόρτωση..."
+
+#: js/comment-editor.js.php:117
+msgid "Comment Loaded Successfully"
+msgstr "Το σχόλιο φορτώθηκε επιτυχώς."
+
+#: js/comment-editor.js.php:126
+msgid "Saving..."
+msgstr "Αποθήκευση..."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:262
+#: js/comment-editor.js.php:168
+msgid "Comment Successfully Saved"
+msgstr "Το σχόλιο αποθηκεύθηκε με επιτυχία"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:319
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:319
+#: js/wp-ajax-edit-comments.js.php:114
+msgid "minutes"
+msgstr "λεπτά"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:319
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:319
+#: js/wp-ajax-edit-comments.js.php:114
+msgid "minute"
+msgstr "λεπτό"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:320
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:320
+#: js/wp-ajax-edit-comments.js.php:115
+msgid "and"
+msgstr "και"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:323
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:323
+#: js/wp-ajax-edit-comments.js.php:118
+msgid "seconds"
+msgstr "δευτερόλεπτα"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:323
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:323
+#: js/wp-ajax-edit-comments.js.php:118
+msgid "second"
+msgstr "δευτερόλεπτο"
+
+#: js/wp-ajax-edit-comments.js.php:168
+msgid "Mark for Moderation?"
+msgstr "Να σημειωθεί Για Επιθεώρηση;"
+
+#: js/wp-ajax-edit-comments.js.php:186
+msgid "Approve Comment?"
+msgstr "Έγκριση του σχολίου;"
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:46
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:46
+#: js/wp-ajax-edit-comments.js.php:204
+msgid "Mark as Spam?"
+msgstr "Να χαρακτηριστεί ως Ανεπιθύμητο;"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:90
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:90
+#: js/wp-ajax-edit-comments.js.php:222
+msgid "Delete this comment?"
+msgstr "Να διαγραφεί το σχόλιο;"
+
+#: js/wp-ajax-edit-comments.js.php:235
+#: js/wp-ajax-edit-comments.js.php:238
+#, fuzzy
+msgid "Anonymous"
+msgstr "Ανώνυμοι χρήστες"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:220
+#: php/admin-panel.php:22
+msgid "Security keys deleted"
+msgstr "Τα κλειδιά ασφαλείας διαγράφηκαν."
+
+#: php/admin-panel.php:36
+msgid "Comment time must be a numerical value"
+msgstr "Ο χρόνος σχολίου πρέπει να αποδοθεί με αριθμό."
+
+#: php/admin-panel.php:39
+msgid "Comment time must be greater than one minute."
+msgstr "Ο χρόνος σχολίου, πρέπει να είναι μεγαλύτερος απο ενα λεπτό."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:262
+#: php/admin-panel.php:89
+msgid "Settings successfully updated."
+msgstr "Οι ρυθμίσεις αποθηκεύθηκαν με επιτυχία."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: php/admin-panel.php:97
+msgid "Your commentators have edited their comments "
+msgstr "Οι σχολιαστές έχουν επεξεργαστεί τα σχόλια τους"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: php/admin-panel.php:97
+msgid "times"
+msgstr "φορές"
+
+#: php/admin-panel.php:97
+msgid "Please"
+msgstr "Παρακαλώ"
+
+#: php/admin-panel.php:97
+msgid "Donate"
+msgstr "Δωρεά"
+
+#: php/admin-panel.php:98
+msgid "Global Options - These Options Affect Everyone"
+msgstr "Γενικές ρυθμίσεις - Αφορούν σε όλους"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:271
+#: php/admin-panel.php:102
+msgid "Set comment time (minutes):"
+msgstr "Χρόνος Σχολίων (λεπτά):"
+
+#: php/admin-panel.php:106
+msgid "Spam notification text."
+msgstr "Κείμενο ενημέρωσης για Ανεπιθύμητα σχόλια."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:273
+#: php/admin-panel.php:108
+msgid "Please limit to one line if possible since this text will show up when editing the comment or author (Tags allowed: em, a, strong, blockquote):"
+msgstr "Περιοριστείτε σε μια γραμμή κειμένου, διότι αυτό θα εμφανίζεται κατα την επεξεργασία σχολίου ή συγγραφέα (Επιτρέπονται τα: em, a, strong, blockquote):"
+
+#: php/admin-panel.php:113
+msgid "Anonymous Users"
+msgstr "Ανώνυμοι χρήστες"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:115
+msgid "Allow Anyone to Edit Their Own Comments?"
+msgstr "Όλοι μπορούν να επεξεργασθούν τα σχόλια τους;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:275
+#: php/admin-panel.php:115
+msgid "Selecting \"No\" will turn off comment editing for everyone except admin types who have post and page editing permissions."
+msgstr "Αν επιλέξετε \"Όχι\" μόνο οι διαχειριστές θα μπορούν να επεξεργασθούν τα σχόλια τους."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:343
+# C:\SVN\plugin/wp-ajax-edit-comments.php:346
+# C:\SVN\plugin/wp-ajax-edit-comments.php:352
+# C:\SVN\plugin/wp-ajax-edit-comments.php:355
+#: php/admin-panel.php:116
+#: php/admin-panel.php:118
+#: php/admin-panel.php:120
+#: php/admin-panel.php:122
+#: php/admin-panel.php:124
+#: php/admin-panel.php:133
+#: php/admin-panel.php:136
+#: php/admin-panel.php:139
+#: php/admin-panel.php:142
+#: php/admin-panel.php:149
+#: php/admin-panel.php:156
+#: php/admin-panel.php:171
+#: php/admin-panel.php:174
+#: php/admin-panel.php:177
+#: php/admin-panel.php:191
+#: php/admin-panel.php:199
+#: php/admin-panel.php:212
+#: php/admin-panel.php:232
+#: php/admin-panel.php:240
+#: php/admin-panel.php:255
+msgid "Yes"
+msgstr "Ναι"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:343
+# C:\SVN\plugin/wp-ajax-edit-comments.php:346
+# C:\SVN\plugin/wp-ajax-edit-comments.php:349
+# C:\SVN\plugin/wp-ajax-edit-comments.php:352
+# C:\SVN\plugin/wp-ajax-edit-comments.php:355
+#: php/admin-panel.php:116
+#: php/admin-panel.php:118
+#: php/admin-panel.php:120
+#: php/admin-panel.php:122
+#: php/admin-panel.php:124
+#: php/admin-panel.php:133
+#: php/admin-panel.php:136
+#: php/admin-panel.php:139
+#: php/admin-panel.php:142
+#: php/admin-panel.php:149
+#: php/admin-panel.php:156
+#: php/admin-panel.php:171
+#: php/admin-panel.php:174
+#: php/admin-panel.php:177
+#: php/admin-panel.php:191
+#: php/admin-panel.php:199
+#: php/admin-panel.php:212
+#: php/admin-panel.php:232
+#: php/admin-panel.php:240
+#: php/admin-panel.php:255
+msgid "No"
+msgstr "Όχι"
+
+#: php/admin-panel.php:117
+msgid "Allow editing after additional comments have been posted?"
+msgstr "Να επιτρέπεται η επεξερασία σχολίου, εαν στο μεταξύ έχουν υπάρξει νεώτερα σχόλια;"
+
+#: php/admin-panel.php:117
+msgid "Selecting \"No\" will prevent users from editing their comments if another comment has been made on a post."
+msgstr "Επιλέγοντας \"Όχι\" εμποδίζετε τους χρήστες να επεξεργαστούν τα σχόλια τους, εαν στο μεταξύ έχει υπάρξει κάποιο νεώτερο σχόλιο."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:119
+msgid "Allow Users to Edit Their Name?"
+msgstr "Να επιτρέπεται στους χρήστες η επεξεργασία του ονόματος τους;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:278
+#: php/admin-panel.php:119
+msgid "Selecting \"No\" will turn off editing of Names"
+msgstr "Επιλέγοντας \"Όχι\" διακόπτετε την επεξεργασία ονομάτων"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:121
+msgid "Allow Users to Edit Their E-mail Addresses?"
+msgstr "Να επιτρέπεται στους χρήστες η επεξεργασία της ηλ. διεύθυνσης τους;"
+
+#: php/admin-panel.php:121
+msgid "Selecting \"No\" will turn off editing of e-mail addresses.  One of the reasons you may want this on is for users with Avatars."
+msgstr "Επιλέγοντας \"Όχι\" εμποδίζετε την επεξεργασία των ηλ. διευθύνσεων. Θα το χρειαστείτε, εαν οι χρήστες σας έχουν avatars."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:123
+msgid "Allow Users to Edit Their URLs?"
+msgstr "Να επιτρέπεται στους χρήστες η επεξεργασία του URL τους;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:278
+#: php/admin-panel.php:123
+msgid "Selecting \"No\" will turn off editing of URLs"
+msgstr "Επιλέγοντας \"Όχι\" διακόπτετε την επεξεργασία URL"
+
+#: php/admin-panel.php:130
+msgid "Registered Users"
+msgstr "Εγγεγραμμένοι χρήστες"
+
+#: php/admin-panel.php:131
+msgid "Allow Registered Users to Edit Comments Indefinitely?"
+msgstr "Να επιτρέπεται στους εγγεγραμένους χρήστες η επεξεργασία σχολίων δίχως χρονικό περιορισμό;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:354
+#: php/admin-panel.php:132
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit comments without a time limit."
+msgstr "Επιλέγοντας \"Ναι\" οι εγγεγραμμένοι χρήστες του ιστολογίου, θα μπορούν να επεξεργάζονται τα σχόλια τους χωρίς χρονικό περιορισμό."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:134
+msgid "Allow Registered Users to Edit Their Name?"
+msgstr "Να επιτρέπεται στους εγγεγραμμένους χρήστες η επεξεργασία του ονόματος τους;"
+
+#: php/admin-panel.php:135
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit their names.  This can prevent issues if a user wishes to impersonate others."
+msgstr "Επιλέγοντας \"Ναι\" οι εγγεγραμμένοι χρήστες θα μπορούν να επεξεργάζονται το όνομά τους. Με αυτό τον τρόπο αποφεύγετε την κλοπή ταυτότητας."
+
+#: php/admin-panel.php:137
+msgid "Allow Registered Users to Edit Their E-mail Address?"
+msgstr "Να επιτρέπεται στους Εγγεγραμμένους χρήστες να επεξεργάζονται της ηλ. διεύθυνση τους;"
+
+#: php/admin-panel.php:138
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit their e-mail address."
+msgstr "Επιλέγοντας \"Ναι\" οι εγγεγραμμένοι χρήστες μπορούν να επεξεργάζονται την ηλ. διεύθυνση τους."
+
+#: php/admin-panel.php:140
+msgid "Allow Registered Users to Edit Their URL?"
+msgstr "Να επιτρέπεται στους Εγγεγραμμένους χρήστες να επεξεργάζονται το URL τους;"
+
+#: php/admin-panel.php:141
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit their URL."
+msgstr "Επιλέγοντας \"Ναι\" επιτρέπετε στους εγγεγραμένους χρήστες να επεξεργάζονται το URL τους."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:277
+#: php/admin-panel.php:146
+msgid "Countdown Timer"
+msgstr "Αντίστροφη μέτρηση"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:277
+#: php/admin-panel.php:148
+msgid "Show a Countdown Timer?"
+msgstr "Να προβάλλεται ο εναπομείναντας χρόνος για επεξεργασία;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:278
+#: php/admin-panel.php:148
+msgid "Selecting \"No\" will turn off the countdown timer for non-admin commentators."
+msgstr "Επιλέγοντας \"Όχι\" απενεργοποιείται ο δείκτης αντίστροφης μέτρησης για τους μη διαχειριστές σχολιαστές."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:280
+#: php/admin-panel.php:153
+msgid "Edit E-mails"
+msgstr "Επεξεργασία ηλ. διευθύνσεων"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:280
+#: php/admin-panel.php:155
+msgid "Allow Edit E-mails?"
+msgstr "Να επιτρέπεται επεξεργασία της ηλ. διεύθυνσης;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:281
+#: php/admin-panel.php:155
+msgid "Selecting \"Yes\" will send you an email each time someone edits their comment."
+msgstr "Επιλέγοντας \"Ναι\" θα λαμβάνετε ενημέρωση κάθε φορά που κάποιος επεξεργάζεται το σχόλιο του."
+
+#: php/admin-panel.php:160
+msgid "Spam Protection"
+msgstr "Προστασία Ανεπιθύμητων Σχολίων"
+
+#: php/admin-panel.php:162
+msgid "Akismet"
+msgstr "Akismet"
+
+#: php/admin-panel.php:162
+msgid "Defensio"
+msgstr "Defensio"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:343
+# C:\SVN\plugin/wp-ajax-edit-comments.php:346
+# C:\SVN\plugin/wp-ajax-edit-comments.php:349
+# C:\SVN\plugin/wp-ajax-edit-comments.php:352
+# C:\SVN\plugin/wp-ajax-edit-comments.php:355
+#: php/admin-panel.php:162
+msgid "None"
+msgstr "Κανένα"
+
+#: php/admin-panel.php:166
+msgid "Styles"
+msgstr ""
+
+#: php/admin-panel.php:168
+msgid "Tweaking the style options is recommended for advanced users only.  If you choose to disable styles, you will have to provide your own styles in your default WordPress stylesheet."
+msgstr ""
+
+#: php/admin-panel.php:169
+msgid "Turn Off Icons?"
+msgstr ""
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:342
+#: php/admin-panel.php:170
+#, fuzzy
+msgid "Selecting \"Yes\" will prevent the plugin icons from showing."
+msgstr "Επιλέγοντας \"Ναι\" απενεργοποιείται η επεξεργασία σχολίων μέσα απο τον Πίνακα Ελέγχου."
+
+#: php/admin-panel.php:172
+msgid "Turn Off clearfix:after?"
+msgstr ""
+
+#: php/admin-panel.php:173
+msgid "The clearfix is enabled by default for maximum compatibility with themes."
+msgstr ""
+
+#: php/admin-panel.php:175
+msgid "Turn Off Admin JavaScript Scrolling?"
+msgstr ""
+
+#: php/admin-panel.php:176
+msgid "The plugin tries to correct incorrect offsets on a post if you are admin."
+msgstr ""
+
+#: php/admin-panel.php:178
+msgid "Leaving a style empty will revert back to the default plugin styles."
+msgstr ""
+
+#: php/admin-panel.php:179
+msgid "The URL should be relative to: "
+msgstr ""
+
+#: php/admin-panel.php:180
+msgid "Post/Admin CSS URL"
+msgstr ""
+
+#: php/admin-panel.php:182
+msgid "Editor CSS URL"
+msgstr ""
+
+#: php/admin-panel.php:187
+msgid "Gravatars"
+msgstr ""
+
+#: php/admin-panel.php:189
+msgid "Turning off Gravatars may solve some plugin compatibility issues."
+msgstr ""
+
+#: php/admin-panel.php:190
+msgid "Turn Off Gravatars?"
+msgstr ""
+
+#: php/admin-panel.php:195
+#, fuzzy
+msgid "Editor Options"
+msgstr "Περισσότερες επιλογές"
+
+#: php/admin-panel.php:197
+msgid "The following affects the editing interface."
+msgstr ""
+
+#: php/admin-panel.php:198
+#, fuzzy
+msgid "Turn Off More Options?"
+msgstr "Περισσότερες επιλογές"
+
+#: php/admin-panel.php:200
+msgid "Please leave as is if you wish to retain proper plugin credit."
+msgstr ""
+
+#: php/admin-panel.php:201
+msgid "Editor Title"
+msgstr ""
+
+#: php/admin-panel.php:203
+msgid "Title URL"
+msgstr ""
+
+#: php/admin-panel.php:208
+msgid "Character Encoding"
+msgstr "Κωδικοποίηση χαρακτήρων"
+
+#: php/admin-panel.php:210
+msgid "Enable mb_convert_encoding?"
+msgstr "Ενεργοποίηση  mb_convert_encoding;"
+
+#: php/admin-panel.php:211
+msgid "Some servers do not have this installed.  If you disable this option, be sure to test out various characters.  The mb_convert_encoding function is necessary to convert from UTF-8 to various charsets."
+msgstr "Κάποιοι διακομιστές δεν το έχουν εγκατεστημένο. Αν απενεργοποιήσετε την επιλογή, ελέγξτε τα αποτελέσματα με διάφορους χαρακτήρες. Η λειτουργία mb_convert_encoding είναι απαραίτητη για τις μετατροπές απο UTF-8 σε άλλες κωδικοσελίδες."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:287
+# C:\SVN\plugin/wp-ajax-edit-comments.php:358
+#: php/admin-panel.php:222
+#: php/admin-panel.php:246
+#: php/admin-panel.php:261
+msgid "Update Settings"
+msgstr "Ενημέρωση Ρυθμίσεων"
+
+#: php/admin-panel.php:224
+msgid "Individual Options - These Options Only Affect You"
+msgstr "Ρυθμίσεις χρήστη - Αφορούν μόνο σε εσάς"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:350
+#: php/admin-panel.php:228
+msgid "Admin Panel Editing"
+msgstr "Επεξεργασία σχολίων απο τον Πίνακα Ελέγχου"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:341
+#: php/admin-panel.php:230
+msgid "Turn Off Comment Editing in Admin Panel?"
+msgstr "Απενεργοποίηση επεξεργασίας σχολίων απο τον Πίνακα Ελέγχου;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:342
+#: php/admin-panel.php:231
+msgid "Selecting \"Yes\" will disable comment editing in the Admin Comments Panel."
+msgstr "Επιλέγοντας \"Ναι\" απενεργοποιείται η επεξεργασία σχολίων μέσα απο τον Πίνακα Ελέγχου."
+
+#: php/admin-panel.php:236
+msgid "Post Editing"
+msgstr "Επεξερασία Ανάρτησης"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:353
+#: php/admin-panel.php:238
+msgid "Turn On Comment Editing?"
+msgstr "Να ενεργοποιηθεί η επεξεργασία σχολίων;"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:354
+#: php/admin-panel.php:239
+msgid "Selecting \"Yes\" will enable your ability to edit a user's comment.  Selecting \"No\" will disable your ability to edit comments on a post"
+msgstr "Επιλέγοντας \"Ναι\" σας δίνεται η δυνατότητα να επεξεργάζεστε σχόλια χρηστών. Επιλέγοντας \"Όχι\" θα αποτρέπει απο το να επεξεργάζεστε σχόλια γενικά."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:269
+#: php/admin-panel.php:248
+msgid "Ajax Edit Comments Cleanup"
+msgstr "Καθαρισμός WP AJAX Επεξεργασία Σχολίων"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:297
+#: php/admin-panel.php:252
+msgid "Delete all security keys"
+msgstr "Διαγραφή όλων των κλειδιών ασφαλείας"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:294
+#: php/admin-panel.php:254
+msgid "Each time a user leaves a comment, a security key is stored as a custom key.  Periodically you may want to delete this information.  Please backup your database first."
+msgstr "Κάθε φορά που κάποιος αφήνει ενα σχόλιο, δημιουργείται ενα κλειδί ασφαλείας και αποθηκεύεται. Περιοδικά, μπορεί να θέλετε να διαγράφετε αυτά τα κλειδιά. Παρακαλώ πάρτε backup τη Βάση σας πριν συνεχίσετε."
+
+#: php/comment-editor.php:33
+#: php/comment-editor.php:92
+msgid "Close"
+msgstr "Κλείσιμο"
+
+#: php/comment-editor.php:54
+msgid "More Options"
+msgstr "Περισσότερες επιλογές"
+
+#: php/comment-editor.php:62
+msgid "Name"
+msgstr "Όνομα"
+
+#: php/comment-editor.php:68
+msgid "E-mail"
+msgstr "Ηλ. Ταχυδρομείο"
+
+#: php/comment-editor.php:74
+msgid "URL"
+msgstr "URL"
+
+#: php/comment-editor.php:88
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: php/comment-editor.php:89
+msgid "Cancel"
+msgstr "Ακύρωση"
+

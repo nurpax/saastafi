@@ -1,0 +1,676 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-06-11 20:56-0600\n"
+"PO-Revision-Date: 2008-06-15 23:14+0100\n"
+"Last-Translator: iKArus\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: wp-ajax-edit-comments.php:121
+msgid "Click to Edit"
+msgstr "Kommentar bearbeiten"
+
+#: wp-ajax-edit-comments.php:137
+#: wp-ajax-edit-comments.php:156
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: wp-ajax-edit-comments.php:142
+#: wp-ajax-edit-comments.php:159
+msgid "Moderate"
+msgstr "Moderieren"
+
+#: wp-ajax-edit-comments.php:145
+msgid "Not Spam"
+msgstr "Kein Spam"
+
+#: wp-ajax-edit-comments.php:148
+#: wp-ajax-edit-comments.php:165
+msgid "Delete"
+msgstr "L&ouml;schen"
+
+#: wp-ajax-edit-comments.php:162
+msgid "Spam"
+msgstr "Spam"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:587
+#: wp-ajax-edit-comments.php:476
+#, php-format
+msgid "A comment has been edited on post %s"
+msgstr "Ein Kommentar zum Beitrag %s wurde bearbeitet"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:588
+#: wp-ajax-edit-comments.php:477
+#, php-format
+msgid "Author: %s\n"
+msgstr "Autor: %s\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:589
+#: wp-ajax-edit-comments.php:478
+#, php-format
+msgid "Author URL: %s\n"
+msgstr "Autor URL: %s\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:588
+#: wp-ajax-edit-comments.php:479
+#, php-format
+msgid "Author E-mail: %s\n"
+msgstr "Autor: %s\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:590
+#: wp-ajax-edit-comments.php:480
+msgid "Comment:\n"
+msgstr "Kommentar:\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:591
+#: wp-ajax-edit-comments.php:481
+msgid "See all comments on this post here:\n"
+msgstr "Siehe alle Kommentare auf diesen Beitrag hier:\n"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:593
+#: wp-ajax-edit-comments.php:483
+#, php-format
+msgid "New Edited Comment On: %s"
+msgstr "Erneut editierter Kommentar am: %s"
+
+#: wp-ajax-edit-comments.php:594
+msgid "Unknown error."
+msgstr "Unbekannter Fehler."
+
+#: wp-ajax-edit-comments.php:653
+msgid "You cannot edit a comment after other comments have been posted."
+msgstr "Kommentare k&ouml;nnen nicht mehr bearbeit werden, wenn bereits ein Folgekommentar abgegeben wurde."
+
+#: wp-ajax-edit-comments.php:654
+msgid "The time to edit your comment has elapsed."
+msgstr "Der gegebene Zeitraum diesen Kommentar zu editieren ist abgelaufen."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: wp-ajax-edit-comments.php:655
+msgid "You do not have permission to edit this comment."
+msgstr "Sie haben nicht die Rechte diesen Kommentar zu editieren."
+
+#: wp-ajax-edit-comments.php:657
+msgid "This comment cannot be edited because it is marked as spam."
+msgstr "Dieser Kommentar kann nicht bearbeitet werden, da er als Spam markiert wurde."
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:347
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:347
+#: wp-ajax-edit-comments.php:658
+msgid "Comment loading failed."
+msgstr "Laden des Kommentars fehlgeschlagen."
+
+#: wp-ajax-edit-comments.php:659
+msgid "Comment editing has been disabled."
+msgstr "Das Editieren der Kommentare wurde deaktiviert."
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:46
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:46
+#: wp-ajax-edit-comments.php:660
+msgid "Could not mark as spam."
+msgstr "Konnte nicht als Spam markiert werden."
+
+#: wp-ajax-edit-comments.php:661
+msgid "You do not have permission to mark this comment as Spam."
+msgstr "Sie haben nicht die Rechte diesen Kommentar als Spam zu markieren."
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:39
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:39
+#: wp-ajax-edit-comments.php:662
+msgid "Could not delete comment."
+msgstr "Kommentar konnte nicht gel&ouml;scht werden."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: wp-ajax-edit-comments.php:663
+msgid "You do not have permission to delete this comment."
+msgstr "Sie haben nicht die Rechte diesen Kommentar zu l&ouml;schen."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: wp-ajax-edit-comments.php:664
+msgid "You do not have permission to approve this comment."
+msgstr "Sie haben nicht die Rechte diesen Kommentar zu genehmigen."
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:39
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:39
+#: wp-ajax-edit-comments.php:665
+msgid "Could not approve comment."
+msgstr "Kommentar konnte nicht gel&ouml;scht werden."
+
+#: wp-ajax-edit-comments.php:666
+msgid "Could not mark this comment for moderation."
+msgstr "Kommentar konnte nicht zum Moderieren markiert werden."
+
+#: wp-ajax-edit-comments.php:667
+msgid "You do not have permission to mark this comment for moderation."
+msgstr "Sie haben nicht die Berechtigung diesen Kommentar zur Moderation zu markieren."
+
+#: wp-ajax-edit-comments.php:668
+msgid "Please enter a valid email address."
+msgstr "Bitte eine g&uuml;ltige E-Mailadresse angeben."
+
+#: wp-ajax-edit-comments.php:669
+msgid "Please fill in the required fields (Name, E-mail)"
+msgstr "Bitte die erforderlichen Felder (Name, E-Mail) ausf&uuml;llen"
+
+#: wp-ajax-edit-comments.php:670
+msgid "You cannot have an empty comment."
+msgstr "Kommentare k&ouml;nnen/d&uuml;rfen nicht leer sein."
+
+#: wp-ajax-edit-comments.php:843
+msgid "Your edited comment was marked as spam.  If this is in error, please contact the admin."
+msgstr "Der Kommentar wurde als Spam markiert. Wenn dieses ein Fehler ist, kontaktieren Sie bitte den Admin."
+
+#: js/comment-editor.js.php:74
+msgid "Loading..."
+msgstr "Lade ..."
+
+#: js/comment-editor.js.php:117
+msgid "Comment Loaded Successfully"
+msgstr "Kommentar wurde erfolgreich geladen"
+
+#: js/comment-editor.js.php:126
+msgid "Saving..."
+msgstr "Speichern ..."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:262
+#: js/comment-editor.js.php:168
+msgid "Comment Successfully Saved"
+msgstr "Einstellungen erfolgreich aktualisiert."
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:319
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:319
+#: js/wp-ajax-edit-comments.js.php:114
+msgid "minutes"
+msgstr "Minuten"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:319
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:319
+#: js/wp-ajax-edit-comments.js.php:114
+msgid "minute"
+msgstr "Minute"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:320
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:320
+#: js/wp-ajax-edit-comments.js.php:115
+msgid "and"
+msgstr "und"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:323
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:323
+#: js/wp-ajax-edit-comments.js.php:118
+msgid "seconds"
+msgstr "Sekunden"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:323
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:323
+#: js/wp-ajax-edit-comments.js.php:118
+msgid "second"
+msgstr "Sekunde"
+
+#: js/wp-ajax-edit-comments.js.php:168
+msgid "Mark for Moderation?"
+msgstr "F&uuml;r Moderation markieren?"
+
+#: js/wp-ajax-edit-comments.js.php:186
+msgid "Approve Comment?"
+msgstr "Kommentar genehmigen?"
+
+# C:\SVN\plugin/php-includes/AjaxEditComments.php:46
+# C:\SVN\plugin\php-includes/AjaxEditComments.php:46
+#: js/wp-ajax-edit-comments.js.php:204
+msgid "Mark as Spam?"
+msgstr "Als Spam markieren?"
+
+# C:\SVN\plugin/js-includes/wp-ajax-edit-comments.js.php:90
+# C:\SVN\plugin\js-includes/wp-ajax-edit-comments.js.php:90
+#: js/wp-ajax-edit-comments.js.php:222
+msgid "Delete this comment?"
+msgstr "Diesen Kommentar l&ouml;schen?"
+
+#: js/wp-ajax-edit-comments.js.php:235
+#: js/wp-ajax-edit-comments.js.php:238
+msgid "Anonymous"
+msgstr "Unbekannte Nutzer"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:220
+#: php/admin-panel.php:22
+msgid "Security keys deleted"
+msgstr "Sicherheitsschl&uuml;ssel gel&ouml;scht"
+
+#: php/admin-panel.php:36
+msgid "Comment time must be a numerical value"
+msgstr "Die Zeitangabe muss als Zahl erfolgen"
+
+#: php/admin-panel.php:39
+msgid "Comment time must be greater than one minute."
+msgstr "Der Zeitraum f&uuml;r einen Kommentar muss l&auml;nger als eine Minute sein."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:262
+#: php/admin-panel.php:89
+msgid "Settings successfully updated."
+msgstr "Einstellungen erfolgreich aktualisiert."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: php/admin-panel.php:97
+msgid "Your commentators have edited their comments "
+msgstr "Ihre Kommentatoren haben ihre Kommentare "
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:270
+#: php/admin-panel.php:97
+msgid "times"
+msgstr "mal bearbeitet"
+
+#: php/admin-panel.php:97
+msgid "Please"
+msgstr "Bitte"
+
+#: php/admin-panel.php:97
+msgid "Donate"
+msgstr "Spende"
+
+#: php/admin-panel.php:98
+msgid "Global Options - These Options Affect Everyone"
+msgstr "Globale Einstellungen - Diese Einstellungen betreffen jeden"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:271
+#: php/admin-panel.php:102
+msgid "Set comment time (minutes):"
+msgstr "Kommentarzeit eingeben (in Minuten):"
+
+#: php/admin-panel.php:106
+msgid "Spam notification text."
+msgstr "Spam Hinweistext."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:273
+# 1. Translation is ignored.
+# 2. I think it should be something like: ... this text will be shown, when the comment is marked as SPAM ...
+#: php/admin-panel.php:108
+msgid "Please limit to one line if possible since this text will show up when editing the comment or author (Tags allowed: em, a, strong, blockquote):"
+msgstr "Bitte auf eine Zeile beschr&auml;nken, da dieser Text gezeigt wird, wenn der Kommentar oder Autor ge&auml;ndert und als Spam markiert wird (erlaubte Tags: em, a, strong, blockquote):"
+
+#: php/admin-panel.php:113
+msgid "Anonymous Users"
+msgstr "Unbekannte Nutzer"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:115
+msgid "Allow Anyone to Edit Their Own Comments?"
+msgstr "Jedem erlauben seine eigenen Kommentare zu editieren?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:275
+#: php/admin-panel.php:115
+msgid "Selecting \"No\" will turn off comment editing for everyone except admin types who have post and page editing permissions."
+msgstr "\"Nein\" schaltet die Editierfunktion der Kommentare f&uuml;r alle Nicht-Admins ab. Benutzer, die &uuml;ber entsprechende Adminrechte verf&uuml;gen, sind davon ausgeschlossen."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:343
+# C:\SVN\plugin/wp-ajax-edit-comments.php:346
+# C:\SVN\plugin/wp-ajax-edit-comments.php:352
+# C:\SVN\plugin/wp-ajax-edit-comments.php:355
+#: php/admin-panel.php:116
+#: php/admin-panel.php:118
+#: php/admin-panel.php:120
+#: php/admin-panel.php:122
+#: php/admin-panel.php:124
+#: php/admin-panel.php:133
+#: php/admin-panel.php:136
+#: php/admin-panel.php:139
+#: php/admin-panel.php:142
+#: php/admin-panel.php:149
+#: php/admin-panel.php:156
+#: php/admin-panel.php:171
+#: php/admin-panel.php:174
+#: php/admin-panel.php:177
+#: php/admin-panel.php:191
+#: php/admin-panel.php:199
+#: php/admin-panel.php:212
+#: php/admin-panel.php:232
+#: php/admin-panel.php:240
+#: php/admin-panel.php:255
+msgid "Yes"
+msgstr "Ja"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:343
+# C:\SVN\plugin/wp-ajax-edit-comments.php:346
+# C:\SVN\plugin/wp-ajax-edit-comments.php:349
+# C:\SVN\plugin/wp-ajax-edit-comments.php:352
+# C:\SVN\plugin/wp-ajax-edit-comments.php:355
+#: php/admin-panel.php:116
+#: php/admin-panel.php:118
+#: php/admin-panel.php:120
+#: php/admin-panel.php:122
+#: php/admin-panel.php:124
+#: php/admin-panel.php:133
+#: php/admin-panel.php:136
+#: php/admin-panel.php:139
+#: php/admin-panel.php:142
+#: php/admin-panel.php:149
+#: php/admin-panel.php:156
+#: php/admin-panel.php:171
+#: php/admin-panel.php:174
+#: php/admin-panel.php:177
+#: php/admin-panel.php:191
+#: php/admin-panel.php:199
+#: php/admin-panel.php:212
+#: php/admin-panel.php:232
+#: php/admin-panel.php:240
+#: php/admin-panel.php:255
+msgid "No"
+msgstr "Nein"
+
+#: php/admin-panel.php:117
+msgid "Allow editing after additional comments have been posted?"
+msgstr "Editieren nach dem Ver&ouml;ffentlichen eines Folgekommentars erlauben?"
+
+#: php/admin-panel.php:117
+msgid "Selecting \"No\" will prevent users from editing their comments if another comment has been made on a post."
+msgstr "\"Nein\" verbietet Benutzern ihren Kommentar noch zu editieren, wenn bereits ein Folgekommentar ver&ouml;ffentlicht wurde."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:119
+msgid "Allow Users to Edit Their Name?"
+msgstr "Benutzern erlauben ihren Namen zu editieren?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:278
+#: php/admin-panel.php:119
+msgid "Selecting \"No\" will turn off editing of Names"
+msgstr "\"Nein\" schaltet das Editieren der Namen ab"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:121
+msgid "Allow Users to Edit Their E-mail Addresses?"
+msgstr "Benutzern erlauben ihre E-Mailadresse zu editieren?"
+
+#: php/admin-panel.php:121
+msgid "Selecting \"No\" will turn off editing of e-mail addresses.  One of the reasons you may want this on is for users with Avatars."
+msgstr "\"Nein\" schaltet das Editieren der E-Mailadressen ab. Ein Grund daf&uuml;r kann die Verwendung von Avataren sein."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:123
+msgid "Allow Users to Edit Their URLs?"
+msgstr "Benutzern erlauben Ihre URL zu &auml;ndern?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:278
+#: php/admin-panel.php:123
+msgid "Selecting \"No\" will turn off editing of URLs"
+msgstr "\"Nein\" schaltet das Editieren der URL ab."
+
+#: php/admin-panel.php:130
+msgid "Registered Users"
+msgstr "Registrierte Benutzer"
+
+#: php/admin-panel.php:131
+msgid "Allow Registered Users to Edit Comments Indefinitely?"
+msgstr "Registrierten Benutzern das Editieren unbegrenzt lange erlauben?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:354
+#: php/admin-panel.php:132
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit comments without a time limit."
+msgstr "\"Ja\" erlaubt registrierten Benutzern das Editieren ihrer Kommentare unbegrenzt lange."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:274
+#: php/admin-panel.php:134
+msgid "Allow Registered Users to Edit Their Name?"
+msgstr "Registrieren Benutzern erlauben Ihre Name zu editieren?"
+
+#: php/admin-panel.php:135
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit their names.  This can prevent issues if a user wishes to impersonate others."
+msgstr "\"Ja\" erlaubt registrierten Benutzern ihre Namen zu editieren. Dieses kann ein Schutz davor sein, wenn ein Benutzer sich als jemand anders ausgeben will."
+
+#: php/admin-panel.php:137
+msgid "Allow Registered Users to Edit Their E-mail Address?"
+msgstr "Registrierten Benutzern erlauben ihre E-Mailadresse zu editieren?"
+
+#: php/admin-panel.php:138
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit their e-mail address."
+msgstr "\"Ja\" erlaubt registrierten Benutzern ihre E-Mailadresse zu editieren."
+
+#: php/admin-panel.php:140
+msgid "Allow Registered Users to Edit Their URL?"
+msgstr "Registrierten Benutzern erlauben ihre URL zu editieren?"
+
+#: php/admin-panel.php:141
+msgid "Selecting \"Yes\" will allow users registered on your blog to edit their URL."
+msgstr "\"Ja\" erlaubt registrierten Benutzern ihre URL zu editieren."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:277
+#: php/admin-panel.php:146
+msgid "Countdown Timer"
+msgstr "Countdown Timer"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:277
+#: php/admin-panel.php:148
+msgid "Show a Countdown Timer?"
+msgstr "Zeige Timer für Countdown?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:278
+#: php/admin-panel.php:148
+msgid "Selecting \"No\" will turn off the countdown timer for non-admin commentators."
+msgstr "Die Auswahl von \"Nein\" schaltet den Timer des Countdowns f&uuml;r Kommentatoren ab, die keine Admins sind."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:280
+#: php/admin-panel.php:153
+msgid "Edit E-mails"
+msgstr "Editiere E-Mailadressen"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:280
+#: php/admin-panel.php:155
+msgid "Allow Edit E-mails?"
+msgstr "Das Editieren der E-Mailadresse erlauben?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:281
+#: php/admin-panel.php:155
+msgid "Selecting \"Yes\" will send you an email each time someone edits their comment."
+msgstr "Bei Auswahl von \"Ja\" werden der Admin bei jedem Editiervorgang per Mail benachrichtigt."
+
+#: php/admin-panel.php:160
+msgid "Spam Protection"
+msgstr "Spamschutz"
+
+#: php/admin-panel.php:162
+msgid "Akismet"
+msgstr "Akismet"
+
+#: php/admin-panel.php:162
+msgid "Defensio"
+msgstr "Defensio"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:343
+# C:\SVN\plugin/wp-ajax-edit-comments.php:346
+# C:\SVN\plugin/wp-ajax-edit-comments.php:349
+# C:\SVN\plugin/wp-ajax-edit-comments.php:352
+# C:\SVN\plugin/wp-ajax-edit-comments.php:355
+#: php/admin-panel.php:162
+msgid "None"
+msgstr "Kein"
+
+#: php/admin-panel.php:166
+msgid "Styles"
+msgstr "Aussehen"
+
+#: php/admin-panel.php:168
+msgid "Tweaking the style options is recommended for advanced users only.  If you choose to disable styles, you will have to provide your own styles in your default WordPress stylesheet."
+msgstr "Das &Auml;ndern der Einstellungen bez&uuml;glich der Stylesheets ist nur erfahrenen Usern zu empfehlen. Wenn die Standardeinstellungen abgeschaltet werden, sind eigene Vorgaben im WordPress Stylesheet bzw. des Themes zu ber&uuml;cksichtigen."
+
+#: php/admin-panel.php:169
+msgid "Turn Off Icons?"
+msgstr "Icons abschalten?"
+
+#: php/admin-panel.php:170
+msgid "Selecting \"Yes\" will prevent the plugin icons from showing."
+msgstr "\"Ja\" verhindert die Anzeige der Icons."
+
+#: php/admin-panel.php:172
+msgid "Turn Off clearfix:after?"
+msgstr "Clearfix abschalten?"
+
+#: php/admin-panel.php:173
+msgid "The clearfix is enabled by default for maximum compatibility with themes."
+msgstr "Clearfix ist per default aktiviert, um eine max. Kompatibilit&auml;t zu verwendeten Themes zu gew&auml;hrleisten."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:344
+#: php/admin-panel.php:175
+msgid "Turn Off Admin JavaScript Scrolling?"
+msgstr "JavaScript Scrolling f&uuml;r den Admin abschalten?"
+
+#: php/admin-panel.php:176
+msgid "The plugin tries to correct incorrect offsets on a post if you are admin."
+msgstr "Das Plugin versucht fehlerhafte Abs&auml;tze in Kommentaren zu berichtigen, wenn man es als Admin nutzt."
+
+#: php/admin-panel.php:178
+msgid "Leaving a style empty will revert back to the default plugin styles."
+msgstr "Wird kein Stylesheet angegeben, so werden die Defaulteinstellungen des Plugins verwendet."
+
+#: php/admin-panel.php:179
+msgid "The URL should be relative to: "
+msgstr "Die URL sollte relativ zu folgender sein:"
+
+#: php/admin-panel.php:180
+msgid "Post/Admin CSS URL"
+msgstr "Kommentar und Admin Stylesheet"
+
+#: php/admin-panel.php:182
+msgid "Editor CSS URL"
+msgstr "URL des Stylesheets zum Editor"
+
+#: php/admin-panel.php:187
+msgid "Gravatars"
+msgstr "Gravatars"
+
+#: php/admin-panel.php:189
+msgid "Turning off Gravatars may solve some plugin compatibility issues."
+msgstr "Die Gravatars abzuschalten, mag einige Kompatibilit&auml;tsprobleme mit dem Plugin beseitigen."
+
+# not used!
+#: php/admin-panel.php:190
+msgid "Turn Off Gravatars?"
+msgstr "Gravatars ausschalten?"
+
+#: php/admin-panel.php:195
+msgid "Editor Options"
+msgstr "Editor Einstellungen"
+
+#: php/admin-panel.php:197
+msgid "The following affects the editing interface."
+msgstr "Das Folgende betrifft das Editorfenster."
+
+#: php/admin-panel.php:198
+msgid "Turn Off More Options?"
+msgstr "Weitere Einstellungen ausschalten?"
+
+#: php/admin-panel.php:200
+msgid "Please leave as is if you wish to retain proper plugin credit."
+msgstr "Bitte so lassen, wie es ist, wenn man einwandfreie Ergebnisse des Plugins m&ouml;chte."
+
+#: php/admin-panel.php:201
+msgid "Editor Title"
+msgstr "Editortitel"
+
+#: php/admin-panel.php:203
+msgid "Title URL"
+msgstr "URL zum Editortitel"
+
+#: php/admin-panel.php:208
+msgid "Character Encoding"
+msgstr "Zeichenkodierung"
+
+#: php/admin-panel.php:210
+msgid "Enable mb_convert_encoding?"
+msgstr "Umlautkonvertierung (mb_convert_encoding) aktivieren?"
+
+#: php/admin-panel.php:211
+msgid "Some servers do not have this installed.  If you disable this option, be sure to test out various characters.  The mb_convert_encoding function is necessary to convert from UTF-8 to various charsets."
+msgstr "Nicht auf jedem Server installiert und wenn diese Option deaktiviert wird, sollte man vorher einige Sonderzeichen ausprobieren.  Die mb_convert_encoding Funktion ist erforderlich, um vom UTF-8 zu anderen Zeichens&auml;tzen zu konvertieren."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:287
+# C:\SVN\plugin/wp-ajax-edit-comments.php:358
+#: php/admin-panel.php:222
+#: php/admin-panel.php:246
+#: php/admin-panel.php:261
+msgid "Update Settings"
+msgstr "Einstellungen aktualisieren"
+
+#: php/admin-panel.php:224
+msgid "Individual Options - These Options Only Affect You"
+msgstr "Individuelle Einstellungen - Diese Einstellungen betreffen den Admin"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:350
+#: php/admin-panel.php:228
+msgid "Admin Panel Editing"
+msgstr "Kommentarverwaltung im Dashboard"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:341
+#: php/admin-panel.php:230
+msgid "Turn Off Comment Editing in Admin Panel?"
+msgstr "Das Editieren der Kommentare im Dashboard deaktivieren?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:342
+#: php/admin-panel.php:231
+msgid "Selecting \"Yes\" will disable comment editing in the Admin Comments Panel."
+msgstr "\"Ja\" schaltet die Editierfunktion in der Kommentarverwaltung ab."
+
+#: php/admin-panel.php:236
+msgid "Post Editing"
+msgstr "Ver&ouml;ffentliche Editiertes"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:353
+#: php/admin-panel.php:238
+msgid "Turn On Comment Editing?"
+msgstr "Editieren der Kommentare aktivieren?"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:354
+#: php/admin-panel.php:239
+msgid "Selecting \"Yes\" will enable your ability to edit a user's comment.  Selecting \"No\" will disable your ability to edit comments on a post"
+msgstr "\"Ja\" aktiviert die M&ouml;glichkeit für den Admin, einen Benutzerkommentar zu editieren. \"Nein\" deaktiviert die M&ouml;glichkeiten im der Beitragsansicht und im Dashboard Kommentare zu editieren."
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:269
+#: php/admin-panel.php:248
+msgid "Ajax Edit Comments Cleanup"
+msgstr "Ajax Edit Comments S&auml;uberung"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:297
+#: php/admin-panel.php:252
+msgid "Delete all security keys"
+msgstr "L&ouml;sche alle Sicherheitsschl&uuml;ssel"
+
+# C:\SVN\plugin/wp-ajax-edit-comments.php:294
+#: php/admin-panel.php:254
+msgid "Each time a user leaves a comment, a security key is stored as a custom key.  Periodically you may want to delete this information.  Please backup your database first."
+msgstr "Jedes mal, wenn ein User einen Kommentar hinterl&auml;sst wird ein Sicherheitsschl&uuml;ssel gespeichert. Diesen k&ouml;nnen Sie in regelm&ouml;ssigen Abst&auml;nden l&ouml;schen. Bitte vorher ein Backup der Datenbank anlegen!"
+
+#: php/comment-editor.php:33
+#: php/comment-editor.php:92
+msgid "Close"
+msgstr "Schließen"
+
+#: php/comment-editor.php:54
+msgid "More Options"
+msgstr "Weitere Einstellungen"
+
+#: php/comment-editor.php:62
+msgid "Name"
+msgstr "Name"
+
+#: php/comment-editor.php:68
+msgid "E-mail"
+msgstr "E-Mail"
+
+#: php/comment-editor.php:74
+msgid "URL"
+msgstr "URL"
+
+#: php/comment-editor.php:88
+msgid "Save"
+msgstr "Speichern"
+
+#: php/comment-editor.php:89
+msgid "Cancel"
+msgstr "Abbrechen"
+
