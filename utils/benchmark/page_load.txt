@@ -21,3 +21,4 @@ Note: use tabs to delimit columns so that this can be copy&pasted into
   Date            T1     T2
 -------------+--------+--------
 2008-05-26	2.44	0.63
+2008-06-26	1.77	0.96
