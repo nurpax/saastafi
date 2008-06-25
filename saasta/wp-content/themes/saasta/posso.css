@@ -1,0 +1,15 @@
+
+@import url("style.css");
+/* sub-site specific settings, partially overrides style.css */
+
+body {
+	background: #F2EED5 url('images/posso/saasta_bgcolor.gif');
+}
+
+#header {
+	background: #82706f url('images/posso/saasta_header.gif') no-repeat bottom center;
+}
+
+#footer {
+	background: #eee url('images/posso/saasta_footer.gif') no-repeat top; 
+}
