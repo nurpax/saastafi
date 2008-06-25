@@ -23,6 +23,14 @@ function bool_to_checked($i)
         return "";
 }
 
+function print_selected($a, $b)
+{
+    if ($a === $b) 
+        echo "value=\"$a\" selected";
+    else
+        echo "value=\"$a\"";
+}
+
 function saasta_config_submenu() 
 {
 ?>
@@ -45,8 +53,14 @@ function saasta_config_submenu()
 
         $opt_val = $_POST['saasta_sidebar_survey_caption'];
         update_option('saasta_sidebar_survey_caption', $opt_val);
+
+        $opt_val = $_POST['saasta_subsite'];
+        update_option('saasta_subsite', $opt_val);
+
         $saved_settings = true;
     }
+
+    $subsite = get_option('saasta_subsite');
 
     $survey_link_enabled = get_option('saasta_sidebar_survey_enabled');
     $survey_url = get_option('saasta_sidebar_survey_url');
@@ -64,6 +78,16 @@ function saasta_config_submenu()
     <h3>Configure saasta.fi</h3>
     <form name="form1" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
     <input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y">
+
+    <h4>General</h4>
+
+    <p>
+         Choose subsite theme: 
+      <select value="<?php echo $subsite; ?>" name="saasta_subsite">
+         <option <?php print_selected("saasta", $subsite);?>>saasta.fi</option>
+         <option <?php print_selected("posso", $subsite);?>>posso.fi</option>
+      </select>
+    </p>
 
     <h4>Sidebar links</h4>
     <table>
