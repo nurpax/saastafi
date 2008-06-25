@@ -113,9 +113,9 @@ function saasta_print_post_header() {
 	print '</td></tr>';
 	// muumi 080411: show prev/next links for single posts
 	if (is_single()) {
-		print '<tr><td width="100%" colspan="2" style="background-color:'.$color.';padding:0.2em;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;"><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td align="left">';
+		print '<tr><td width="100%" colspan="2" style="background-color:'.$color.';padding:0.2em;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;"><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td align="left" style="font-size:0.88em;">';
 		next_post_link('&laquo; %link');
-		print '</td><td align="right">';
+		print '</td><td align="right" style="font-size:0.88em;">';
 		previous_post_link('%link &raquo;');
 		print '</td></tr></table></td></tr>';
 	}
