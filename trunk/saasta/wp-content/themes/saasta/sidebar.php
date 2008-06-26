@@ -15,12 +15,11 @@ $user = wp_get_current_user();
 				<li><h2>Meta</h2>
 				<ul>
 <?php if (is_user_logged_in()) { print "<li><a href=\""; print get_bloginfo('wpurl').'/wp-admin/post-new.php">Write a new post</a></li>'; } ?>
-                     <?php wp_register(); ?>
-                     <li><?php wp_loginout();  saasta_print_if_logged_in(" [$user->display_name]"); ?></li>
-<?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(140); print "</li>"; } ?>
-					 <li><?php saasta_print_permalink(2624); ?></li>
-					 <?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(922); print "</li>"; } ?>
-                     <li><?php saasta_print_permalink(2598); ?></li>
+                      
+                      <?php wp_register(); ?>
+                      <li><?php wp_loginout();  saasta_print_if_logged_in(" [$user->display_name]"); ?></li>
+                      <?php /* see saasta.fi plugin */ do_action('saasta_sidebar_meta_links'); ?>
+
                      <li>RSS: <a href="<?php bloginfo('rss2_url'); ?>">Entries</a> and <a href="<?php bloginfo('comments_rss2_url'); ?>">Comments</a></li>
 					<?php wp_meta(); ?>
 				</ul>
@@ -29,7 +28,7 @@ $user = wp_get_current_user();
 
             <li><?php /* configurable links from saasta.fi plugin: */ do_action('saasta_sidebar_links'); ?></li>
 
-			<li><h2>Random saasta</h2>
+			<li><h2>Random post</h2>
 			<ul><li>
 			<?php
 			$foo = $wpdb->get_row("SELECT ID,post_title FROM ".$wpdb->posts." WHERE post_status='publish' ORDER BY RAND() LIMIT 1");
