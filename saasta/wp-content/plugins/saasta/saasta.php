@@ -2,7 +2,7 @@
 /*
 Plugin Name: saasta.fi
 Plugin URI: http://code.google.com/p/saastafi/#
-Description: This plugin is a configuration tab for the saasta.fi site.  This plugin needs to be used together with the saasta theme.
+Description: This plugin is a configuration tab for the saasta.fi site.  This plugin needs to be used together with the saasta theme.  The purpose of making all of this configurable is to be able to serve two slightly different sites using the same source code.  This is useful as we have written our own extensions to WordPress.
 Author: Janne Hellsten
 Version: 1.0
 */
@@ -29,6 +29,31 @@ function print_selected($a, $b)
         echo "value=\"$a\" selected";
     else
         echo "value=\"$a\"";
+}
+
+/* Auto-create saasta SQL tables.  This function should be the ONLY
+ place that creates or modifies our custom tables.  If tables are
+ upgraded directly via console manipulation, all sorts of
+ incompatibilities will arise.  Please ensure that this function is
+ the only place that modifies our saasta.fi schema. */
+function saasta_sql_setup()
+{
+    global $wpdb;
+
+    $table_name = $wpdb->prefix . "faves";
+
+    /* Check whether or not we have a faves table? */
+    if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        $sql = "
+CREATE TABLE `$table_name` (
+  `user_id` int(11) NOT NULL default '0',
+  `post_id` int(11) NOT NULL default '0',
+  `fave_date` datetime NOT NULL,
+  PRIMARY KEY  (`user_id`,`post_id`)
+)";
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);  
+    }
 }
 
 function saasta_config_submenu() 
@@ -124,6 +149,17 @@ function saasta_add_menus()
     add_submenu_page('plugins.php', 'saasta.fi config', 'saasta.fi', 7, __FILE__, 'saasta_config_submenu');
 }
 
+function saasta_sidebar_meta_links()
+{
+    $user = wp_get_current_user();
+?>
+<?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(140); print "</li>"; } ?>
+    <li><?php saasta_print_permalink(2624); ?></li>
+    <?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(922); print "</li>"; } ?>
+    <li><?php saasta_print_permalink(2598); ?></li>
+<?php
+}
+
 // Print sidebar links for various ad/poll/gala campaigns
 function saasta_sidebar_links() 
 {
@@ -141,6 +177,18 @@ function saasta_sidebar_links()
 // Now we set that function up to execute when the admin_footer action is called
 add_action('saasta_sidebar_links', 'saasta_sidebar_links');
 
+$subsite = get_option('saasta_subsite');
+if ($subsite == 'saasta')
+{
+    add_action('saasta_sidebar_meta_links', 'saasta_sidebar_meta_links');
+} else
+{
+    assert ($subsite == 'posso');
+}
+
 add_action('admin_menu', 'saasta_add_menus');
+
+/* Ensure all SQL tables are properly setup upon plugin activation, */
+register_activation_hook(__FILE__,'saasta_sql_setup');
 
 ?>

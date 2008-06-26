@@ -16,7 +16,7 @@ if (isset($_REQUEST['add_post_id'])) {
 $user = wp_get_current_user();
 if ( $user->ID ) {
     if ($add) {
-        $wpdb->query("insert ignore into ".$wpdb->prefix."faves (user_id,post_id) values (".$user->ID.",".$postId.")");
+        $wpdb->query("INSERT ignore into ".$wpdb->prefix."faves (user_id,post_id,fave_date) values (".$user->ID.",".$postId.", NOW())");
 
         $post = get_post($postId, OBJECT);
         $author = get_userdata($post->post_author);
