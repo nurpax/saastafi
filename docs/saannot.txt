@@ -13,14 +13,14 @@ ja sen kotipaikka on Helsinki
 
 2. Tarkoitus ja toiminnan laatu
 
-// kopioitu templaatista, pitäis keksiä omat tähän
-Yhdistyksen tarkoituksena on edistää elokuva- ja mediataiteen harrastusta ja tasoa yhdistyksen kotipaikkakunnalla sekä koota taiteen harrastajat yhteiseen toimintaan.
+Yhdistyksen tarkoituksena on a) parantaa laadukkaan sisällön saatavuutta internetissä, b) toimia kiinnostavan jäsenten tuottaman sisällön tehokkaana jakelukanavana ja c) luoda tämän tematiikan ympärille sykkivä ja elinvoimainen harrastajayhteisö.
 
 Tarkoituksensa toteuttamiseksi yhdistys:
-- tekee taiteita edistäviä aloitteita
+- kehittää ja ylläpitää saasta.fi -verkkopalvelua
+- TODO promotoidaan saastan aatetta
 - suunnittelee ja järjestää kesäkursseja ja muuta tarkoitukseen liittyvää taidekoulutusta
 - harjoittaa tiedotus- ja julkaisutoimintaa
-- järjestää kulttuuritilaisuuksia.
+- TODO järjestää kaikille avoimia gaala-iltoja 
 
 Tointansa tukemiseksi yhdistys voi ottaa vastaan lahjoituksia ja testamentteja, omistaa toimintaansa varten tarpeellista kiinteää omaisuutta sekä toimeenpanna asianomaisen luvan saatuaan arpajaisia ja rahankeräyksiä.
 
