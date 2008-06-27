@@ -16,22 +16,11 @@ ja sen kotipaikka on Helsinki
 Yhdistyksen tarkoituksena on a) parantaa laadukkaan sisällön saatavuutta internetissä, b) toimia kiinnostavan jäsenten tuottaman sisällön tehokkaana jakelukanavana ja c) luoda tämän tematiikan ympärille sykkivä ja elinvoimainen harrastajayhteisö.
 
 Tarkoituksensa toteuttamiseksi yhdistys:
-- kehittää ja ylläpitää saasta.fi -verkkopalvelua
-- TODO promotoidaan saastan aatetta
-- suunnittelee ja järjestää kesäkursseja ja muuta tarkoitukseen liittyvää taidekoulutusta
-- harjoittaa tiedotus- ja julkaisutoimintaa
-- TODO järjestää kaikille avoimia gaala-iltoja 
+- kehittää ja ylläpitää monimediapalveluita (esim. saasta.fi -verkkopalvelu) jotka tavoittavat medianälkäiset loppukäyttäjät 
+- edistää yhdistyksen arvoja ja ydinosaamista
+- suunnittelee ja järjestää yhdistyksen tarkoituksen mukaisia tapahtumia
 
-Tointansa tukemiseksi yhdistys voi ottaa vastaan lahjoituksia ja testamentteja, omistaa toimintaansa varten tarpeellista kiinteää omaisuutta sekä toimeenpanna asianomaisen luvan saatuaan arpajaisia ja rahankeräyksiä.
-
-
-// Yhdistyksen tarkoituksena on
-// Tarkoituksensa toteuttamiseksi yhdistys
-
-
-
-Toimintansa tukemiseksi yhdistys
-
+Toimintansa tukemiseksi yhdistys voi ottaa vastaan lahjoituksia ja testamentteja, myydä oheistuotteita ja -palveluita, omistaa toimintaansa varten tarpeellista kiinteää omaisuutta sekä toimeenpanna asianomaisen luvan saatuaan arpajaisia ja rahankeräyksiä.
 
 
 3. Jäsenet
