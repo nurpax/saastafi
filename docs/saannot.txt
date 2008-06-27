@@ -6,9 +6,7 @@ Yhdistysrekisteri			Yksi kokous,
 
 1. Yhdistyksen nimi ja kotipaikka
 
-Yhdistyksen nimi on Saasta ry
-
-ja sen kotipaikka on Helsinki
+Yhdistyksen nimi on Saasta ry ja sen kotipaikka on Helsinki
 
 
 2. Tarkoitus ja toiminnan laatu
@@ -63,13 +61,13 @@ Yhdistyksen nimen kirjoittaa hallituksen puheenjohtaja, varapuheenjohtaja, sihte
 
 8. Tilikausi ja tilintarkastus
 
-Yhdistyksen tilikausi on 1.11. - 31.10.
+Yhdistyksen tilikausi on 1.9. - 31.8.
 
 Tilinp‰‰tˆs tarvittavine asiakirjoineen ja hallituksen vuosikertomus on annettava tilintarkastajille viimeist‰‰n kolme viikkoa ennen vuosikokousta. Tilintarkastajien tulee antaa kirjallinen lausuntonsa viimeist‰‰n kaksi viikkoa ennen vuosikokousta hallitukselle.
 
 9. Yhdistyksen kokoukset
 
-Yhdistyksen vuosikokous pidet‰‰n vuosittain hallituksen m‰‰r‰‰m‰n‰ p‰iv‰n‰ marras-maaliskuussa.
+Yhdistyksen vuosikokous pidet‰‰n vuosittain hallituksen m‰‰r‰‰m‰n‰ p‰iv‰n‰ elo-helmikuussa.
 
 Ylim‰‰r‰inen kokous pidet‰‰n, kun yhdistyksen kokous niin p‰‰tt‰‰ tai kun hallitus katsoo siihen olevan aihetta tai kun v‰hint‰‰n kymmenesosa (1/10) yhdistyksen ‰‰nioikeutetuista j‰senist‰ sit‰ hallitukselta erityisesti ilmoitettua asiaa varten kirjallisesti vaatii. Kokous on pidett‰v‰ kolmenkymmenen vuorokauden kuluessa siit‰, kun vaatimus sen pit‰misest‰ on esitetty hallitukselle.
 
