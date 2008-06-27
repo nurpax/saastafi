@@ -13,12 +13,20 @@ ja sen kotipaikka on Helsinki
 
 2. Tarkoitus ja toiminnan laatu
 
+// kopioitu templaatista, pit‰is keksi‰ omat t‰h‰n
+Yhdistyksen tarkoituksena on edist‰‰ elokuva- ja mediataiteen harrastusta ja tasoa yhdistyksen kotipaikkakunnalla sek‰ koota taiteen harrastajat yhteiseen toimintaan.
+
+Tarkoituksensa toteuttamiseksi yhdistys:
+- tekee taiteita edist‰vi‰ aloitteita
+- suunnittelee ja j‰rjest‰‰ kes‰kursseja ja muuta tarkoitukseen liittyv‰‰ taidekoulutusta
+- harjoittaa tiedotus- ja julkaisutoimintaa
+- j‰rjest‰‰ kulttuuritilaisuuksia.
+
+Tointansa tukemiseksi yhdistys voi ottaa vastaan lahjoituksia ja testamentteja, omistaa toimintaansa varten tarpeellista kiinte‰‰ omaisuutta sek‰ toimeenpanna asianomaisen luvan saatuaan arpajaisia ja rahanker‰yksi‰.
 
 
-Yhdistyksen tarkoituksena on
-
-
-Tarkoituksensa toteuttamiseksi yhdistys
+// Yhdistyksen tarkoituksena on
+// Tarkoituksensa toteuttamiseksi yhdistys
 
 
 
