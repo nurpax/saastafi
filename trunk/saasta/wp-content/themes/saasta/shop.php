@@ -52,7 +52,7 @@ function saasta_confirm_order($ext_id)
             echo "<h2>Order #$q->id confirmed and waiting for payment</h2>";
 
             $price = 0.01;
-            $return_url = urlencode("http://192.168.67.128/saasta/?page_id=3480&preview=true");
+            $return_url = "http://www.saasta.fi/saasta/?page_id=3480&preview=true";
 
             print ("<p>Please click the below PayPal button to pay for your purchase:</p>");
             print ("<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\">\n");
