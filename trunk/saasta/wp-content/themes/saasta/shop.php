@@ -50,8 +50,31 @@ function saasta_confirm_order($ext_id)
         if ($q->order_state == 'inbox' || $q->order_state == 'confirmed')
         {
             echo "<h2>Order #$q->id confirmed and waiting for payment</h2>";
-            echo "<p>We're waiting to confirm that your order has been successfully paid for.  Once we can verify that the payment for the purchase was successful, we will ship the product to the below address:</p>";
-            echo "<pre style=\"font-size:1.2em\">$q->address</pre>";
+
+            $price = 0.01;
+            $return_url = urlencode("http://192.168.67.128/saasta/?page_id=3480&preview=true");
+
+            print ("<p>Please click the below PayPal button to pay for your purchase:</p>");
+            print ("<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\">\n");
+            print ("<input type=\"hidden\" name=\"cmd\" value=\"_xclick\">\n");
+            print ("<input type=\"hidden\" name=\"business\" value=\"jjhellst@gmail.com\">\n");
+            print ("<input type=\"hidden\" name=\"item_name\" value=\"Saasta Merchandise\">\n");
+            print ("<input type=\"hidden\" name=\"item_number\" value=\"$q->id\">\n");
+            print ("<input type=\"hidden\" name=\"amount\" value=\"$price\">\n");
+            print ("<input type=\"hidden\" name=\"no_shipping\" value=\"0\">\n");
+            print ("<input type=\"hidden\" name=\"no_note\" value=\"1\">\n");
+            print ("<input type=\"hidden\" name=\"currency_code\" value=\"EUR\">\n");
+            print ("<input type=\"hidden\" name=\"return\" value=\"$return_url\">\n");
+            print ("<input type=\"hidden\" name=\"lc\" value=\"FI\">\n");
+            print ("<input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF\">\n");
+            print ("<input type=\"image\" src=\"https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n");
+            print ("<img alt=\"\" border=\"0\" src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n");
+            print ("</form>\n");
+
+            print ("<p>Once we have received your payment, we will process your order and deliver your products to the following address:</p>\n");
+
+            print ("<pre style=\"font-size:1.2em\">$q->address</pre>\n");
+            print ("<p>Thank you!</p\n");
         }
     } else
     {
@@ -109,6 +132,7 @@ saasta_confirm_order($_GET['confirm_id']);
 
 } else {
 ?>
+
 <h2>Saasta Merchandise Shop</h2>
 
 <h3>Place your order for the below products</h3>
