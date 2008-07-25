@@ -8,4 +8,6 @@ nocache_headers();
 
 /* Process PayPal payment notification */
 
+wp_mail("jjhellst@gmail.com", "Payment confirmation", "jebah!");
+
 ?>
