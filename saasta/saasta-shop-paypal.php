@@ -23,7 +23,7 @@ wp_mail("jjhellst@gmail.com", "paypal notification", "first stage");
 $header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
 $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
 $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
-$fp = fsockopen ('ssl://www.paypal.com', 80, $errno, $errstr, 30);
+$fp = fsockopen ('ssl://www.paypal.com', 443, $errno, $errstr, 30);
 
 // assign posted variables to local variables
 $item_name = $_POST['item_name'];
