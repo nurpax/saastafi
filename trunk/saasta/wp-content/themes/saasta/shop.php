@@ -52,7 +52,7 @@ function saasta_confirm_order($ext_id)
             echo "<h2>Order #$q->id confirmed and waiting for payment</h2>";
 
             $price = 0.01;
-            $return_url = "http://www.saasta.fi/saasta/?page_id=3480&preview=true";
+            $return_url = saasta_get_shop_base_url()."&thanks=true";
 
             print ("<p>Please click the below PayPal button to pay for your purchase:</p>");
             print ("<form action=\"https://www.paypal.com/cgi-bin/webscr\" method=\"post\">\n");
@@ -123,13 +123,15 @@ function saasta_shop_form()
 <?php if (isset($_GET['saved'])) { ?>
 <h2>Thank you for shopping at saasta.fi!</h2>
 <p>Please confirm your purchase order by following the instructions that you were just sent to via an automated e-mail.</p>
-<p><a href="<?php echo attribute_escape($_SERVER['REQUEST_URI']);?>">Back to the shop</a></p>
+<p><a href="<?php echo saasta_get_shop_base_url();?>">Back to the shop..</a></p>
 
 <?php 
 } elseif (isset($_GET['confirm_id'])) {
-
-saasta_confirm_order($_GET['confirm_id']);
-
+    saasta_confirm_order($_GET['confirm_id']);
+} elseif (isset($_GET['thanks'])) {
+?><h2>PayPal payment successfully completed!</h2>
+<p>Thank you for your order.  We will deliver your products as soon as possible.</p>
+<?php
 } else {
 ?>
 
