@@ -75,6 +75,9 @@ function saasta_confirm_order($ext_id)
 
             print ("<pre style=\"font-size:1.2em\">$q->address</pre>\n");
             print ("<p>Thank you!</p\n");
+        } else if ($q->order_state == 'paid')
+        {
+            echo "<h2>Order #$q->id paid and waiting to be delivered</h2>";
         }
     } else
     {
