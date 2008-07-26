@@ -52,6 +52,7 @@ if (!$fp) {
                 // process payment
 
                 wp_mail("jjhellst@gmail.com", "Payment confirmation", "jebah $payment_amount $payment_currency $receiver_email, order id = $item_number!");
+                saasta_order_paid($item_number);
             } else
             {
                 wp_mail("jjhellst@gmail.com", "Payment confirmation", "payment was not completed order paypal account did not match.");

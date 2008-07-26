@@ -24,6 +24,7 @@ CREATE TABLE $table_orders (
   address TEXT,
   order_ext_uid VARCHAR (40),
   order_state ENUM ('inbox', 'confirmed', 'paid', 'shipped'),
+  order_paid_on TIMESTAMP,
   PRIMARY KEY (id))");
 
         $wpdb->query("
