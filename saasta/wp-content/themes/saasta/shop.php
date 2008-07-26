@@ -67,7 +67,7 @@ function saasta_confirm_order($ext_id)
             print ("<input type=\"hidden\" name=\"return\" value=\"$return_url\">\n");
             print ("<input type=\"hidden\" name=\"lc\" value=\"FI\">\n");
             print ("<input type=\"hidden\" name=\"bn\" value=\"PP-BuyNowBF\">\n");
-            print ("<input type=\"image\" src=\"https://www.sandbox.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n");
+            print ("<input type=\"image\" src=\"https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif\" border=\"0\" name=\"submit\" alt=\"PayPal - The safer, easier way to pay online!\">\n");
             print ("<img alt=\"\" border=\"0\" src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\" width=\"1\" height=\"1\">\n");
             print ("</form>\n");
 
