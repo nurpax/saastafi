@@ -63,6 +63,7 @@ function saasta_confirm_order($ext_id)
             print ("<input type=\"hidden\" name=\"amount\" value=\"$price\">\n");
             print ("<input type=\"hidden\" name=\"no_shipping\" value=\"0\">\n");
             print ("<input type=\"hidden\" name=\"no_note\" value=\"1\">\n");
+            print ("<input type=\"hidden\" name=\"page_style\" value=\"Saasta\">\n");
             print ("<input type=\"hidden\" name=\"currency_code\" value=\"EUR\">\n");
             print ("<input type=\"hidden\" name=\"return\" value=\"$return_url\">\n");
             print ("<input type=\"hidden\" name=\"lc\" value=\"FI\">\n");
