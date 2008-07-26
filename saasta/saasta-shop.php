@@ -34,11 +34,6 @@ CREATE TABLE $table_orders_products (
     }
 }
 
-function saasta_get_shop_base_url()
-{
-    return get_permalink(3480);
-}
-
 function saasta_send_confirmation_email($order_id)
 {
     global $wpdb;

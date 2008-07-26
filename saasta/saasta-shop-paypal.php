@@ -8,7 +8,6 @@ nocache_headers();
 
 /* Process PayPal payment notification */
 
-
 // read the post from PayPal system and add 'cmd'
 $req = 'cmd=_notify-validate';
 
@@ -45,14 +44,18 @@ if (!$fp) {
     while (!feof($fp)) {
         $res = fgets ($fp, 1024);
         if (strcmp ($res, "VERIFIED") == 0) {
-            // check the payment_status is Completed
-            // check that txn_id has not been previously processed
-            // check that receiver_email is your Primary PayPal email
-            // check that payment_amount/payment_currency are correct
-            // process payment
+            if (strcmp($payment_status, "Completed") == 0 &&
+                strcmp($receiver_email, $saasta_paypal_account) == 0)
+            {
+                // check that txn_id has not been previously processed
+                // check that payment_amount/payment_currency are correct
+                // process payment
 
-            wp_mail("jjhellst@gmail.com", "Payment confirmation", "jebah $payment_amount $payment_currency $receiver_email!");
-            
+                wp_mail("jjhellst@gmail.com", "Payment confirmation", "jebah $payment_amount $payment_currency $receiver_email, order id = $item_number!");
+            } else
+            {
+                wp_mail("jjhellst@gmail.com", "Payment confirmation", "payment was not completed order paypal account did not match.");
+            }
         }
         else if (strcmp ($res, "INVALID") == 0) {
             // log for manual investigation
