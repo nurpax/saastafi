@@ -4,6 +4,8 @@
 <head profile="http://gmpg.org/xfn/11">
 <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 
+<script type="text/javascript" src="<?php bloginfo('template_url');?>/saasta.js"></script>
+
 <title>saasta.fi <?php if ( is_single() ) { ?> &raquo; Archive <?php } ?> <?php wp_title(); ?></title>
 
 <meta name="generator" content="WordPress <?php bloginfo('version'); ?>" /> <!-- leave this for stats -->
@@ -19,9 +21,9 @@ $saasta_subsite=get_option('saasta_subsite');
 // Checks to see whether it needs a sidebar or not
 if ( !$withcomments && !is_single() ) {
 ?>
-	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images/<?php echo $saasta_subsite; ?>/saasta_bg.gif") repeat-y top; border: none; }
+	#page { background: url("<?php bloginfo('template_directory'); ?>/images/<?php echo $saasta_subsite; ?>/saasta_bg.gif") repeat-y top; border: none; }
 <?php } else { // No sidebar ?>
-	#page { background: url("<?php bloginfo('stylesheet_directory'); ?>/images//<?php echo $saasta_subsite; ?>/saasta_bg.gif") repeat-y top; border: none; }
+	#page { background: url("<?php bloginfo('template_directory'); ?>/images//<?php echo $saasta_subsite; ?>/saasta_bg.gif") repeat-y top; border: none; }
 <?php } ?>
 </style>
 

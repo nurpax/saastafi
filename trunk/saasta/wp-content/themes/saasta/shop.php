@@ -101,6 +101,7 @@ function saasta_shop_form()
     foreach ($saasta_products as $key => $v) {
         $id = $key;
         $n = $v["name"];
+        $unit_price=1; // 0.01
         print '<tr><td><img src="http://www.saasta.fi/saasta/people/unknown.png"/></td>';
         print '<td>' . $n . '</td>';
         
@@ -108,16 +109,22 @@ function saasta_shop_form()
         print '<option selected value="0">None</option>';
         print '<option value="50">50</option>';
         print '<option value="100">100</option>';
-        print '</select></td>';
+        print '</select><input type="hidden" name="unit_price_product_'.$id.'" value="'.$unit_price.'"/></td>';
 
         print '</tr>';
     } 
 ?>
     <tr><td/><td>E-mail (*)</td><td><input name="email" type="text"/></td></tr>
     <tr><td/><td>Delivery address (*)</td><td><textarea rows="5" cols="40" name="address"></textarea></td></tr>
+
+    <tr><td/><td>Price:</td><td><strong id="order_price">0</strong> EUR</td></tr>
     <tr><td></td><td></td><td><input type="submit" value="Place order!"/></td></tr>
     </table>
     </form>
+
+    <!-- Register Javascript handlers for computing order prices -->
+    <script language="JavaScript" type="text/javascript">addLoadEvent(registerPriceCompute);</script>
+
 <?php
 }
 ?>
