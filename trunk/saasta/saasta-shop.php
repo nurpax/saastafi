@@ -20,8 +20,11 @@ function saasta_po_db_setup()
 CREATE TABLE $table_orders (
   id int(11) NOT NULL AUTO_INCREMENT,
   timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  first_name VARCHAR (60),
+  last_name VARCHAR (60),
   email VARCHAR (55),
   address TEXT,
+  price DECIMAL (8,2),
   order_ext_uid VARCHAR (40),
   order_state ENUM ('inbox', 'confirmed', 'paid', 'shipped'),
   order_paid_on TIMESTAMP,
@@ -43,7 +46,7 @@ function saasta_send_confirmation_email($order_id)
     $tbl_orders = $wpdb->prefix . "orders";
     $tbl_orders_products = $wpdb->prefix . "orders_products";
 
-    $q = $wpdb->get_row("SELECT email,order_ext_uid,address FROM $tbl_orders WHERE id = $order_id");
+    $q = $wpdb->get_row("SELECT email,order_ext_uid,address,price FROM $tbl_orders WHERE id = $order_id");
     
     // TODO hardcoded URL :( -- how can we get the page id without hardcoding it?
     $page_url = saasta_get_shop_base_url();
@@ -52,7 +55,8 @@ function saasta_send_confirmation_email($order_id)
     $order_text = "";
 
     $ordered_prods = $wpdb->get_results("SELECT product_id,qty FROM saasta_orders_products WHERE order_id = $order_id");
-    foreach ($ordered_prods as $p) {
+    foreach ($ordered_prods as $p) 
+    {
         $prod_name = $saasta_products[$p->product_id]['name'];
         $order_text = $order_text . "$prod_name (quantity: $p->qty)\n";
     }
@@ -72,13 +76,15 @@ Here's a summary of your order:
 
 $order_text
 
+Price: $q->price EUR
+
 Once confirmed and paid, the products you ordered will be sent to the following address:
 
 $q->address
 
 Thank you!
 ";
-        wp_mail($q->email, "Purchase Confirmation", $text);
+        wp_mail($q->email, "saasta.fi // Purchase Confirmation", $text);
     } else
     {
         die("Couldn't find purchase order!");
@@ -94,13 +100,16 @@ function saasta_save_order()
     $tbl_orders = $wpdb->prefix . "orders";
     $tbl_orders_products = $wpdb->prefix . "orders_products";
 
+    $first_name = $wpdb->escape($_POST['first_name']);
+    $last_name = $wpdb->escape($_POST['last_name']);
     $email = $wpdb->escape($_POST['email']);
     $address = $wpdb->escape($_POST['address']);
 
     // TODO e-mail error checks & re-direction if not valid
-
-    $wpdb->query("INSERT INTO $tbl_orders (order_state, email, address) VALUES ('inbox', '$email', '$address')");
+    $wpdb->query("INSERT INTO $tbl_orders (order_state, first_name, last_name, email, address) VALUES ('inbox', '$first_name', '$last_name', '$email', '$address')");
     $order_id = mysql_insert_id($wpdb->dbh);
+
+    $order_price = 0;
 
     foreach ($saasta_products as $id => $v) {
         $product_id = 'product_' . $id;
@@ -108,8 +117,15 @@ function saasta_save_order()
         {
             $qty = $_POST[$product_id];
             $wpdb->query("INSERT INTO $tbl_orders_products (order_id,product_id,qty) VALUES ($order_id,$id, $qty)");
+
+            $order_price += $qty * $v["unit_price"];
         }
     }
+
+    // TODO calculate shipping cost
+    $order_price += $saasta_shipping_cost;
+
+    $wpdb->query("UPDATE $tbl_orders SET price = $order_price / 100.0 WHERE id = $order_id");
 
     // Compute confirmation UID that will be used when a confirmation
     // e-mail is sent to the customer.  When the customer confirm the

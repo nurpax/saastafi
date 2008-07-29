@@ -65,8 +65,9 @@ function computeOrderPrice(productSelects, unitPrices)
 function updatePrice(sels, unitPrices)
 {
     var priceElem = document.getElementById('order_price');
+    var shippingCost = parseInt(document.getElementById('shipping_cost').value);
     // Compute order price from select elements:
-    var orderPrice = computeOrderPrice(sels, unitPrices);
+    var orderPrice = computeOrderPrice(sels, unitPrices) + shippingCost;
     var d = Math.floor(orderPrice / 100);
     var f = Math.floor(Math.floor(orderPrice % 100));
 

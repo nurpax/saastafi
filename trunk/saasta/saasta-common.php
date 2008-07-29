@@ -26,9 +26,15 @@ Thanks!");
 
 $saasta_paypal_account = "jjhellst@gmail.com";
 
+$saasta_shipping_cost = 500;
+
+$sticker_qties=array(0, 50, 100, 150, 200);
+
 // List of products we're selling
 $saasta_products = 
-      array(1 => array("name" => "Sticker 1"),
-            2 => array("name" => "Sticker 2"));
+    array(1 => array("name" => "Sticker 1", "unit_price" => "1", 
+                     "qty_opts" => $sticker_qties),
+          2 => array("name" => "Sticker 2", "unit_price" => "1",
+                     "qty_opts" => $sticker_qties));
 
 ?>
