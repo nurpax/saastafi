@@ -36,7 +36,7 @@ function saasta_confirm_order($ext_id)
     $tbl_orders = $wpdb->prefix . "orders";
 
     $i = $wpdb->escape($ext_id);
-    $q = $wpdb->get_row("SELECT email,id,order_state,address FROM $tbl_orders WHERE order_ext_uid='".$i."'");
+    $q = $wpdb->get_row("SELECT email,id,order_state,address,price FROM $tbl_orders WHERE order_ext_uid='".$i."'");
 
     if ($q)
     {
@@ -51,7 +51,7 @@ function saasta_confirm_order($ext_id)
         {
             echo "<h2>Order #$q->id confirmed and waiting for payment</h2>";
 
-            $price = 0.01;
+            $price = $q->price;
             $return_url = saasta_get_shop_base_url()."&thanks=true";
 
             print ("<p>Please click the below PayPal button to pay for your purchase:</p>");
@@ -89,6 +89,8 @@ function saasta_confirm_order($ext_id)
 function saasta_shop_form()
 {
     global $saasta_products;
+    global $saasta_shipping_cost;
+
     $redirectURI = attribute_escape($_SERVER['REQUEST_URI']);
 
     print '<form action="'.get_option('siteurl').'/saasta-shop.php" method="post">';
@@ -118,10 +120,15 @@ function saasta_shop_form()
         print '</tr>';
     } 
 ?>
-    <tr><td/><td>Price:</td><td><strong id="order_price">0</strong> EUR</td></tr>
+    <tr><td/><td>Price:</td>
+      <td><strong id="order_price">0</strong> EUR
+          <input type="hidden" name="to_js" id="shipping_cost" value="<?php print ($saasta_shipping_cost); ?>"/>
+      </td>
+    </tr>
     </table>
 
     <h3>Fill in your personal details</h3>
+    <p style="color:#c00; font-weight:bold;">Note: you must fill in all the fields!</p>
     <table>
     <tr><td>First Name</td><td><input name="first_name" type="text"/></td></tr>
     <tr><td>Last Name</td><td><input name="last_name" type="text"/></td></tr>
