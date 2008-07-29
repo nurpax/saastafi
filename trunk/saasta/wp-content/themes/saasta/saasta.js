@@ -70,7 +70,7 @@ function updatePrice(sels, unitPrices)
     var d = Math.floor(orderPrice / 100);
     var f = Math.floor(Math.floor(orderPrice % 100));
 
-    priceElem.innerHTML = d + '.' + f;
+    priceElem.innerHTML = d + '.' + (f < 10 ? '0'+f : f);
 }
 
 function registerPriceCompute()
