@@ -101,29 +101,36 @@ function saasta_shop_form()
     foreach ($saasta_products as $key => $v) {
         $id = $key;
         $n = $v["name"];
-        $unit_price=1; // 0.01
+        $unit_price=$v["unit_price"]; // in cents
         print '<tr><td><img src="http://www.saasta.fi/saasta/people/unknown.png"/></td>';
         print '<td>' . $n . '</td>';
         
         print '<td><select style="width:60px" name="product_' . $id . '">';
-        print '<option selected value="0">None</option>';
-        print '<option value="50">50</option>';
-        print '<option value="100">100</option>';
+        foreach ($v["qty_opts"] as $o)
+        {
+            if ($o == 0)
+                print "<option selected value=\"0\">None</option>";
+            else
+                print "<option selected value=\"$o\">$o</option>";
+        }
         print '</select><input type="hidden" name="unit_price_product_'.$id.'" value="'.$unit_price.'"/></td>';
 
         print '</tr>';
     } 
 ?>
-    <tr><td/><td>E-mail (*)</td><td><input name="email" type="text"/></td></tr>
-    <tr><td/><td>Delivery address (*)</td><td><textarea rows="5" cols="40" name="address"></textarea></td></tr>
-
     <tr><td/><td>Price:</td><td><strong id="order_price">0</strong> EUR</td></tr>
-    <tr><td></td><td></td><td><input type="submit" value="Place order!"/></td></tr>
+    </table>
+
+    <h3>Fill in your personal details</h3>
+    <table>
+    <tr><td>First Name</td><td><input name="first_name" type="text"/></td></tr>
+    <tr><td>Last Name</td><td><input name="last_name" type="text"/></td></tr>
+    <tr><td>E-mail</td><td><input name="email" type="text"/></td></tr>
+    <tr><td>Delivery Address</td><td><textarea rows="5" cols="40" name="address"></textarea></td></tr>
+
+    <tr><td></td><td><input type="submit" value="Place order!"/></td></tr>
     </table>
     </form>
-
-    <!-- Register Javascript handlers for computing order prices -->
-    <script language="JavaScript" type="text/javascript">addLoadEvent(registerPriceCompute);</script>
 
 <?php
 }
@@ -148,12 +155,15 @@ function saasta_shop_form()
 
 <h2>Saasta Merchandise Shop</h2>
 
-<h3>Place your order for the below products</h3>
+<h3>Select the products you wish to order</h3>
 <br/>
 <?php
 saasta_shop_form();
 }
 ?>
+
+    <!-- Register Javascript handlers for computing order prices -->
+    <script language="JavaScript" type="text/javascript">addLoadEvent(registerPriceCompute);</script>
 
 </div>
 
