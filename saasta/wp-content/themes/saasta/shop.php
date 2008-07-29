@@ -157,6 +157,11 @@ function saasta_shop_form()
 ?><h2>PayPal payment successfully completed!</h2>
 <p>Thank you for your order.  We will deliver your products as soon as possible.</p>
 <?php
+} elseif (isset($_GET['missing_fields'])) {
+?><h2>Error!</h2>
+<p>Please fill in all the fields in the order form.  They are all required for us to be able to process your purchase.  Thank you!.</p>
+<p><a href="<?php echo saasta_get_shop_base_url();?>">Back to the shop..</a></p>
+<?php
 } else {
 ?>
 

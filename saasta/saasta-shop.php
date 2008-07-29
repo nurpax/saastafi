@@ -93,7 +93,7 @@ Thank you!
 
 function saasta_save_order()
 {
-    global $saasta_products, $wpdb;
+    global $saasta_products, $wpdb, $saasta_shipping_cost;
 
     saasta_po_db_setup();
    
@@ -104,6 +104,12 @@ function saasta_save_order()
     $last_name = $wpdb->escape($_POST['last_name']);
     $email = $wpdb->escape($_POST['email']);
     $address = $wpdb->escape($_POST['address']);
+
+    if ($first_name == "" || $last_name == "" || $email == "" || $address == "")
+    {
+        wp_redirect($_REQUEST['redirect_to'] . "&missing_fields=true");
+        return;
+    }
 
     // TODO e-mail error checks & re-direction if not valid
     $wpdb->query("INSERT INTO $tbl_orders (order_state, first_name, last_name, email, address) VALUES ('inbox', '$first_name', '$last_name', '$email', '$address')");
@@ -140,11 +146,12 @@ function saasta_save_order()
     $wpdb->query("UPDATE $tbl_orders SET order_ext_uid = '" . md5($ext_uid_str) . "' WHERE id = $order_id");
 
     saasta_send_confirmation_email($order_id);
+
+    wp_redirect($_REQUEST['redirect_to'] . "&saved=true");
 }
 
 if (isset($_POST['po'])) {
     saasta_save_order();
-    wp_redirect($_REQUEST['redirect_to'] . "&saved=1");
 } else
 {
     wp_redirect($_REQUEST['redirect_to']);
