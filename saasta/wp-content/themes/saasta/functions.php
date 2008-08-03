@@ -231,16 +231,19 @@ function saasta_list_faves() {
  */
 function saasta_list_recent_faves($limit=30) {	
 	global $wpdb;
+    $tbl_faves = $wpdb->prefix."faves";
+    $tbl_posts = $wpdb->prefix."posts";
+    $tbl_users = $wpdb->prefix."users";
 
 	$query = "
 SELECT
   CONCAT('".get_option('home')."?p=',sp.ID) AS url,
   sp.post_title AS title,
-  (SELECT COUNT(post_id) FROM saasta_faves WHERE post_id=sp.ID) AS num_faves,
+  (SELECT COUNT(post_id) FROM $tbl_faves WHERE post_id=sp.ID) AS num_faves,
   sf.fave_date AS date,
   su.display_name AS name
 FROM 
-  saasta_faves sf,saasta_posts sp,saasta_users su
+  $tbl_faves sf,$tbl_posts sp,$tbl_users su
 WHERE
   sp.ID=sf.post_id AND 
   su.ID=sp.post_author
