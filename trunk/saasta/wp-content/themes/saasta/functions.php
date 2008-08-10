@@ -40,6 +40,33 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 }
 
+
+// Print adsense ads based on subsite option.
+function saasta_print_middle_image_adsense_unit()
+{
+    $subsite = get_option('saasta_subsite');
+    if ($subsite == 'saasta')
+    {
+        print '
+<script type="text/javascript"><!--
+google_ad_client = "pub-7907497075456864";
+/* saasta.fi 468x60, created 8/10/08 */
+google_ad_slot = "3278794639";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+';
+    } else
+    {
+        if ($subsite != 'posso')
+            die("unknown subsite $subsite");
+    }
+}
+
 // Print adsense ads based on subsite option.
 function saasta_print_right_skyscraper_adsense()
 {

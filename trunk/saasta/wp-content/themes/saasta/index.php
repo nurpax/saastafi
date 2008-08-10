@@ -4,6 +4,7 @@
 
     <?php saasta_print_upper_adsense_link_unit(); ?>
 
+    <?php $post_count = 0; ?>
 	<?php if (have_posts()) : ?>
 
 		<?php while (have_posts()) : the_post(); ?>
@@ -16,6 +17,17 @@
 				<p class="postmetadata"><?php the_tags('Tags: ', ', ', '<br />'); ?> Posted in <?php the_category(', ') ?> | <?php edit_post_link('Edit', '', ' | '); ?>  <?php comments_popup_link('No Comments &#187;', '1 Comment &#187;', '% Comments &#187;'); ?></p>
 
 			</div>
+
+         <?php 
+                if ($post_count == 0) {
+                    // Uncomment below line for post index ads
+                    if (get_option('saasta_middle_adunit_enabled')) {
+                        saasta_print_middle_image_adsense_unit ();
+                    }
+                }
+             $post_count++;
+         ?>
+
 
 		<?php endwhile; ?>
 

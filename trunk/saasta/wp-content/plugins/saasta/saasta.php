@@ -15,6 +15,8 @@ add_option('saasta_sidebar_survey_caption', "you have until July 15 to respond",
 
 add_option('saasta_subsite', "saasta", null);
 
+add_option('saasta_middle_adunit_enabled', 0, null);
+
 function bool_to_checked($i)
 {
     if ($i) 
@@ -82,6 +84,9 @@ function saasta_config_submenu()
         $opt_val = $_POST['saasta_subsite'];
         update_option('saasta_subsite', $opt_val);
 
+        $opt_val = $_POST['saasta_middle_adunit_enabled'];
+        update_option('saasta_middle_adunit_enabled', $opt_val);
+
         $saved_settings = true;
     }
 
@@ -91,6 +96,7 @@ function saasta_config_submenu()
     $survey_url = get_option('saasta_sidebar_survey_url');
     $survey_link_text = get_option('saasta_sidebar_survey_link_text');
     $survey_caption = get_option('saasta_sidebar_survey_caption');
+    $middle_adunit_enabled = get_option('saasta_middle_adunit_enabled');
 
     if ($saved_settings)
     {
@@ -112,6 +118,11 @@ function saasta_config_submenu()
          <option <?php print_selected("saasta", $subsite);?>>saasta.fi</option>
          <option <?php print_selected("posso", $subsite);?>>posso.fi</option>
       </select>
+    </p>
+
+    <h4>Adsense</h4>
+    <p>
+     <input type="checkbox" name="saasta_middle_adunit_enabled" <?php echo bool_to_checked($middle_adunit_enabled); ?>> Check to show AdSense ad unit after first post on index page?</input>
     </p>
 
     <h4>Sidebar links</h4>
