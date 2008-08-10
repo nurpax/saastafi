@@ -66,9 +66,9 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
         print '
 <script type="text/javascript"><!--
 google_ad_client = "pub-7907497075456864";
-/* posso.fi / 120x600, created 8/10/08 */
-google_ad_slot = "7743660259";
-google_ad_width = 120;
+/* posso.fi - 160x600, created 8/10/08 */
+google_ad_slot = "5985214010";
+google_ad_width = 160;
 google_ad_height = 600;
 //-->
 </script>
