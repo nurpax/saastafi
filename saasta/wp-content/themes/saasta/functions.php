@@ -1,8 +1,12 @@
 <?php
 
+// Print adsense ads based on subsite option.
 function saasta_print_upper_adsense_link_unit()
 {
-    print '
+    $subsite = get_option('saasta_subsite');
+    if ($subsite == 'saasta')
+    {
+        print '
 <script type="text/javascript"><!--
 google_ad_client = "pub-7907497075456864";
 /* 468x60, created 5/25/08 */
@@ -15,6 +19,64 @@ google_ad_height = 60;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 ';
+    } else
+    {
+        if ($subsite != 'posso')
+            die("unknown subsite $subsite");
+        print '
+<script type="text/javascript"><!--
+google_ad_client = "pub-7907497075456864";
+/* posso.fi/468x60, created 8/10/08 */
+google_ad_slot = "2096816017";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+';
+    }
+
+}
+
+// Print adsense ads based on subsite option.
+function saasta_print_right_skyscraper_adsense()
+{
+    $subsite = get_option('saasta_subsite');
+    if ($subsite == 'saasta')
+    {
+        print '
+<script type="text/javascript"><!--
+google_ad_client = "pub-7907497075456864";
+/* 160x600, created 4/4/08 */
+google_ad_slot = "3125109427";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+';
+    } else
+    {
+        if ($subsite != 'posso')
+            die("unknown subsite $subsite");
+        print '
+<script type="text/javascript"><!--
+google_ad_client = "pub-7907497075456864";
+/* posso.fi / 120x600, created 8/10/08 */
+google_ad_slot = "7743660259";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+';
+    }
 }
 
 function saasta_print_add_fave_form() 
@@ -44,11 +106,6 @@ function saasta_print_del_fave_form($post_id)
 function saasta_print_post_header() {
     global $user_ID;
     global $wpdb;
-
-	/*
-	 * old color #ddd391
-	 * new color #dac8c7
-	 */
 
 	$color = "#dac8c7";
 
@@ -129,9 +186,13 @@ function saasta_print_admin_notice() {
 	if (get_the_author_login() != 'admin')
 		return;
 
-	print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:0.5em;margin-bottom:0.5em;">';
-	print '<tr><td style="border:1px solid black;padding:0.5em;background-color:#cc0000;color:#ffffff;font-weight:bold;text-align:center;">ACHTUNG!</td></tr>';
-	print '</table>';
+    // Achtung baby only on saasta.fi, customize later for other subsites
+    if (get_option('saasta_subsite') == 'saasta')
+    {
+        print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:0.5em;margin-bottom:0.5em;">';
+        print '<tr><td style="border:1px solid black;padding:0.5em;background-color:#cc0000;color:#ffffff;font-weight:bold;text-align:center;">ACHTUNG!</td></tr>';
+        print '</table>';
+    }
 }
 
 function saasta_print_permalink($id) 

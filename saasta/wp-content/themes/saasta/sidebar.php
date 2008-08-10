@@ -66,17 +66,7 @@ $user = wp_get_current_user();
 			<?php if (!is_single()) { wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); } ?>
 
 </ul>
-<script type="text/javascript"><!--
-google_ad_client = "pub-7907497075456864";
-/* 160x600, created 4/4/08 */
-google_ad_slot = "3125109427";
-google_ad_width = 160;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
+<?php saasta_print_right_skyscraper_adsense(); ?>
 <ul>
 
 <li><h2>Recent faves</h2>
