@@ -114,9 +114,11 @@ function saasta_print_post_header() {
     // TODO: use css classes
     print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1.0em;">';
     print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" style="padding:0.2em;border:1px solid black;background-color:'.$color.';">';
-    $icon = "people/unknown.png";
 
-    $pic_name = "people/" . get_the_author_login();
+    $people_images_dir = "people/" . get_option('saasta_subsite') . '/';
+    $icon = $people_images_dir . "unknown.png";
+
+    $pic_name = $people_images_dir . get_the_author_login();
 
     if (file_exists($pic_name . ".png"))
         $icon = $pic_name . ".png";
