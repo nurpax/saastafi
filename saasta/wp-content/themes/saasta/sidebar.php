@@ -72,10 +72,9 @@ $user = wp_get_current_user();
 <li><h2>Recent faves</h2>
 <ul>
 <?php
-$foo = saasta_list_recent_faves(5);
-
+$foo = saasta_list_recent_faves();
 foreach ($foo as $f) {
-	print '<li><a href="'.$f->url.'">'.$f->title.'</a> ('.$f->num_faves.')</li>';
+	print '<li><a href="'.get_permalink($f->post_id).'">'.get_the_title($f->post_id).'</a></li>';
     print "\n";
 }
 ?>

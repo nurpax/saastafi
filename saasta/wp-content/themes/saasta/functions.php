@@ -316,33 +316,25 @@ function saasta_list_faves() {
  * List n recent faved posts. Orders by fave date (in saasta_faves)
  * and then by post id, both in descending order.
  *
- * @param limit how many faves to show (defaults to 30)
+ * @param limit how many faves to show (defaults to 5)
  * @return a list of associative arrays {url,title,author,num_faves}
  */
-function saasta_list_recent_faves($limit=30) {	
+function saasta_list_recent_faves($limit=5) {	
 	global $wpdb;
     $tbl_faves = $wpdb->prefix."faves";
-    $tbl_posts = $wpdb->prefix."posts";
-    $tbl_users = $wpdb->prefix."users";
 
 	$query = "
-SELECT
-  CONCAT('".get_option('home')."?p=',sp.ID) AS url,
-  sp.post_title AS title,
-  (SELECT COUNT(post_id) FROM $tbl_faves WHERE post_id=sp.ID) AS num_faves,
-  sf.fave_date AS date,
-  su.display_name AS name
+SELECT 
+  post_id
 FROM 
-  $tbl_faves sf,$tbl_posts sp,$tbl_users su
-WHERE
-  sp.ID=sf.post_id AND 
-  su.ID=sp.post_author
-ORDER BY
-  sf.fave_date DESC,
-  sf.post_id DESC
-LIMIT 
-  {$limit}
-";
+  $tbl_faves AS sf
+INNER JOIN 
+  (SELECT MAX(fave_date) AS fd FROM $tbl_faves GROUP by post_id) foo 
+ON 
+  sf.fave_date=foo.fd
+ORDER BY 
+  fave_date DESC
+LIMIT 5";
 
 	return $wpdb->get_results($query);
 }
