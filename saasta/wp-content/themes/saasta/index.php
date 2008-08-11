@@ -19,10 +19,12 @@
 			</div>
 
          <?php 
-                if ($post_count == 0) {
+                if ($post_count == 4) {
                     // Uncomment below line for post index ads
                     if (get_option('saasta_middle_adunit_enabled')) {
+                        echo "<br/>\n<center>";
                         saasta_print_middle_image_adsense_unit ();
+                        echo "</center><br/>\n";
                     }
                 }
              $post_count++;
