@@ -104,6 +104,9 @@ function print_option($cur_state, $o)
 
 function print_order_editor()
 {
+    global $wpdb;
+    global $saasta_products;
+
     $admin_url = get_bloginfo('template_directory') . '/shop-admin.php';
     $id = $_GET['edit_id'];
     if ($id)
@@ -123,6 +126,23 @@ function print_order_editor()
 </table>
 
 <br/>
+
+<h3>Ordered products</h3>
+<table>
+<tr><th>Product</th><th>Quantity</th></tr>
+<?php
+    $ordered_prods = $wpdb->get_results("SELECT product_id,qty FROM saasta_orders_products WHERE order_id = $id");
+    foreach ($ordered_prods as $p) 
+    {
+        $prod_name = $saasta_products[$p->product_id]['name'];
+        print "<tr><td id=\"oe\">$prod_name</td><td id=\"oe\">$p->qty</td></tr>\n";
+    }
+?>
+</table>
+
+<p>Total price: <strong><?php echo $o->price; ?></strong> EUR</p>
+
+<br />
 
 <table>
   <tr><td id="ord_status">Order status now:</td><td><?php echo ($o->order_state); ?></td></tr>
