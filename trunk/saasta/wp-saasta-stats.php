@@ -181,7 +181,11 @@ SELECT
 FROM 
     saasta_posts sp, saasta_users su, saasta_faves sf
 WHERE 
-    QUARTER(sp.post_date)=".$q." AND YEAR(sp.post_date)=".$y." AND sp.post_author=su.ID AND sf.post_id=sp.ID
+    QUARTER(sp.post_date)=".$q." AND 
+    YEAR(sp.post_date)=".$y." AND 
+    sp.post_author=su.ID AND 
+    sf.post_id=sp.ID AND
+    sp.post_status='publish'
 GROUP BY
     su.ID
 ORDER BY
@@ -190,16 +194,16 @@ ORDER BY
 	$ret = $wpdb->get_results($query);
 
 	// then fetch total number of posts per quarter
-	$tmp = $wpdb->get_row("SELECT COUNT(ID) as num_posts FROM saasta_posts WHERE QUARTER(post_date)=".$q." AND YEAR(post_date)=".$y);
+	$tmp = $wpdb->get_row("SELECT COUNT(ID) as num_posts FROM saasta_posts WHERE QUARTER(post_date)=".$q." AND YEAR(post_date)=".$y." AND post_status='publish'");
 	$totalPosts = $tmp->num_posts;
 
 	// then the total number of faves per quarter
-	$tmp = $wpdb->get_row("SELECT COUNT(sf.post_id) as num_faves FROM saasta_faves sf, saasta_posts sp WHERE QUARTER(sp.post_date)=".$q." AND YEAR(sp.post_date)=".$y." and sf.post_id=sp.ID");
+	$tmp = $wpdb->get_row("SELECT COUNT(sf.post_id) as num_faves FROM saasta_faves sf, saasta_posts sp WHERE QUARTER(sp.post_date)=".$q." AND YEAR(sp.post_date)=".$y." and sf.post_id=sp.ID AND sp.post_status='publish'");
 	$totalFaves = $tmp->num_faves;
 
 	// finally, go through each user and fetch
 	foreach ($ret as $user) {
-		$tmp = $wpdb->get_row("SELECT COUNT(ID) as num_posts FROM saasta_posts WHERE post_author=".$user->id." AND QUARTER(post_date)=".$q." AND YEAR(post_date)=".$y);
+		$tmp = $wpdb->get_row("SELECT COUNT(ID) as num_posts FROM saasta_posts WHERE post_author=".$user->id." AND QUARTER(post_date)=".$q." AND YEAR(post_date)=".$y." and post_status='publish'");
 		$user->num_posts = $tmp->num_posts;
 		$user->favesPerPost = $user->num_faves / $user->num_posts;
 		$user->postsPerFave = $user->num_posts / $user->num_faves;
