@@ -6,7 +6,7 @@
 
 <script type="text/javascript" src="<?php bloginfo('template_url');?>/saasta.js"></script>
 
-<title><?php echo get_option('blogname'); ?><?php if ( is_single() ) { ?> &raquo; Archive <?php } ?> <?php wp_title(); ?></title>
+<title><?php echo get_option('blogname'); ?> <?php echo wp_title(); ?></title>
 
 <meta name="generator" content="WordPress <?php bloginfo('version'); ?>" /> <!-- leave this for stats -->
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); echo ("/".get_option('saasta_subsite').".css"); ?>" type="text/css" media="screen"/>
