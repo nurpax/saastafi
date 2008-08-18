@@ -164,7 +164,7 @@ function saasta_sidebar_meta_links()
 {
     $user = wp_get_current_user();
 ?>
-<?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(140); print "</li>"; } ?>
+    <li><?php saasta_print_permalink(3664); ?></li>
     <li><?php saasta_print_permalink(2624); ?></li>
     <?php if (is_user_logged_in()) { print "<li>"; saasta_print_permalink(922); print "</li>"; } ?>
     <li><?php saasta_print_permalink(2598); ?></li>
