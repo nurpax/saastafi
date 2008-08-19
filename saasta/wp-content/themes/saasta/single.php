@@ -15,12 +15,10 @@
 				<?php the_content('<p class="serif">Read the rest of this entry &raquo;</p>'); ?>
 
 <?php if (get_the_tag_list())
-echo get_the_tag_list('<p style="border-top:1px solid #333;padding-top:5px;">Tags: ',', ','</p>');
+echo get_the_tag_list('<p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ','</p>');
 ?>
-				<?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
-<p style="background-color:#dac8c7;padding:5px;border:1px solid #666666">
-	  <img style="border:0px;" src="images/digg.png" width="16" height="16" align="absmiddle" alt="Digg"/> <a href="http://digg.com/submit?url=<?php echo urlencode(get_permalink()) ?>&title=<?php echo urlencode(get_the_title()); ?>&bodytext=<?php echo urlencode(get_the_excerpt()); ?>">Digg this</a>&nbsp;<img style="border:0px;" src="images/su.png" width="16" height="16" align="absmiddle" alt="stumbleupon"/> <a href="http://www.stumbleupon.com/submit?url=<?php echo urlencode(get_permalink()); ?>&title=<?php echo urlencode(get_the_title()); ?>">StumbleUpon</a>&nbsp;<img style="border:0px;" src="images/reddit.gif" width="16" height="16" align="absmiddle" alt="reddit"/> <a href="http://reddit.com/submit?url=<?php echo urlencode(get_permalink()); ?>&title=<?php echo urlencode(get_the_title()); ?>">Reddit</a>&nbsp;<script>function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436');return false;}</script><style> html .fb_share_link { padding:2px 0 0 20px; height:16px; background:url(http://static.ak.fbcdn.net/images/share/facebook_share_icon.gif?0:26981) no-repeat top left; }</style><a href="http://www.facebook.com/share.php?u=<?php echo urlencode(get_permalink()); ?>" onclick="return fbs_click()" target="_blank" class="fb_share_link">Facebook</a>
-</p>
+<?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
+<?php saasta_print_share_post_buttons(); ?>
 				<p class="postmetadata alt">
 					<small>
 						This entry was posted
