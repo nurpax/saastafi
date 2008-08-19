@@ -50,8 +50,8 @@
 		<?php endwhile; ?>
 
 		<div class="navigation">
-			<div class="alignleft"><?php next_posts_link('&laquo; Older Entries') ?></div>
-			<div class="alignright"><?php previous_posts_link('Newer Entries &raquo;') ?></div>
+			<div class="alignleft"><?php previous_posts_link('&laquo; Newer entries') ?></div>
+			<div class="alignright"><?php next_posts_link('Older entries &raquo;') ?></div>
 		</div>
 
 	<?php else : ?>
