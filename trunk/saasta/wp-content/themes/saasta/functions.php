@@ -1,5 +1,24 @@
 <?php
 
+// Print share post buttons. Used in single post view.
+function saasta_print_share_post_buttons() 
+{
+    $url = urlencode(get_permalink());
+    $title = urlencode(get_the_title());
+    $excerpt = urlencode(get_the_excerpt());
+
+    print '<p style="background-color:#dac8c7;padding:5px;border:1px solid #666666">';
+    // digg
+    print '<img style="border:0px;" src="images/digg.png" width="16" height="16" align="absmiddle" alt="Digg"/> <a href="http://digg.com/submit?url='.$url.'&title='.$title.'&bodytext='.$excerpt.'">Digg this</a>&nbsp;';
+    // stumbleupon
+    print '<img style="border:0px;" src="images/su.png" width="16" height="16" align="absmiddle" alt="stumbleupon"/> <a href="http://www.stumbleupon.com/submit?url='.$url.'&title='.$title.'">StumbleUpon</a>&nbsp;';
+    // reddit
+    print '<img style="border:0px;" src="images/reddit.gif" width="16" height="16" align="absmiddle" alt="reddit"/> <a href="http://reddit.com/submit?url='.$url.'&title='.$title.'">Reddit</a>&nbsp;';
+    // facebook
+    print '<script>function fbs_click() {u=location.href;t=document.title;window.open(\'http://www.facebook.com/sharer.php?u=\'+encodeURIComponent(u)+\'&t=\'+encodeURIComponent(t),\'sharer\',\'toolbar=0,status=0,width=626,height=436\');return false;}</script><style> html .fb_share_link { padding:2px 0 0 20px; height:16px; background:url(http://static.ak.fbcdn.net/images/share/facebook_share_icon.gif?0:26981) no-repeat top left; }</style><a href="http://www.facebook.com/share.php?u='.$url.'" onclick="return fbs_click()" target="_blank" class="fb_share_link">Facebook</a>';
+    print '</p>';
+}
+
 // Print adsense ads based on subsite option.
 function saasta_print_upper_adsense_link_unit()
 {
@@ -114,7 +133,7 @@ function saasta_print_add_fave_form()
     print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
     print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
-    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#dac8c7;" value="add fave"/>';
+    print '<input type="submit" style="border:0;font-size:smaller;background-color:#dac8c7;" value="add fave"/>';
     print '</form>';
 }
 
@@ -123,38 +142,44 @@ function saasta_print_del_fave_form($post_id)
 	$redirectURI = attribute_escape($_SERVER['REQUEST_URI']);
 	$redirectURI .= "#saasta".get_the_ID();
 
-    print '<form style="" action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return confirm(\"You sure?\");">';
+    print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return confirm(\"You sure?\");">';
     print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="del_post_id" value="'. $post_id .'"/>';
-    print '<input type="submit" style="border:1px solid black;font-size:smaller;background-color:#dac8c7;" value="unfave"/>';
+    print '<input type="submit" style="border:0;font-size:smaller;background-color:#dac8c7;" value="unfave"/>';
     print '</form>';
 }
 
+/**
+ * Print post header. Contains author image (avatar), post title,
+ * author, date etc and fave button & count.
+ *
+ * muumi 080819: refactored the whole thing into a simple table
+ */
 function saasta_print_post_header() {
     global $user_ID;
     global $wpdb;
 
-	$color = "#dac8c7";
-
-	saasta_print_admin_notice(TRUE);
-
-    // TODO: use css classes
-    print '<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1.0em;">';
-    print '<tr><td rowspan="2" width="32" height="32" align="center" valign="middle" style="padding:0.2em;border:1px solid black;background-color:'.$color.';">';
-
     $people_images_dir = "people/" . get_option('saasta_subsite') . '/';
     $icon = $people_images_dir . "unknown.png";
-
     $pic_name = $people_images_dir . get_the_author_login();
-
     if (file_exists($pic_name . ".png"))
         $icon = $pic_name . ".png";
     else if (file_exists($pic_name . ".gif"))
         $icon = $pic_name . ".gif";
 
-    print '<img src="' . $icon . '" width="32" height="32" border="0" alt="'.get_the_author_login().'"/></td>';
-    print '<td width="100%" style="background-color:'.$color.';padding-left:0.2em;border-right:1px solid black;border-top:1px solid black;border-bottom:1px solid black;"><span style="font-family:\'Trebuchet MS\', \'Lucida Grande\', Verdana, Arial, Sans-Serif;font-size:1.6em;width:100%;font-weight:bold;">';
-    print '<a name="saasta'.get_the_ID().'" href="';
+
+	saasta_print_admin_notice(TRUE);
+
+	print '<table class="postheader">';
+	print '<tr>';
+	// left column: author image
+	print '<td width="40" align="center">';
+	print '<img align="absmiddle" src="' . $icon . '" width="32" height="32" border="0" alt="'.get_the_author_login().'"/>';
+	print '</td>';
+	// middle column: post title, author etc
+	print '<td width="420">';
+	// post title
+    print '<span style="font-weight:bold;font-size:1.2em;"><a name="saasta'.get_the_ID().'" href="';
     the_permalink();
     print '" rel="bookmark" title="Permanent Link to ';
     the_title();
@@ -164,20 +189,13 @@ function saasta_print_post_header() {
     the_time('F jS, Y');
     print ' by ';
     the_author();
-    print '</small></td></tr>';
+    print '</small>';
+	print '</td>';
 
-    get_currentuserinfo();
+	// right column: add fave/unfave buttons, # of faves
+	print '<td valign="middle" align="center">';
 
-	print '<tr>';
-	print '<td valign="middle" style="border-right:1px solid black;border-bottom:1px solid black;font-size:smaller;padding:0.2em;background-color:'.$color.';">';
-	
-	// The extra table here is used here to force fave/unfave
-	// button and '# of faves' text to go on the same line.
-	
-	print '<table><tr><td>';
-	
-	// If user hasn't marked the post as a fave, add an "add fave"
-	// button.  Otherwise offer an "unfave" button.
+	print '<div style="border:1px solid #666666;padding:0.2em;">';
 	if ($user_ID == '') {
         saasta_print_add_fave_form ();
     }
@@ -188,24 +206,24 @@ function saasta_print_post_header() {
 		else 
 			saasta_print_del_fave_form (get_the_ID());
 	}
-	
-	print '</td><td>';
-	
-	// How many people have faved this post?
 	$foo = $wpdb->get_row("select count(post_id) as numfaves from ".$wpdb->prefix."faves where post_id=".get_the_ID());
-	if ($foo->numfaves > 1) print $foo->numfaves.' faves';
-	else if ($foo->numfaves == 1) print '1 fave';
-	print '</td></tr></table>';
-	print '</td></tr>';
-	// muumi 080411: show prev/next links for single posts
+	if ($foo->numfaves > 0)
+		print '<span style="font-size:larger;color:#666666;">'.$foo->numfaves.'</span>';
+	print '</div>';
+	print '</td>';
+
+	// close post header table
+	print '</tr></table>';
+
+	// next/prev navigation for single post view
 	if (is_single()) {
-		print '<tr><td width="100%" colspan="2" style="background-color:'.$color.';padding:0.2em;border-left:1px solid black;border-right:1px solid black;border-bottom:1px solid black;"><table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td align="left" style="font-size:0.88em;">';
+		print '<table class="singleprevnext">';
+		print '<tr><td align="left" style="font-size:0.88em;">';
 		next_post_link('&laquo; %link');
 		print '</td><td align="right" style="font-size:0.88em;">';
 		previous_post_link('%link &raquo;');
-		print '</td></tr></table></td></tr>';
+		print '</td></tr></table>';
 	}
-	print '</table>';
 }
 
 /**

@@ -647,3 +647,17 @@ div.post h2 {
 li a:hover,
 form a:hover { text-decoration: underline; }
 
+.postheader {
+	width:502px;
+	border:1px solid #666666;
+	background-color:#dac8c7;
+}
+
+.singleprevnext {
+	width:502px;
+	border:1px solid #666666;
+	background-color:#dac8c7;
+	margin-top: 0.25em;
+}
+
+form { margin:0; }
