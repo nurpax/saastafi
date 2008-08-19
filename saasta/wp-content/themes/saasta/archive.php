@@ -41,6 +41,10 @@
 
 				<div class="entry">
 					<?php the_content() ?>
+
+<?php if (get_the_tag_list())
+echo get_the_tag_list('<p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ','</p>');
+?>
 				</div>
 
 				<p class="postmetadata">Posted in <?php the_category(', ') ?> | <?php edit_post_link('Edit', '', ' | '); ?>  <?php comments_popup_link('No Comments &#187;', '1 Comment &#187;', '% Comments &#187;'); ?></p>
