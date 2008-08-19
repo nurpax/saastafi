@@ -63,11 +63,13 @@ $user = wp_get_current_user();
 			<?php } ?>
 			</li>
 
-			<?php wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); ?>
+			<?php if (!is_single()) wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); ?>
 
 </ul>
 <?php saasta_print_right_skyscraper_adsense(); ?>
 <ul>
+
+			<?php if (is_single()) wp_list_categories('show_count=1&title_li=<h2>Categories</h2>'); ?>
 
 <li><h2>Recent faves</h2>
 <ul>
