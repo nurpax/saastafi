@@ -177,7 +177,7 @@ function saasta_print_post_header() {
 	print '<img align="absmiddle" src="' . $icon . '" width="32" height="32" border="0" alt="'.get_the_author_login().'"/>';
 	print '</td>';
 	// middle column: post title, author etc
-	print '<td width="420">';
+	print '<td width="420" style="padding-right:0.5em;">';
 	// post title
     print '<span style="font-weight:bold;font-size:1.2em;"><a name="saasta'.get_the_ID().'" href="';
     the_permalink();
