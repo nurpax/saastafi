@@ -208,7 +208,7 @@ function saasta_print_post_header() {
 	}
 	$foo = $wpdb->get_row("select count(post_id) as numfaves from ".$wpdb->prefix."faves where post_id=".get_the_ID());
 	if ($foo->numfaves > 0)
-		print '<span style="font-size:larger;color:#666666;">'.$foo->numfaves.'</span>';
+		print '<span style="font-weight:bold;color:#333;">'.$foo->numfaves.'</span>';
 	print '</div>';
 	print '</td>';
 
