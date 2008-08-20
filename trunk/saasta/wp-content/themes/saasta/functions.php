@@ -133,7 +133,7 @@ function saasta_print_add_fave_form()
     print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post">';
     print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="add_post_id" value="'.get_the_ID().'"/>';
-    print '<input type="submit" style="border:0;font-size:smaller;background-color:#dac8c7;" value="add fave"/>';
+    print '<input type="submit" style="border:1px solid #666666;font-size:smaller;background-color:#dac8c7;" value="add fave"/>';
     print '</form>';
 }
 
@@ -145,7 +145,7 @@ function saasta_print_del_fave_form($post_id)
     print '<form action="'.get_option('siteurl').'/saasta-handlefaves.php" method="post" onsubmit="return confirm(\"You sure?\");">';
     print '<input type="hidden" name="redirect_to" value="'.$redirectURI.'"/>';
     print '<input type="hidden" name="del_post_id" value="'. $post_id .'"/>';
-    print '<input type="submit" style="border:0;font-size:smaller;background-color:#dac8c7;" value="unfave"/>';
+    print '<input type="submit" style="border:1px solid #666666;font-size:smaller;background-color:#dac8c7;" value="unfave"/>';
     print '</form>';
 }
 
