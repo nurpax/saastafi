@@ -193,9 +193,9 @@ function saasta_print_post_header() {
 	print '</td>';
 
 	// right column: add fave/unfave buttons, # of faves
-	print '<td valign="middle" align="center">';
+	print '<td valign="middle" align="center" style="border-left:1px dashed #666666;padding-left:0.5em;padding-right:0.5em;">';
 
-	print '<div style="border:1px solid #666666;padding:0.2em;">';
+	//print '<div style="border:1px solid #666666;padding:0.2em;">';
 	if ($user_ID == '') {
         saasta_print_add_fave_form ();
     }
@@ -209,7 +209,7 @@ function saasta_print_post_header() {
 	$foo = $wpdb->get_row("select count(post_id) as numfaves from ".$wpdb->prefix."faves where post_id=".get_the_ID());
 	if ($foo->numfaves > 0)
 		print '<span style="font-weight:bold;color:#333;">'.$foo->numfaves.'</span>';
-	print '</div>';
+	//print '</div>';
 	print '</td>';
 
 	// close post header table
