@@ -10,7 +10,8 @@
 
 <meta name="generator" content="WordPress <?php bloginfo('version'); ?>" /> <!-- leave this for stats -->
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); echo ("/".get_option('saasta_subsite').".css"); ?>" type="text/css" media="screen"/>
-<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> Posts" href="<?php bloginfo('rss2_url'); ?>" />
+<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> Comments" href="<?php bloginfo('comments_rss2_url'); ?>" />
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="shortcut icon" href="favicon.ico"/>
 <style type="text/css" media="screen">
