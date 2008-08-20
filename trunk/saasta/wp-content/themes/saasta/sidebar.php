@@ -20,10 +20,12 @@ $user = wp_get_current_user();
                       <li><?php wp_loginout();  saasta_print_if_logged_in(" [$user->display_name]"); ?></li>
                       <?php /* see saasta.fi plugin */ do_action('saasta_sidebar_meta_links'); ?>
 
-                     <li>RSS <img src="images/rss.png" width="14" height="14" border="0" align="top" alt="RSS"/> <a href="<?php bloginfo('rss2_url'); ?>">Entries</a> and <a href="<?php bloginfo('comments_rss2_url'); ?>">Comments</a></li>
 					<?php wp_meta(); ?>
 				</ul>
 				</li>
+                <div>
+                     <img src="images/rss.png" width="14" height="14" border="0" align="top" alt="RSS"/><a href="<?php bloginfo('rss2_url'); ?>"> Posts</a> and <a href="<?php bloginfo('comments_rss2_url'); ?>">Comments</a>
+                </div>
 			<?php } ?>
 
             <li><?php /* configurable links from saasta.fi plugin: */ do_action('saasta_sidebar_links'); ?></li>
