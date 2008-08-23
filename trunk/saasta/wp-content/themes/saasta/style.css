@@ -661,3 +661,9 @@ form a:hover { text-decoration: underline; }
 }
 
 form { margin:0; }
+
+input.saastaui {
+	border:1px solid #666666;
+	font-size:smaller;
+	background-color:#dac8c7;
+}
