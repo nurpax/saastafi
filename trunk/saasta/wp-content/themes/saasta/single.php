@@ -11,10 +11,17 @@
 				<?php the_content('<p class="serif">Read the rest of this entry &raquo;</p>'); ?>
 
 <?php 
-if (get_the_tag_list())
-	echo get_the_tag_list('<div id="taglist_'.get_the_ID().'"><p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ',' <input class="saastaui" type="button" onclick="showAddTagForm('.get_the_ID().',this)" value="add"/></p></div>');
-else
-	echo '<div id="taglist_'.get_the_ID().'"><input class="saastaui" type="button" onclick="showAddTagForm('.get_the_ID().',this)" value="add"/></div>';
+
+if (isset($_REQUEST['makkonen'])) {
+	if (get_the_tag_list())
+		echo get_the_tag_list('<div id="taglist_'.get_the_ID().'"><p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ',' <input class="saastaui" type="button" onclick="showAddTagForm('.get_the_ID().',this)" value="add"/></p></div>');
+	else
+		echo '<div id="taglist_'.get_the_ID().'"><input class="saastaui" type="button" onclick="showAddTagForm('.get_the_ID().',this)" value="add"/></div>';
+}
+else {
+	if (get_the_tag_list())
+		echo get_the_tag_list('<p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ','</p>');
+}
 ?>
 <?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
 <?php saasta_print_share_post_buttons(); ?>
