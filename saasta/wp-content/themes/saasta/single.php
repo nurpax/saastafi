@@ -14,9 +14,9 @@
 
 if (isset($_REQUEST['makkonen'])) {
 	if (get_the_tag_list())
-		echo get_the_tag_list('<div id="taglist_'.get_the_ID().'"><p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ',' <input class="saastaui" type="button" onclick="showAddTagForm('.get_the_ID().',this)" value="add"/></p></div>');
+		echo get_the_tag_list('<div id="taglist_'.get_the_ID().'"><p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ',' <input class="saastaui" type="button" onclick="showLiveAddTagForm('.get_the_ID().',this,true)" value="add"/></p></div>');
 	else
-		echo '<div id="taglist_'.get_the_ID().'"><input class="saastaui" type="button" onclick="showAddTagForm('.get_the_ID().',this)" value="add"/></div>';
+		echo '<div id="taglist_'.get_the_ID().'"><input class="saastaui" type="button" onclick="showLiveAddTagForm('.get_the_ID().',this,false)" value="add"/></div>';
 }
 else {
 	if (get_the_tag_list())
