@@ -95,18 +95,49 @@ function registerPriceCompute()
     priceUpdateFunc();
 }
 
-/**
- * Dynamically add an "add tags" textfield below post
- *
- * @param postId id of post, used to search for container (such as
- * div) with id taglist_postId
- */
-function showAddTagForm(postId,button) {
+function showLiveAddTagForm(postId, button, hasTags) {
     // hide button
     button.style.display="none";
     // ref points to the container
     var ref = document.getElementById("taglist_"+postId);
+
+    var p = document.createElement("p");
+
+    p.appendChild(document.createTextNode("add tags: "));
+    // tag textfield
+    var tf = createInput("text",null,"");
+    tf.setAttribute("id", "newtags_"+postId);
+    tf.setAttribute("class","saastaui");
+    tf.style.width = "300px";
+    p.appendChild(tf);
+    // some spacing
+    p.appendChild(document.createTextNode(" "));
+    // submit button
+    var b = createInput("button",null,"do it!");
+    b.setAttribute("class","saastaui");
+    b.setAttribute("onclick","addTagsLive("+postId+","+hasTags+")");
+    p.appendChild(b);    
+    ref.appendChild(p);
+}
+
+function addTagsLive(postId,hasTags) {
+    var ref = document.getElementById("taglist_"+postId);
     if (ref) {
+	// hide form
+	var f = ref.lastChild;
+	f.style.display = "none";
+	var tags = document.getElementById("newtags_"+postId); 
+	if (hasTags) {
+	    var l = ref.firstChild;
+	    l.appendChild(document.createTextNode(","+tags.value));
+	}
+	else {
+	    var p = document.createElement("p");
+	    p.appendChild(document.createTextNode("Tags: "+tags.value));
+	    ref.appendChild(p);
+	}
+
+	// add save form
 	var f = document.createElement("form");
 	f.setAttribute("action", "saasta-addtags.php");
 	f.setAttribute("method", "post");
@@ -118,17 +149,9 @@ function showAddTagForm(postId,button) {
 	    redirectURI = redirectURI.substring(0, idx);
 	redirectURI += "#saasta"+postId;
 	f.appendChild(createInput("hidden","redirect_to",redirectURI));
-	// text
-	f.appendChild(document.createTextNode("add tags: "));
-	// tag textfield
-	var tf = createInput("text","tags","");
-	tf.setAttribute("class","saastaui");
-	tf.style.width = "300px";
-	f.appendChild(tf);
-	// some spacing
-	f.appendChild(document.createTextNode(" "));
+	f.appendChild(createInput("hidden","tags",tags.value));
 	// submit button
-	var b = createInput("submit",null,"do it!");
+	var b = createInput("submit",null,"save!");
 	b.setAttribute("class","saastaui");
 	f.appendChild(b);
 	// add form to container
