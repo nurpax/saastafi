@@ -95,68 +95,31 @@ function registerPriceCompute()
     priceUpdateFunc();
 }
 
-function showLiveAddTagForm(postId, button, hasTags) {
+function showLiveAddTagForm(postId, hasTags) {
     // hide button
-    button.style.display="none";
-    // ref points to the container
-    var ref = document.getElementById("taglist_"+postId);
-
-    var p = document.createElement("p");
-
-    p.appendChild(document.createTextNode("add tags: "));
-    // tag textfield
-    var tf = createInput("text",null,"");
-    tf.setAttribute("id", "newtags_"+postId);
-    tf.setAttribute("class","saastaui");
-    tf.style.width = "300px";
-    p.appendChild(tf);
-    // some spacing
-    p.appendChild(document.createTextNode(" "));
-    // submit button
-    var b = createInput("button",null,"do it!");
-    b.setAttribute("class","saastaui");
-    b.setAttribute("onclick","addTagsLive("+postId+","+hasTags+")");
-    p.appendChild(b);    
-    ref.appendChild(p);
+    document.getElementById("addbutton_"+postId).style.display="none";
+    // show add form
+    document.getElementById("addtags_"+postId).style.display="block";
 }
 
 function addTagsLive(postId,hasTags) {
-    var ref = document.getElementById("taglist_"+postId);
-    if (ref) {
-	// hide form
-	var f = ref.lastChild;
-	f.style.display = "none";
-	var tags = document.getElementById("newtags_"+postId); 
-	if (hasTags) {
-	    var l = ref.firstChild;
-	    l.appendChild(document.createTextNode(","+tags.value));
-	}
-	else {
-	    var p = document.createElement("p");
-	    p.appendChild(document.createTextNode("Tags: "+tags.value));
-	    ref.appendChild(p);
-	}
-
-	// add save form
-	var f = document.createElement("form");
-	f.setAttribute("action", "saasta-addtags.php");
-	f.setAttribute("method", "post");
-	// post id
-	f.appendChild(createInput("hidden","id",postId));
-	// redirect_to
-	var redirectURI = window.location.href;
-	if ((idx = redirectURI.indexOf("#")) > -1)
-	    redirectURI = redirectURI.substring(0, idx);
-	redirectURI += "#saasta"+postId;
-	f.appendChild(createInput("hidden","redirect_to",redirectURI));
-	f.appendChild(createInput("hidden","tags",tags.value));
-	// submit button
-	var b = createInput("submit",null,"save!");
-	b.setAttribute("class","saastaui");
-	f.appendChild(b);
-	// add form to container
-	ref.appendChild(f);
+    var tags = document.getElementById("newtags_"+postId).value;
+    tags = trim(tags);
+    if (tags.length > 0) {
+	tags = "," + tags;
+	// append new tags to form & webpage
+	document.getElementById("tagstosave_"+postId).value += tags;
+	document.getElementById("taglist_"+postId).appendChild(document.createTextNode(tags));
     }
+    // clear tags from add form
+    document.getElementById("newtags_"+postId).value = "";
+    // hide add form
+    document.getElementById("addtags_"+postId).style.display="none";
+    // show save form
+    document.getElementById("savetags_"+postId).style.display="block";
+
+    // show add button again
+    document.getElementById("addbutton_"+postId).style.display="inline";
 }
 
 /**
@@ -173,4 +136,8 @@ function createInput(type,name,val) {
 	el.setAttribute("name",name);
     el.setAttribute("value",val);
     return el;
+}
+
+function trim(str) {
+    return str.replace(/^\s+|\s+$/g,"");
 }
