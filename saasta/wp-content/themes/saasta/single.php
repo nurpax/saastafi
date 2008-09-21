@@ -13,10 +13,20 @@
 <?php 
 
 if (isset($_REQUEST['makkonen'])) {
-	if (get_the_tag_list())
-		echo get_the_tag_list('<div id="taglist_'.get_the_ID().'"><p style="border-top:1px solid #666666;padding-top:5px;">Tags: ',', ',' <input class="saastaui" type="button" onclick="showLiveAddTagForm('.get_the_ID().',this,true)" value="add"/></p></div>');
+	$hasTags = get_the_tag_list();
+	if ($hasTags)
+		echo get_the_tag_list('<p style="border-top:1px solid #666666;padding-top:5px;"><span id="taglist_'.get_the_ID().'">Tags: ',', ','</span> <input class="saastaui" type="button" onclick="showLiveAddTagForm('.get_the_ID().')" value="add" id="addbutton_'.get_the_ID().'"/></p>');
 	else
-		echo '<div id="taglist_'.get_the_ID().'"><input class="saastaui" type="button" onclick="showLiveAddTagForm('.get_the_ID().',this,false)" value="add"/></div>';
+		echo '<div id="taglist_'.get_the_ID().'"><input class="saastaui" id="addbutton_'.get_the_ID().'" type="button" onclick="showLiveAddTagForm('.get_the_ID().')" value="add"/></div>';
+
+	// add tags form
+	echo '<div id="addtags_'.get_the_ID().'" style="display:none;"><input type="text" class="saastaui" style="width:300px;" id="newtags_'.get_the_ID().'"/>&nbsp;<input type="button" value="add!" class="saastaui" onclick="addTagsLive('.get_the_ID().','.($hasTags?'true':'false').')"/></div>';
+
+	// save tags form
+	$redirectURI = attribute_escape($_SERVER['REQUEST_URI']);
+	if (!is_single()) $redirectURI .= "#saasta".get_the_ID();
+	echo '<div id="savetags_'.get_the_ID().'" style="display:none;"><form method="post" action="saasta-addtags.php"><input type="hidden" name="id" value="'.get_the_ID().'"/><input type="hidden" name="tags" value="" id="tagstosave_'.get_the_ID().'"/><input type="hidden" name="redirect_to" value="'.$redirectURI.'"/><input type="submit" value="save" class="saastaui"/></form></div>';
+
 }
 else {
 	if (get_the_tag_list())
