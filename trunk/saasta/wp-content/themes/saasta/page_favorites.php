@@ -4,7 +4,10 @@ Template Name: FAVORITES
 */
 ?>
 
-<?php get_header(); ?>
+<?php get_header(); 
+
+require_once(ABSPATH . '/saasta-common.php');
+?>
 
 <div id="content" class="narrowcolumn">
 
@@ -19,19 +22,10 @@ function saasta_query_user_faves($user)
     return $foo;
 }
 
-function saasta_query_q3_2007_faves($user) 
-{
-    global $wpdb;
-
-    $foo = $wpdb->get_results("select DISTINCT p.post_title as title,f.post_id as post_id,dATE_FORMAT(p.post_date, '%b %d, %Y') as date_posted from ".$wpdb->posts." p,".$wpdb->prefix."faves f where f.post_id=p.ID AND DATE(p.post_date) >= '2007-07-01' AND DATE(p.post_date) < '2007-10-01' ORDER BY p.post_date");
-
-    return $foo;
-}
-
 $user = wp_get_current_user();
 ?>
 
-<h2>All Faved Posts of Q3/2007</h2>
+<h2>All Faved Posts in the Previous Four Quarters</h2>
 
 <?php
 
@@ -39,22 +33,31 @@ if (isset($_REQUEST['all_faves']))
 {
     echo '<br/><a href="' . get_permalink(922) . '">Click here to hide..</a></br>';
 
-    echo '<table><tr><th></th><th>Posted on</th><th>Title</th></tr>';
-    $r = saasta_query_q3_2007_faves($user);
-    $cnt = 1;
-    foreach ($r as $f)
+    $quarters = saasta_prev_quarters(4);
+
+    foreach ($quarters as $q)
     {
-        $url = get_permalink($f->post_id);
-        echo '<tr><td style="padding-right:1.0em;">' . $cnt . '</td>';
-        echo '<td style="padding-right:1.0em;">' . $f->date_posted . '</td>';
-        echo '<td><a href="' . $url . '">';
+        $qrtr = $q["q"];
+        $year = $q["y"];
+        print "<h3>Q".$qrtr."/".$year."</h3>";
 
-        echo $f->title == "" ? $url : $f->title;
-
-        print "</a></tr>\n";
-        $cnt++;
+        echo '<table><tr><th></th><th>Author</th><th>Faves</th><th>Title</th></tr>';
+        $r = saasta_query_top_faved_posts($qrtr,$year);
+        $cnt = 1;
+        foreach ($r as $f)
+        {
+            $url = get_permalink($f->post_id);
+            echo '<tr><td style="padding-right:1.0em;">' . $cnt . '</td>';
+            echo '<td>' . $f->author . '</td>';
+            echo '<td>' . $f->fave_count . '</td>';
+            echo '<td><a href="' . $url . '">';
+            echo $f->title == "" ? $url : $f->title;
+            print "</a>";
+            echo "</tr>\n";
+            $cnt++;
+        }
+        echo '</table>';
     }
-    echo '</table>';
 
 } else
 {
@@ -70,7 +73,6 @@ if ( $user->ID ) {
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <?php 
 
-        //    $foo = saasta_query_user_faves($user);
     $foo = saasta_query_user_faves($user);
 
     if (count($foo) > 0) {
