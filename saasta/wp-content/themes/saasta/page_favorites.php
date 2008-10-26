@@ -29,35 +29,60 @@ $user = wp_get_current_user();
 
 <?php
 
-if (isset($_REQUEST['all_faves'])) 
-{
-    echo '<br/><a href="' . get_permalink(922) . '">Click here to hide..</a></br>';
+$quarters = saasta_prev_quarters(4);
 
-    $quarters = saasta_prev_quarters(4);
+function print_faved_posts($user_id)
+{
+    global $quarters;
+
+    $title_prefix = "Most faved posts in";
+    if ($user_id)
+        $title_prefix = "My faves in";
 
     foreach ($quarters as $q)
     {
         $qrtr = $q["q"];
         $year = $q["y"];
-        print "<h3>Most faved posts in Q".$qrtr."/".$year."</h3>";
 
-        echo '<table><tr><th></th><th>Author</th><th>Faves</th><th>Title</th></tr>';
-        $r = saasta_query_top_faved_posts($qrtr,$year);
-        $cnt = 1;
+        // TODO misleading title for own faves
+        print "<h3>$title_prefix Q".$qrtr."/".$year."</h3>";
+
+        if (!$user_id)
+        {
+            $r = saasta_query_top_faved_posts($qrtr,$year);
+
+            echo '<table><tr><th>Author</th><th>Faves</th><th>Title</th></tr>';
+        }
+        else
+        {
+            $r = saasta_query_top_faved_posts_for_user($user_id, $qrtr,$year);
+
+            echo '<table><tr><th>Author</th><th>Title</th></tr>';
+        }
+            
         foreach ($r as $f)
         {
             $url = get_permalink($f->post_id);
-            echo '<tr><td style="padding-right:1.0em;">' . $cnt . '</td>';
-            echo '<td>' . $f->author . '</td>';
-            echo '<td>' . $f->fave_count . '</td>';
+            echo '<tr><td>' . $f->author . '</td>';
+
+            if (!$user_id)
+                echo '<td>' . $f->fave_count . '</td>';
+
             echo '<td><a href="' . $url . '">';
             echo $f->title == "" ? $url : $f->title;
             print "</a>";
             echo "</tr>\n";
-            $cnt++;
         }
         echo '</table>';
     }
+}
+
+if (isset($_REQUEST['all_faves'])) 
+{
+    echo '<br/><a href="' . get_permalink(922) . '">Click here to hide..</a></br>';
+    
+    // user_id == 0 -- all users
+    print_faved_posts(0);
 
 } else
 {
@@ -65,31 +90,11 @@ if (isset($_REQUEST['all_faves']))
 }
 
 if ( $user->ID ) {
-?>
-
-<h2>Your favorites</h2>
-
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<?php 
-
-    $foo = saasta_query_user_faves($user);
-
-    if (count($foo) > 0) {
-        foreach ($foo as $f) {
-            print '<tr><td width="100%" style="padding-top:0.5em;"><a href="'.get_permalink($f->post_id).'" title="'.$f->title.'">'.$f->title.'</a></td>';
-            print '<td valign="middle" align="right" style="padding-top:0.5em;">';
-
-            saasta_print_del_fave_form($f->post_id);
-
-            print '</td></tr>';
-            print '<tr><td colspan="2" style="height:0.5empx;border-top:1px dashed #666666;"></td></tr>';
-        }
-    }
+    print "<h2>Your favorites</h2>";
+    print_faved_posts($user->ID);
+} 
 
 ?>
-</table>
-<?php } ?>
 
 </div>
 
