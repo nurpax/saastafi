@@ -1,5 +1,40 @@
 <?php
 
+/**
+ * Retrieve list of top faved posts in a specific quarter.
+ *
+ * @param q Quarter (1..4)
+ * @param y Year
+ * @return list of associated arrays {title,author,fave_count,post_id,url,date_posted}
+ */
+function saasta_query_top_faved_posts($q,$y) {
+	global $wpdb;
+
+	$query = "SELECT DISTINCT 
+       p.post_title        AS title,   
+       u.display_name      AS author,
+       COUNT(p.post_title) AS fave_count,
+       f.post_id           AS post_id,
+       CONCAT('".get_bloginfo('wpurl')."/?p=',f.post_id) AS url,
+       DATE_FORMAT(p.post_date, '%b %d, %Y')           AS date_posted
+FROM 
+     saasta_posts p,
+     saasta_faves f,
+     saasta_users u
+WHERE 
+      f.post_id=p.ID AND 
+      p.post_author <> f.user_id AND
+      p.post_author=u.ID AND      
+      QUARTER(p.post_date)=".$q." AND
+      YEAR(p.post_date)=".$y."
+GROUP BY 
+      p.post_title 
+ORDER BY 
+      fave_count DESC";
+
+	return $wpdb->get_results($query);
+}
+
 function saasta_get_shop_base_url()
 {
     return get_permalink(3480);
