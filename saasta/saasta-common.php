@@ -35,6 +35,33 @@ ORDER BY
 	return $wpdb->get_results($query);
 }
 
+/* Return 'n' previous quarters as an array of quarters containing
+   (year,q) tuples */
+function saasta_prev_quarters($n)
+{
+    $t = getdate(time());
+    $y = $t["year"];
+    $m = $t["mon"];
+    $q = 1+($m-1)/3;
+    
+    $r = array();
+
+    // count backwards in quarters
+    for ($i = 0; $i < $n; $i++)
+    {
+        $r[$i] = array("y" => $y, "q" => $q);
+
+        $q = $q-1;
+
+        if ($q == 0)
+        {
+            $y--;
+            $q = 4;
+        }
+    }
+    return $r;
+}
+
 function saasta_get_shop_base_url()
 {
     return get_permalink(3480);
