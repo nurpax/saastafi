@@ -25,7 +25,7 @@ function saasta_query_user_faves($user)
 $user = wp_get_current_user();
 ?>
 
-<h2>All Faved Posts in the Previous Four Quarters</h2>
+<h2>Faved Posts in Previous Quarters</h2>
 
 <?php
 
@@ -39,7 +39,7 @@ if (isset($_REQUEST['all_faves']))
     {
         $qrtr = $q["q"];
         $year = $q["y"];
-        print "<h3>Q".$qrtr."/".$year."</h3>";
+        print "<h3>Most faved posts in Q".$qrtr."/".$year."</h3>";
 
         echo '<table><tr><th></th><th>Author</th><th>Faves</th><th>Title</th></tr>';
         $r = saasta_query_top_faved_posts($qrtr,$year);
