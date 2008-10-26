@@ -35,6 +35,45 @@ ORDER BY
 	return $wpdb->get_results($query);
 }
 
+/**
+ * Retrieve list of top faved posts in a specific quarter for a specific user.
+ *
+ * @param user_id User ID we're interested in
+ * @param q Quarter (1..4)
+ * @param y Year
+ * @return list of associated arrays {title,author,fave_count,post_id,url,date_posted}
+ */
+function saasta_query_top_faved_posts_for_user($user_id, $q,$y) {
+	global $wpdb;
+
+    // TODO perhaps this could be easily merged with
+    // saasta_query_top_faved_posts?
+	$query = "SELECT DISTINCT 
+       p.post_title        AS title,   
+       u.display_name      AS author,
+       COUNT(p.post_title) AS fave_count,
+       f.post_id           AS post_id,
+       CONCAT('".get_bloginfo('wpurl')."/?p=',f.post_id) AS url,
+       DATE_FORMAT(p.post_date, '%b %d, %Y')           AS date_posted
+FROM 
+     saasta_posts p,
+     saasta_faves f,
+     saasta_users u
+WHERE 
+      f.post_id=p.ID AND 
+      p.post_author <> f.user_id AND
+      p.post_author=u.ID AND      
+      f.user_id=$user_id AND
+      QUARTER(p.post_date)=".$q." AND
+      YEAR(p.post_date)=".$y."
+GROUP BY 
+      p.post_title 
+ORDER BY 
+      fave_count DESC";
+
+	return $wpdb->get_results($query);
+}
+
 /* Return 'n' previous quarters as an array of quarters containing
    (year,q) tuples */
 function saasta_prev_quarters($n)
