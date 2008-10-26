@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 if (empty($wp)) {
 	require_once('./wp-config.php');
 }
+require_once('./saasta-common.php');
 
 get_currentuserinfo();
 // no user
@@ -34,41 +35,6 @@ ORDER BY
       name";
 
     return $wpdb->get_results($query);
-}
-
-/**
- * Retrieve list of top faved posts in a specific quarter.
- *
- * @param q Quarter (1..4)
- * @param y Year
- * @return list of associated arrays {title,author,fave_count,post_id,url,date_posted}
- */
-function query_top_faved_posts($q,$y) {
-	global $wpdb;
-
-	$query = "SELECT DISTINCT 
-       p.post_title        AS title,   
-       u.display_name      AS author,
-       COUNT(p.post_title) AS fave_count,
-       f.post_id           AS post_id,
-       CONCAT('".get_bloginfo('wpurl')."/?p=',f.post_id) AS url,
-       DATE_FORMAT(p.post_date, '%b %d, %Y')           AS date_posted
-FROM 
-     saasta_posts p,
-     saasta_faves f,
-     saasta_users u
-WHERE 
-      f.post_id=p.ID AND 
-      p.post_author <> f.user_id AND
-      p.post_author=u.ID AND      
-      QUARTER(p.post_date)=".$q." AND
-      YEAR(p.post_date)=".$y."
-GROUP BY 
-      p.post_title 
-ORDER BY 
-      fave_count DESC";
-
-	return $wpdb->get_results($query);
 }
 
 /**
@@ -373,7 +339,7 @@ else if ($mode == 'faves') {
 
 	print '<tr><th>title</th><th>author</th><th>num faves</th><th>post id</th><th>date posted</th></tr>';
 
-	$foo = query_top_faved_posts($q,$year);
+	$foo = saasta_query_top_faved_posts($q,$year);
 	foreach ($foo as $f) {
 		print '<tr>';
 		print '<td><a href="'.$f->url.'">'.$f->title.'</a></td>';
