@@ -48,7 +48,7 @@ let homebrew_re = Pcre.regexp ("^homebrew: "^url_re_s^"[ \n\r]*$")
 
 let read_vote_files () =
 
-  let vote_dir_name = "data/votes_q4_2007" in
+  let vote_dir_name = "data/votes_q123_2008" in
   let parse_vote dst ndx s =
     Printf.printf "voteline '%s'\n" s;
     let m = (Pcre.extract ~rex:voteline_re s) in
@@ -113,7 +113,7 @@ let rank_score = function
 
 let wp =
   new WordPress.api
-    ~url:"http://127.0.0.1:8000/saasta/xmlrpc.php"
+    ~url:"http://www.saasta.fi/saasta/xmlrpc.php"
     ~blog_id:1
     ~username:"admin"
     ~password:(Sys.getenv "ADMIN_PASSWD")
@@ -143,7 +143,7 @@ let check_vote_validity pi =
   if pi.pi_post_id = 0 then
     ()
   else 
-    if not ((List.mem pi.pi_month [10; 11; 12]) && pi.pi_year = 2007) then
+    if not ((List.mem pi.pi_month [1;2;3;4;5;6;7;8;9;10]) && pi.pi_year = 2008) then
       error (P.sprintf "post '%i' not created in Q3/2007! month %i year %i" pi.pi_post_id pi.pi_month pi.pi_year)
     else
       ()
