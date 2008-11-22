@@ -81,7 +81,7 @@ function saasta_prev_quarters($n)
     $t = getdate(time());
     $y = $t["year"];
     $m = $t["mon"];
-    $q = 1+($m-1)/3;
+    $q = round(1+($m-1)/3);
     
     $r = array();
 
